@@ -19,6 +19,7 @@ var target = null
 func _ready():
 	ai.set_weapon(gun)
 	ai.connect("emit_target", self.set_target)
+	animate()
 
 func set_target(new_target):
 	target = new_target
@@ -42,7 +43,7 @@ func animate():
 	if target == null:
 		return
 	
-	if target.global_position.x - self.global_position.x < 0:
+	if barrel.global_position.x - self.global_position.x < 0:
 		gun_sprite.flip_v = true
 		gun_sprite.offset = Vector2(0, -2)
 		sprite.flip_h = true

@@ -49,7 +49,7 @@ func animate():
 	
 	gun.look_at(mouse_pos)
 	
-	if mouse_pos.x - global_position.x < 0:
+	if barrel.global_position.x - global_position.x < 0:
 		gun_sprite.flip_v = true
 		gun_sprite.offset = Vector2(0, -2)
 		sprite.flip_h = true
