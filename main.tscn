@@ -18,7 +18,7 @@ script = ExtResource("1_hkor1")
 script = ExtResource("5_bl2cg")
 
 [node name="Player" parent="." instance=ExtResource("2_diwyk")]
-health = 200
+health = 500
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_8pse0")
@@ -29,7 +29,7 @@ position = Vector2(-582, -334)
 rotation = 3.14159
 
 [node name="Spawner" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 7.0
 autostart = true
 
 [connection signal="timeout" from="Spawner" to="." method="_on_spawner_timeout"]

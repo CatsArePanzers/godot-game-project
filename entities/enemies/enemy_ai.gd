@@ -1,11 +1,12 @@
 extends Node2D
 
+signal emit_target(target)
+
 enum State{
 	IDLE,
+	HIT,
 	ATTACK
 }
-
-signal emit_target(target)
 
 var state = State.IDLE:
 	set(new_state):
@@ -23,6 +24,9 @@ var targets_queue = Array()
 
 @onready var detection_zone = $DetectionZone
 @onready var fov			= $DetectionZone/FOV
+@onready var end_of_fov		= $DetectionZone/EndOfFOV
+
+@onready var hit_from = Vector2()
 
 @export var rotation_speed = PI * 0.7
 
@@ -37,14 +41,21 @@ func _process(delta):
 	match state:
 		State.IDLE:
 			pass
+		State.HIT:
+			if target != null:
+				state = State.ATTACK
+			turn_to(hit_from, rotation_speed * delta * 5)
+			var angle = weapon.global_position.direction_to(hit_from).angle()
+			if parent.get_target() != end_of_fov and abs(weapon.global_rotation - angle) <= PI/18:
+				emit_target.emit(end_of_fov)
 		State.ATTACK:
-			if target != null and weapon != null:	
-				var angle 	  = lerp_angle(weapon.rotation, (weapon.global_position.direction_to(target.global_position)).angle(), 1)
-				var direction = clamp(angle, weapon.rotation - (rotation_speed * delta), weapon.rotation + (rotation_speed * delta))
-				#print(weapon.rotation, weapon.global_position.direction_to(target.global_position).angle(), direction)
-				weapon.rotation = direction
-				detection_zone.rotation = weapon.rotation + PI/2
-				if $Cooldown.is_stopped():
+			if target != null and weapon != null:
+				turn_to(target.global_position, rotation_speed * delta)
+				var angle = weapon.global_position.direction_to(target.global_position).angle()
+				if (
+						$Cooldown.is_stopped() 
+						and abs(weapon.global_rotation - angle) <= PI/18
+				):
 					weapon.shoot()
 					$Cooldown.start()
 
@@ -85,3 +96,11 @@ func _on_detection_zone_body_exited(body):
 			targets_queue.pop_front()
 			target = targets_queue[0]
 		emit_target.emit(target)
+		
+func turn_to(pos, rotationa_speed = PI):
+	var final_pos = weapon.global_position.direction_to(pos)
+	var angle = lerp_angle(weapon.rotation, final_pos.angle(), 1)
+	var direction = clamp(angle, weapon.rotation - rotationa_speed, weapon.rotation + rotationa_speed)
+	weapon.rotation = direction
+	detection_zone.rotation = weapon.rotation + PI/2
+

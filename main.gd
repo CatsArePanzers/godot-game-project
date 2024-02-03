@@ -25,6 +25,7 @@ func _ready():
 	spawn_ally()
 	spawn_enemy()
 	spawn_ally()
+	pass
 
 func _process(_delta):
 	pass
