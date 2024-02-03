@@ -46,7 +46,7 @@ func animate():
 		animations.play("idle")
 	else: 
 		animations.play("run")
-		
+	
 	var mouse_pos = get_global_mouse_position()
 	
 	gun.look_at(mouse_pos)
@@ -58,7 +58,7 @@ func animate():
 	else:
 		gun_sprite.flip_v = false
 		gun_sprite.offset = Vector2(0, 2)
-		$PlayerSprite.flip_h = false
+		sprite.flip_h = false
 
 func take_damage(damage):
 	health -= damage
