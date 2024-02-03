@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca0o866hwfhy8"]
+[gd_scene load_steps=5 format=3 uid="uid://ca0o866hwfhy8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_hkor1"]
 [ext_resource type="PackedScene" uid="uid://dluwqd4oqg0ws" path="res://entities/player/player.tscn" id="2_diwyk"]
-[ext_resource type="PackedScene" uid="uid://bfvl2terb63tc" path="res://entities/enemies/enemy.tscn" id="5_0rasj"]
 [ext_resource type="Script" path="res://weapons/bullet_manager.gd" id="5_bl2cg"]
 
 [sub_resource type="Curve2D" id="Curve2D_8pse0"]
@@ -19,9 +18,7 @@ script = ExtResource("1_hkor1")
 script = ExtResource("5_bl2cg")
 
 [node name="Player" parent="." instance=ExtResource("2_diwyk")]
-
-[node name="Enemy" parent="." instance=ExtResource("5_0rasj")]
-position = Vector2(240, 164)
+health = 500
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_8pse0")
@@ -32,7 +29,7 @@ position = Vector2(-582, -334)
 rotation = 3.14159
 
 [node name="Spawner" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="Spawner" to="." method="_on_spawner_timeout"]

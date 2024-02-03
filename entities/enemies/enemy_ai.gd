@@ -22,6 +22,8 @@ var weapon = null
 @onready var detection_zone = $DetectionZone
 @onready var fov			= $DetectionZone/FOV
 
+@export var rotation_speed = PI * 0.7
+
 func set_weapon(new_weapon):
 	enemy = get_parent()
 	weapon = new_weapon
@@ -29,15 +31,18 @@ func set_weapon(new_weapon):
 func _ready():
 	pass # Replace with function body.
 
-func _process(_delta):
+func _process(delta):
 	match state:
 		State.IDLE:
 			pass
 		State.ATTACK:
 			if target != null and weapon != null:
-				var direction = weapon.global_position.direction_to(target.global_position).angle()
-				weapon.rotation 		= direction
-				detection_zone.rotation = direction + 1.75
+				
+				var angle 	  = lerp_angle(weapon.rotation, (weapon.global_position.direction_to(target.global_position)).angle(), 1)
+				var direction = clamp(angle, weapon.rotation - (rotation_speed * delta), weapon.rotation + (rotation_speed * delta))
+				#print(weapon.rotation, weapon.global_position.direction_to(target.global_position).angle(), direction)
+				weapon.rotation = direction
+				detection_zone.rotation = weapon.rotation + PI/2
 				if $Cooldown.is_stopped():
 					weapon.shoot()
 					$Cooldown.start()
