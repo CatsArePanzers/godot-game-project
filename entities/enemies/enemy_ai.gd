@@ -19,7 +19,7 @@ var parent = null
 var target = null
 var weapon = null
 
-var targets = Array()
+var targets_queue = Array()
 
 @onready var detection_zone = $DetectionZone
 @onready var fov			= $DetectionZone/FOV
@@ -52,17 +52,36 @@ func _on_detection_zone_body_entered(body):
 	if (
 			body.has_method("get_team")  
 			and body.get_team() != parent.team.team
-			and target == null
 	):
+		targets_queue.append(body)
+		#print("Enemy added: ", targets_queue.size())
+		if target == null:
+			target = targets_queue[0]
+			emit_target.emit(target)
 		state = State.ATTACK
-		target = body
-		emit_target.emit(target)
 
 func _on_detection_zone_body_exited(body):
+	if (
+			body.has_method("get_team") == false
+			or body.get_team() == parent.team.team
+	):
+		return
+	
+	if target != body:
+		var idx = targets_queue.find(body)
+		if idx == -1:
+			print("Error this shouldn't happen for the enemy")
+			return 
+		targets_queue.pop_at(idx)
+		#print("enemy removed: ", targets_queue.size())
+	
 	if target and target == body:
-		target = null
+		#print("enemy removed: ", targets_queue.size())
+		if targets_queue.size() <= 1:
+			targets_queue.pop_front()
+			target = null
+			state = State.IDLE
+		else:
+			targets_queue.pop_front()
+			target = targets_queue[0]
 		emit_target.emit(target)
-		state = State.IDLE
-	
-	
-	
