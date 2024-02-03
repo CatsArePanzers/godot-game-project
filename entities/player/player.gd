@@ -40,7 +40,6 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 	if event.is_action_released("shoot"):
 		gun.shoot()
-	pass
 
 func animate():
 	if velocity == Vector2.ZERO:

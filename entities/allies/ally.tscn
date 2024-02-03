@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_kf25d"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_emytg"]
 [ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_8yqyf"]
-[ext_resource type="Script" path="res://entities/allies/ally_ai.tres.gd" id="4_qis4d"]
+[ext_resource type="Script" path="res://entities/allies/ally_ai.gd" id="4_64l1l"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_xa53s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
@@ -235,7 +235,7 @@ libraries = {
 [node name="Gun" parent="." instance=ExtResource("3_8yqyf")]
 
 [node name="AI" type="Node2D" parent="."]
-script = ExtResource("4_qis4d")
+script = ExtResource("4_64l1l")
 
 [node name="DetectionZone" type="Area2D" parent="AI" groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)

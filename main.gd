@@ -19,7 +19,12 @@ func spawn_ally():
 	new_ally.ai.detection_zone.rotation = rand_rotation + PI/2
 
 func _ready():
-	pass
+	spawn_enemy()
+	spawn_ally()
+	spawn_enemy()
+	spawn_ally()
+	spawn_enemy()
+	spawn_ally()
 
 func _process(_delta):
 	pass
