@@ -5,9 +5,9 @@ func spawn_enemy():
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
 	add_child(new_enemy)
-	var rand_rotation = randf() * PI * 4
+	var rand_rotation = randf() * PI * 2
 	new_enemy.gun.rotation 				 = rand_rotation
-	new_enemy.ai.detection_zone.rotation = rand_rotation + 1.75
+	new_enemy.ai.detection_zone.rotation = rand_rotation + PI/2
 
 func _ready():
 	pass

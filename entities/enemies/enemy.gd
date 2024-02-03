@@ -40,9 +40,6 @@ func animate():
 	else: 
 		animations.play("run")
 	
-	if target == null:
-		return
-	
 	if barrel.global_position.x - self.global_position.x < 0:
 		gun_sprite.flip_v = true
 		gun_sprite.offset = Vector2(0, -2)
