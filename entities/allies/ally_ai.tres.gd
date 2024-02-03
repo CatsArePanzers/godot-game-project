@@ -14,12 +14,10 @@ var state = State.IDLE:
 		state = new_state
 	get:
 		return state
-
+		
 var parent = null
 var target = null
 var weapon = null
-
-var targets = Array()
 
 @onready var detection_zone = $DetectionZone
 @onready var fov			= $DetectionZone/FOV
@@ -38,7 +36,7 @@ func _process(delta):
 		State.IDLE:
 			pass
 		State.ATTACK:
-			if target != null and weapon != null:	
+			if target != null and weapon != null:
 				var angle 	  = lerp_angle(weapon.rotation, (weapon.global_position.direction_to(target.global_position)).angle(), 1)
 				var direction = clamp(angle, weapon.rotation - (rotation_speed * delta), weapon.rotation + (rotation_speed * delta))
 				#print(weapon.rotation, weapon.global_position.direction_to(target.global_position).angle(), direction)
@@ -63,6 +61,3 @@ func _on_detection_zone_body_exited(body):
 		target = null
 		emit_target.emit(target)
 		state = State.IDLE
-	
-	
-	

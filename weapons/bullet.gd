@@ -17,5 +17,7 @@ func _on_body_entered(body):
 		body.take_damage(20)
 	queue_free()
 
+"""
 func _on_body_exited(_body):
 	queue_free()
+"""

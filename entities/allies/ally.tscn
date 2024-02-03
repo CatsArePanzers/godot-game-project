@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfvl2terb63tc"]
+[gd_scene load_steps=12 format=3 uid="uid://b8dtul6hb2rdb"]
 
-[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_w6htd"]
-[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_e2eef"]
-[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_8ve45"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_ai.gd" id="4_61i40"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_hswp1"]
+[ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_kf25d"]
+[ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_emytg"]
+[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_8yqyf"]
+[ext_resource type="Script" path="res://entities/allies/ally_ai.tres.gd" id="4_qis4d"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_xa53s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 15.0
@@ -15,7 +15,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite:region_enabled")
+tracks/0/path = NodePath("AllySprite:region_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,7 +27,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("EnemySprite:hframes")
+tracks/1/path = NodePath("AllySprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,7 +39,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EnemySprite:vframes")
+tracks/2/path = NodePath("AllySprite:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -51,7 +51,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("EnemySprite:frame")
+tracks/3/path = NodePath("AllySprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -63,7 +63,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("EnemySprite:region_rect")
+tracks/4/path = NodePath("AllySprite:region_rect")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -79,7 +79,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite:region_enabled")
+tracks/0/path = NodePath("AllySprite:region_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +91,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("EnemySprite:hframes")
+tracks/1/path = NodePath("AllySprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +103,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EnemySprite:vframes")
+tracks/2/path = NodePath("AllySprite:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -115,7 +115,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("EnemySprite:frame")
+tracks/3/path = NodePath("AllySprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -127,7 +127,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("EnemySprite:region_rect")
+tracks/4/path = NodePath("AllySprite:region_rect")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -143,7 +143,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemySprite:hframes")
+tracks/0/path = NodePath("AllySprite:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -155,7 +155,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("EnemySprite:vframes")
+tracks/1/path = NodePath("AllySprite:vframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -167,7 +167,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EnemySprite:region_enabled")
+tracks/2/path = NodePath("AllySprite:region_enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -179,7 +179,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("EnemySprite:region_rect")
+tracks/3/path = NodePath("AllySprite:region_rect")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -191,7 +191,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("EnemySprite:frame")
+tracks/4/path = NodePath("AllySprite:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -212,14 +212,14 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Ally" type="CharacterBody2D"]
 position = Vector2(564, -3)
-collision_layer = 2
-collision_mask = 5
-script = ExtResource("1_w6htd")
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_kf25d")
 
-[node name="EnemySprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_e2eef")
+[node name="AllySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_emytg")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
@@ -232,15 +232,15 @@ libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
 
-[node name="Gun" parent="." instance=ExtResource("3_8ve45")]
+[node name="Gun" parent="." instance=ExtResource("3_8yqyf")]
 
 [node name="AI" type="Node2D" parent="."]
-script = ExtResource("4_61i40")
+script = ExtResource("4_qis4d")
 
 [node name="DetectionZone" type="Area2D" parent="AI" groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
-collision_layer = 2
-collision_mask = 5
+collision_layer = 4
+collision_mask = 3
 
 [node name="FOV" type="CollisionShape2D" parent="AI/DetectionZone"]
 position = Vector2(1.22951, -115.086)
@@ -250,8 +250,7 @@ shape = SubResource("CapsuleShape2D_1og35")
 wait_time = 0.5
 one_shot = true
 
-[node name="Team" parent="." instance=ExtResource("5_hswp1")]
-team = 1
+[node name="Team" parent="." instance=ExtResource("5_xa53s")]
 
 [connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_exited"]

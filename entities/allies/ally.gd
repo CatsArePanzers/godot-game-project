@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var gun_sprite = $Gun/GunSprite
 
 @onready var animations = $AnimationPlayer
-@onready var sprite 	= $EnemySprite
+@onready var sprite 	= $AllySprite
 
 @onready var team		= $Team
 
