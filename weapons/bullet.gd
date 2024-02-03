@@ -2,6 +2,8 @@ extends Area2D
 
 @export var speed: int = 900
 
+var team: int
+
 var direction := Vector2.ZERO
 
 func _physics_process(delta):
@@ -13,7 +15,7 @@ func set_direction(new_direction):
 	self.direction = new_direction
 
 func _on_body_entered(body):
-	if body.has_method("take_damage"):
+	if body.has_method("take_damage") and body.get_team() != team:
 		body.take_damage(20)
 	queue_free()
 
