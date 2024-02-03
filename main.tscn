@@ -18,7 +18,7 @@ script = ExtResource("1_hkor1")
 script = ExtResource("5_bl2cg")
 
 [node name="Player" parent="." instance=ExtResource("2_diwyk")]
-health = 500
+health = 200
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_8pse0")

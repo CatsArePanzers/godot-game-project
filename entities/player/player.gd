@@ -9,8 +9,13 @@ class_name Player
 @onready var animations = $AnimationPlayer
 @onready var sprite 	= $PlayerSprite
 
+@onready var team		= $Team
+
 @export var speed: 	int = 5
-@export var health: int = 100
+@export var health: int = 1
+
+func get_team():
+	return team.team
 
 func _ready():
 	pass
@@ -29,7 +34,6 @@ func _physics_process(_delta):
 	
 	velocity = velocity.normalized()
 	move_and_collide(velocity * speed)
-	move_and_slide()
 	
 	animate()
 
@@ -37,7 +41,6 @@ func _unhandled_input(event):
 	if event.is_action_released("shoot"):
 		gun.shoot()
 	pass
-
 
 func animate():
 	if velocity == Vector2.ZERO:
