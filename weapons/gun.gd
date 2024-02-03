@@ -16,6 +16,6 @@ func shoot():
 	
 	var new_bullet = preload("res://weapons/bullet.tscn").instantiate()
 	var bullet_direction = (barrel.global_position - self.global_position).normalized()
-	GlobalShooting.bullet_fired.emit(new_bullet, barrel.global_position, bullet_direction)
+	GlobalShooting.bullet_fired.emit(new_bullet, barrel.global_position, bullet_direction, get_parent().team.team)
 	$Cooldown.start()
 	
