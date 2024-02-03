@@ -20,10 +20,10 @@ func _ready():
 	ai.set_weapon(gun)
 	ai.connect("emit_target", self.set_target)
 
-func set_target(target):
-	self.target = target
+func set_target(new_target):
+	target = new_target
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if target:
 		direction = global_position.direction_to(target.global_position)
 	else: 

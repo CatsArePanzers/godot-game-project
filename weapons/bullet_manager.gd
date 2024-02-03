@@ -10,5 +10,5 @@ func handle_bullet(bullet, pos, direction):
 	bullet.set_direction(direction)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

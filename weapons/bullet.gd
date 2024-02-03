@@ -9,13 +9,13 @@ func _physics_process(delta):
 		var velocity = direction * speed * delta
 		global_position += velocity
 
-func set_direction(direction: Vector2):
-	self.direction = direction
+func set_direction(new_direction):
+	self.direction = new_direction
 
 func _on_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(20)
 	queue_free()
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	queue_free()

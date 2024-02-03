@@ -22,14 +22,14 @@ var weapon = null
 @onready var detection_zone = $DetectionZone
 @onready var fov			= $DetectionZone/FOV
 
-func set_weapon(weapon):
+func set_weapon(new_weapon):
 	enemy = get_parent()
-	self.weapon = weapon
+	weapon = new_weapon
 
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	match state:
 		State.IDLE:
 			pass
