@@ -8,7 +8,8 @@ func handle_bullet(bullet, pos, direction, team):
 	bullet.global_position = pos
 	bullet.team = team
 	await get_tree().create_timer(0.001).timeout 
-	bullet.set_direction(direction)
+	if bullet:
+		bullet.set_direction(direction)
 
 func _process(_delta):
 	pass

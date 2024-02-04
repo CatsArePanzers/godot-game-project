@@ -28,7 +28,7 @@ var targets_queue = Array()
 
 @onready var hit_from = Vector2()
 
-@export var rotation_speed = PI * 0.7
+@export var rotation_speed = PI * 0.8
 
 func set_weapon(new_weapon):
 	parent = get_parent()
@@ -44,9 +44,9 @@ func _process(delta):
 		State.HIT:
 			if target != null:
 				state = State.ATTACK
-			turn_to(hit_from, rotation_speed * delta * 5)
+			turn_to(hit_from, rotation_speed * delta * 10)
 			var angle = weapon.global_position.direction_to(hit_from).angle()
-			if parent.get_target() != end_of_fov and abs(weapon.global_rotation - angle) <= PI/18:
+			if parent.get_target() != end_of_fov and abs(weapon.global_rotation - angle) <= PI/36:
 				emit_target.emit(end_of_fov)
 		State.ATTACK:
 			if target != null and weapon != null:
@@ -54,7 +54,7 @@ func _process(delta):
 				var angle = weapon.global_position.direction_to(target.global_position).angle()
 				if (
 						$Cooldown.is_stopped() 
-						and abs(weapon.global_rotation - angle) <= PI/18
+						and abs(weapon.global_rotation) - abs(angle) <= PI/18
 				):
 					weapon.shoot()
 					$Cooldown.start()
@@ -103,4 +103,5 @@ func turn_to(pos, rotationa_speed = PI):
 	var direction = clamp(angle, weapon.rotation - rotationa_speed, weapon.rotation + rotationa_speed)
 	weapon.rotation = direction
 	detection_zone.rotation = weapon.rotation + PI/2
+	#print(weapon.global_rotation)
 

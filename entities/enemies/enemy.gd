@@ -15,7 +15,7 @@ extends CharacterBody2D
 
 var direction = Vector2.ZERO
 var target = null
-var target_distance = 1000
+var target_distance: int = -1
 
 @export var health: int = 100
 
@@ -41,14 +41,15 @@ func get_target():
 
 func _physics_process(_delta):
 	if target:
-		direction = global_position.direction_to(target.global_position)
+		direction 		= global_position.direction_to(target.global_position).normalized()
 		target_distance = global_position.distance_to(target.global_position)
 	else: 
 		direction = Vector2.ZERO
+		target_distance = -1
 	
-	if target_distance >= 200:
+	if target_distance - speed > 200:
 		move_and_collide(direction * speed)
-	elif target_distance <= 100:
+	elif target_distance + speed < 100:
 		move_and_collide(-direction * speed)
 	else:
 		direction = Vector2.ZERO
