@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Enemy
+
 @onready var ai  = $AI
 
 @onready var gun   		= $Gun
@@ -15,7 +17,7 @@ extends CharacterBody2D
 
 var direction = Vector2.ZERO
 var target = null
-var target_distance: int = -1
+var target_distance = -1
 
 @export var health: int = 100
 

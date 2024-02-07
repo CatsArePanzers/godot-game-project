@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name AllyAI
+
 signal emit_target(target)
 
 var state = CharacterState.IDLE:
@@ -38,20 +40,30 @@ func _process(delta):
 		CharacterState.HIT:
 			if target != null:
 				state = CharacterState.ATTACK
+				pass
+			
 			turn_to(hit_from, rotation_speed * delta * 10)
+			
 			var angle = weapon.global_position.direction_to(hit_from).angle()
-			if parent.get_target() != end_of_fov and abs(weapon.global_rotation - angle) <= PI/18:
+			if (
+					parent.get_target() != end_of_fov
+					and fmod(abs(weapon.global_rotation - angle), PI * 1.99) <= PI/18
+			):
 				emit_target.emit(end_of_fov)
+				
 		CharacterState.ATTACK:
-			if target != null and weapon != null:
-				turn_to(target.global_position, rotation_speed * delta)
-				var angle = weapon.global_position.direction_to(target.global_position).angle()
-				if (
-						$Cooldown.is_stopped() 
-						and abs(weapon.global_rotation) - abs(angle) <= PI/36
-				):
-					weapon.shoot()
-					$Cooldown.start()
+			if target == null or weapon == null:
+				pass
+				
+			turn_to(target.global_position, rotation_speed * delta)
+				
+			var angle = weapon.global_position.direction_to(target.global_position).angle()
+			if (
+					$Cooldown.is_stopped() 
+					and fmod(abs(weapon.global_rotation - angle), PI * 1.99) <= PI/18
+			):
+				weapon.shoot()
+				$Cooldown.start()
 
 func _on_detection_zone_body_entered(body):
 	if (
@@ -91,9 +103,9 @@ func _on_detection_zone_body_exited(body):
 			target = targets_queue[0]
 		emit_target.emit(target)
 
-func turn_to(pos, rotation_speed = self.rotation_speed):
+func turn_to(pos, p_rotation_speed = self.rotation_speed):
 	var final_pos = weapon.global_position.direction_to(pos)
 	var angle = lerp_angle(weapon.rotation, final_pos.angle(), 1)
-	var direction = clamp(angle, weapon.rotation - rotation_speed, weapon.rotation + rotation_speed)
+	var direction = clamp(angle, weapon.rotation - p_rotation_speed, weapon.rotation + p_rotation_speed)
 	weapon.rotation = direction
 	detection_zone.rotation = weapon.rotation + PI/2
