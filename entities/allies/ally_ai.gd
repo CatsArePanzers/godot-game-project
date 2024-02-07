@@ -2,13 +2,7 @@ extends Node2D
 
 signal emit_target(target)
 
-enum State{
-	IDLE,
-	HIT,
-	ATTACK
-}
-
-var state = State.IDLE:
+var state = CharacterState.IDLE:
 	set(new_state):
 		if new_state == state:
 			return
@@ -39,16 +33,16 @@ func _ready():
 
 func _process(delta):
 	match state:
-		State.IDLE:
+		CharacterState.IDLE:
 			pass
-		State.HIT:
+		CharacterState.HIT:
 			if target != null:
-				state = State.ATTACK
+				state = CharacterState.ATTACK
 			turn_to(hit_from, rotation_speed * delta * 10)
 			var angle = weapon.global_position.direction_to(hit_from).angle()
 			if parent.get_target() != end_of_fov and abs(weapon.global_rotation - angle) <= PI/18:
 				emit_target.emit(end_of_fov)
-		State.ATTACK:
+		CharacterState.ATTACK:
 			if target != null and weapon != null:
 				turn_to(target.global_position, rotation_speed * delta)
 				var angle = weapon.global_position.direction_to(target.global_position).angle()
@@ -69,7 +63,7 @@ func _on_detection_zone_body_entered(body):
 		if target == null:
 			target = targets_queue[0]
 			emit_target.emit(target)
-		state = State.ATTACK
+		state = CharacterState.ATTACK
 
 func _on_detection_zone_body_exited(body):
 	if (
@@ -91,7 +85,7 @@ func _on_detection_zone_body_exited(body):
 		if targets_queue.size() <= 1:
 			targets_queue.pop_front()
 			target = null
-			state = State.IDLE
+			state = CharacterState.IDLE
 		else:
 			targets_queue.pop_front()
 			target = targets_queue[0]
