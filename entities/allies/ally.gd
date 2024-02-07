@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@onready var ai  = $AI
+class_name Ally
+
+@onready var ai: AllyAI = $AI
 
 @onready var gun   		= $Gun
 @onready var barrel     = $Gun/GunBarrel
@@ -23,6 +25,9 @@ func _ready():
 	ai.set_weapon(gun)
 	ai.connect("emit_target", self.set_target)
 	animate()
+
+func get_hit_from_pos():
+	pass
 
 func get_team():
 	return team.team

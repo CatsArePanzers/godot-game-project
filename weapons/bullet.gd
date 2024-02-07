@@ -17,10 +17,13 @@ func set_direction(new_direction):
 func _on_body_entered(body):
 	if body.has_method("take_damage") and body.get_team() != team:
 		body.take_damage(20)
-	queue_free()
+	
 	if body.has_method("set_state") and body.get_state() != CharacterState.ATTACK:
 		body.set_state(CharacterState.HIT)
 		body.ai.hit_from = global_position - (direction * speed)
+	
+	queue_free()
+	
 	
 """
 func _on_body_exited(_body):
