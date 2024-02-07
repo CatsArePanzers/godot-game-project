@@ -33,3 +33,4 @@ func _process(_delta):
 func _on_spawner_timeout():
 	spawn_enemy()
 	spawn_ally()
+	pass

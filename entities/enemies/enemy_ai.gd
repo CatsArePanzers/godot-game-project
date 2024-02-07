@@ -2,13 +2,7 @@ extends Node2D
 
 signal emit_target(target)
 
-enum State{
-	IDLE,
-	HIT,
-	ATTACK
-}
-
-var state = State.IDLE:
+var state = CharacterState.IDLE:
 	set(new_state):
 		if new_state == state:
 			return
@@ -28,7 +22,7 @@ var targets_queue = Array()
 
 @onready var hit_from = Vector2()
 
-@export var rotation_speed = PI * 0.8
+@export var rotation_speed = PI * 0.6
 
 func set_weapon(new_weapon):
 	parent = get_parent()
@@ -39,16 +33,16 @@ func _ready():
 
 func _process(delta):
 	match state:
-		State.IDLE:
+		CharacterState.IDLE:
 			pass
-		State.HIT:
+		CharacterState.HIT:
 			if target != null:
-				state = State.ATTACK
-			turn_to(hit_from, rotation_speed * delta * 10)
+				state = CharacterState.ATTACK
+			turn_to(hit_from, rotation_speed * delta * 5)
 			var angle = weapon.global_position.direction_to(hit_from).angle()
 			if parent.get_target() != end_of_fov and abs(weapon.global_rotation - angle) <= PI/36:
 				emit_target.emit(end_of_fov)
-		State.ATTACK:
+		CharacterState.ATTACK:
 			if target != null and weapon != null:
 				turn_to(target.global_position, rotation_speed * delta)
 				var angle = weapon.global_position.direction_to(target.global_position).angle()
@@ -69,7 +63,7 @@ func _on_detection_zone_body_entered(body):
 		if target == null:
 			target = targets_queue[0]
 			emit_target.emit(target)
-		state = State.ATTACK
+		state = CharacterState.ATTACK
 
 func _on_detection_zone_body_exited(body):
 	if (
@@ -88,10 +82,10 @@ func _on_detection_zone_body_exited(body):
 	
 	if target and target == body:
 		#print("enemy removed: ", targets_queue.size())
-		if targets_queue.size() <= 1:
+		if targets_queue.size() == 1:
 			targets_queue.pop_front()
 			target = null
-			state = State.IDLE
+			state = CharacterState.IDLE
 		else:
 			targets_queue.pop_front()
 			target = targets_queue[0]
@@ -103,5 +97,3 @@ func turn_to(pos, rotationa_speed = PI):
 	var direction = clamp(angle, weapon.rotation - rotationa_speed, weapon.rotation + rotationa_speed)
 	weapon.rotation = direction
 	detection_zone.rotation = weapon.rotation + PI/2
-	#print(weapon.global_rotation)
-

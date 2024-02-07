@@ -18,6 +18,7 @@ script = ExtResource("1_hkor1")
 script = ExtResource("5_bl2cg")
 
 [node name="Player" parent="." instance=ExtResource("2_diwyk")]
+speed = 4
 health = 500
 
 [node name="Path2D" type="Path2D" parent="."]
