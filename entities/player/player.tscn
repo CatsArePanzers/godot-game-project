@@ -208,18 +208,20 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 7
+collision_layer = 129
+collision_mask = 135
+motion_mode = 1
 script = ExtResource("1_7plj8")
 health = 100
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(2.38419e-07, -1)
+shape = SubResource("CapsuleShape2D_pe8ln")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_xyece")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
-
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_pe8ln")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -228,7 +230,8 @@ libraries = {
 
 [node name="Gun" parent="." instance=ExtResource("4_beaok")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.6, 0.6)
-
 [node name="Team" parent="." instance=ExtResource("4_n5ttn")]
+
+[node name="Camera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
