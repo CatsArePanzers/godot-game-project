@@ -42,7 +42,7 @@ func _process(delta):
 				state = CharacterState.ATTACK
 				pass
 			
-			turn_to(hit_from, rotation_speed * delta * 10)
+			turn_to(hit_from, rotation_speed * delta * 7)
 			
 			var angle = weapon.global_position.direction_to(hit_from).angle()
 			if (

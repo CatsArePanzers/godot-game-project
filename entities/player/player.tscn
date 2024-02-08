@@ -229,5 +229,6 @@ libraries = {
 [node name="Gun" parent="." instance=ExtResource("4_beaok")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.6, 0.6)
 
 [node name="Team" parent="." instance=ExtResource("4_n5ttn")]
