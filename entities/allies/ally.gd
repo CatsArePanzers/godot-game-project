@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Ally
 
+signal died(body)
+
 @onready var ai: AllyAI = $AI
 
 @onready var gun   		= $Gun
@@ -20,6 +22,9 @@ var target = null
 var target_distance = 1000
 
 @export var health: int = 100
+
+func get_camera():
+	return $Camera
 
 func _ready():
 	ai.set_weapon(gun)
@@ -78,4 +83,5 @@ func animate():
 func take_damage(damage):
 	health -= damage
 	if health <= 0:
+		emit_signal("died", self)
 		queue_free()
