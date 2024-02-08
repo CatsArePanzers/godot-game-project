@@ -32,8 +32,9 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("move_right"):
 		velocity.x = 1
 	
-	velocity = velocity.normalized()
-	move_and_collide(velocity * speed)
+	velocity = velocity.normalized() * speed
+	#move_and_collide(velocity * speed)
+	move_and_slide()
 	
 	animate()
 
