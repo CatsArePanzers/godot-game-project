@@ -57,14 +57,12 @@ func _on_spawner_timeout():
 func switch_camera(curr_camera: Camera2D, new_camera: Camera2D):	
 	var tween: Tween = get_tree().create_tween()
 	
-	#var path_to_camera: Vector2 = curr_camera.global_position.direction_to(new_camera.global_position) * curr_camera.global_position.distance_to(curr_camera.global_position)
-	
-	tween.tween_property(curr_camera, "offset", new_camera.global_position - curr_camera.global_position, 0.2)
-	
-	await tween.finished
-	
-	curr_camera.offset = Vector2.ZERO
+	new_camera.offset = curr_camera.global_position - new_camera.global_position
 	new_camera.make_current()
+	
+	tween.tween_property(new_camera, "offset", Vector2.ZERO, 0.3)
+	await tween.finished
+
 
 func remove_dead_ally(dead_ally):
 	allies.pop_at(allies.find(dead_ally))
