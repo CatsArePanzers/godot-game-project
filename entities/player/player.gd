@@ -11,7 +11,7 @@ class_name Player
 
 @onready var team		= $Team
 
-@export var speed: 	float = 5
+@export var speed: 	float = 400
 @export var health: int = 1
 
 var can_move_up:    bool = true

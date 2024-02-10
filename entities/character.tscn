@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfvl2terb63tc"]
+[gd_scene load_steps=11 format=3 uid="uid://bfvl2terb63tc"]
 
-[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_w6htd"]
-[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_e2eef"]
-[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_8ve45"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_ai.gd" id="4_61i40"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_hswp1"]
+[ext_resource type="Script" path="res://entities/character.gd" id="1_702ln"]
+[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_68isn"]
+[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_ms75q"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_bkhtu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 15.0
@@ -216,10 +215,10 @@ height = 231.897
 position = Vector2(564, -3)
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("1_w6htd")
+script = ExtResource("1_702ln")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_e2eef")
+texture = ExtResource("2_68isn")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
@@ -232,29 +231,26 @@ libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
 
-[node name="Gun" parent="." instance=ExtResource("3_8ve45")]
+[node name="Gun" parent="." instance=ExtResource("3_ms75q")]
 
-[node name="AI" type="Node2D" parent="."]
-script = ExtResource("4_61i40")
-
-[node name="DetectionZone" type="Area2D" parent="AI" groups=["Enemy"]]
+[node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
 collision_layer = 2
 collision_mask = 5
 
-[node name="FOV" type="CollisionShape2D" parent="AI/DetectionZone"]
+[node name="FOV" type="CollisionShape2D" parent="DetectionZone"]
 position = Vector2(1.22951, -115.086)
 shape = SubResource("CapsuleShape2D_1og35")
 
-[node name="EndOfFOV" type="Marker2D" parent="AI/DetectionZone"]
+[node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
 position = Vector2(-1.63934, -230.172)
 
-[node name="Cooldown" type="Timer" parent="AI"]
+[node name="Team" parent="." instance=ExtResource("4_bkhtu")]
+team = 1
+
+[node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[node name="Team" parent="." instance=ExtResource("5_hswp1")]
-team = 1
-
-[connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_exited"]
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
