@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Ally
 
-signal died(body)
+signal died
 
 @onready var ai: AllyAI = $AI
 
