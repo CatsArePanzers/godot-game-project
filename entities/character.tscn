@@ -213,8 +213,8 @@ height = 231.897
 
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(564, -3)
-collision_layer = 130
-collision_mask = 135
+collision_layer = 2
+collision_mask = 7
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
@@ -270,7 +270,7 @@ debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="NavUpdate" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 autostart = true
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]

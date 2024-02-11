@@ -29,13 +29,15 @@ func spawn_ally():
 	allies.append(new_ally)
 	new_ally.connect("died", remove_dead_ally)
 
+
+
 func _ready():
 	allies.push_front($Player)
 	spawn_enemy()
 	#spawn_ally()
-	#spawn_enemy()
+	spawn_enemy()
 	#spawn_ally()
-	#spawn_enemy()
+	spawn_enemy()
 	#spawn_ally()
 	
 	allies[0].get_camera().make_current()
@@ -67,7 +69,7 @@ func _process(_delta):
 	pass
 
 func _on_spawner_timeout():
-	#spawn_enemy()
+	spawn_enemy()
 	#spawn_ally()
 	pass
 	

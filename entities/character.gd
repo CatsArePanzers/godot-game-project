@@ -41,6 +41,7 @@ var move_pos := Vector2.ZERO
 
 var targets_queue := Array()
 var potential_targets := Array()
+var potential_target_idx: int = 0
 
 var target = null
 var target_distance = -1
@@ -63,9 +64,15 @@ func set_move_pos(new_pos):
 	move_pos = new_pos
 
 func _physics_process(_delta):
-	if potential_targets:
-		track_target(potential_targets[0])
+	if !potential_targets.is_empty():
+		track_potential_target(potential_targets[potential_target_idx])
+		if !potential_targets.is_empty():
+			potential_target_idx += 1
+			potential_target_idx %= potential_targets.size()
 	
+	print(potential_targets)
+	
+	track_target()
 	nav_agent.set_velocity(velocity)
 	animate()
 
@@ -101,11 +108,10 @@ func _on_detection_zone_body_exited(body):
 		return
 	
 	var idx = potential_targets.find(body)
-	if idx != -1:
-		targets_queue.pop_at(idx)
-		print("cat")
 	
-	if target != body:
+	if idx != -1:
+		potential_targets.pop_at(idx)
+	elif target != body:
 		idx = targets_queue.find(body)
 		if idx == -1:
 			print("Error this shouldn't happen for the enemy")
@@ -113,16 +119,14 @@ func _on_detection_zone_body_exited(body):
 		targets_queue.pop_at(idx)
 	
 	if target and target == body:
-		if targets_queue.size() == 1:
+		if targets_queue.size() <= 1:
 			targets_queue.pop_front()
 			target = null
-			state = CharacterState.IDLE
 		else:
 			targets_queue.pop_front()
 			target = targets_queue[0]
-		target = target
 
-func track_target(body):
+func track_potential_target(body):
 	if body == null:
 		return
 	
@@ -131,7 +135,7 @@ func track_target(body):
 	if (ray["collider"] != body):
 		return
 	
-	potential_targets.pop_front()
+	potential_targets.pop_at(potential_targets.find(body))
 	targets_queue.append(body)
 	
 	if target == null:
@@ -139,7 +143,25 @@ func track_target(body):
 		target = target
 		_on_nav_update_timeout()
 	state = CharacterState.ATTACK
-	pass
+
+func track_target():
+	if target == null:
+		return
+		
+	var ray = create_ray(global_position, target.global_position)
+	
+	if (ray["collider"] != target):
+		if targets_queue.size() <= 1:
+			targets_queue.pop_front()
+			potential_targets.push_front(target)
+			_on_nav_update_timeout()
+			target = null
+		else:
+			targets_queue.pop_front()
+			potential_targets.push_front(target)
+			target = targets_queue[0]
+			_on_nav_update_timeout()
+
 
 func turn_to(pos, p_rotation_speed = PI):
 	var final_pos = weapon.global_position.direction_to(pos)
@@ -156,6 +178,9 @@ func take_damage(damage):
 
 func get_move_direction() -> Vector2:
 	return global_position.direction_to(nav_agent.get_next_path_position())
+	
+func get_next_pos() -> Vector2:
+	return nav_agent.get_next_path_position()
 
 func _on_nav_update_timeout():
 	if target != null:
@@ -164,8 +189,8 @@ func _on_nav_update_timeout():
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	velocity = safe_velocity
 
-func create_ray(from: Vector2, to: Vector2):
+func create_ray(from: Vector2, to: Vector2) -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(from, to)
+	var query = PhysicsRayQueryParameters2D.create(from, to, collision_mask ^ collision_layer, [self])
 	query.exclude = [self]
 	return space_state.intersect_ray(query)
