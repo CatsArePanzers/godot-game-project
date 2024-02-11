@@ -17,5 +17,5 @@ func enter(p_character: Character):
 func exit():
 	pass
 
-func update(delta):
+func update(_delta):
 	pass

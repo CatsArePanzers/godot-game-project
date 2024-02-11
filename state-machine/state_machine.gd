@@ -17,13 +17,13 @@ func set_character(p_character: Character):
 		return
 	
 	character = p_character
-	change_state(p_character.state)
+	change_state(character.state)
 
-func _process(delta):
+func update(delta):
 	if curr_state and character:
 		curr_state.update(delta)
 	
-func _physics_process(delta):
+func update_physics(delta):
 	if curr_state and character:
 		curr_state.update(delta)
 
@@ -33,7 +33,7 @@ func change_state(new_state_name):
 		curr_state.enter(character)
 	
 	if curr_state.state_name == new_state_name:
-		return
+		curr_state.enter(character)
 
 	curr_state.exit()
 	curr_state = states[new_state_name]
