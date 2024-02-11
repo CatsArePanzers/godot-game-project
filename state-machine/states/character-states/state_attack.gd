@@ -29,17 +29,17 @@ func update(delta):
 
 func move_character(delta):
 	if character.target:
-		character.velocity 		  = character.global_position.direction_to(character.target.global_position).normalized()
+		character.velocity 		  = character.get_move_direction() * character.speed
 		character.target_distance = character.global_position.distance_to(character.target.global_position)
 	else: 
 		character.velocity = Vector2.ZERO
 		character.arget_distance = -1
 	
-	if character.target_distance > 300:
-		character.velocity *= character.speed
-	elif character.target_distance < 150:
-		character.velocity *= -character.speed
-	else:
-		character.velocity = Vector2.ZERO
+	#if character.target_distance > 300:
+	#	character.velocity *= character.speed
+	#elif character.target_distance < 150:
+	#	character.velocity *= -character.speed
+	#else:
+	#	character.velocity = Vector2.ZERO
 		
 	character.move_and_slide()

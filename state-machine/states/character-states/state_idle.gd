@@ -11,5 +11,5 @@ func enter(p_character):
 func exit():
 	pass
 	
-func update(delta):
+func update(_delta):
 	character.velocity = Vector2.ZERO

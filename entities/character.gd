@@ -18,6 +18,8 @@ func set_state(p_state):
 func get_state():
 	return state
 
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+
 @onready var detection_zone = $DetectionZone
 @onready var fov			= $DetectionZone/FOV
 @onready var end_of_fov		= $DetectionZone/EndOfFOV
@@ -27,15 +29,15 @@ func get_state():
 @onready var weapon_sprite 	= $Gun/GunSprite
 
 @onready var animations = $AnimationPlayer
-@onready var sprite 	= $EnemySprite
+@onready var sprite 	= $CharacterSprite
 
 @onready var team		= $Team
 @onready var shoot_cooldown = $Cooldown
 
 var move_pos: Vector2 = Vector2.ZERO
 
-@export var speed: int = 100
-@export var rotation_speed = PI * 0.6
+@export var speed: int = 300
+@export var rotation_speed = PI 
 
 var targets_queue = Array()
 
@@ -45,7 +47,7 @@ var target_distance = -1
 @export var health: int = 100
 
 func _ready():
-	animate()
+	pass
 
 func get_team():
 	return team.team
@@ -59,7 +61,8 @@ func get_target():
 func set_move_pos(new_pos):
 	move_pos = new_pos
 
-func _physics_process(delta):	
+func _physics_process(_delta):
+	nav_agent.set_velocity(velocity)
 	animate()
 
 func animate():
@@ -124,3 +127,14 @@ func take_damage(damage):
 	if health <= 0:
 		died.emit(self)
 		queue_free()
+
+func get_move_direction() -> Vector2:
+	return global_position.direction_to(nav_agent.get_next_path_position())
+
+func _on_nav_update_timeout():
+	if target != null:
+		nav_agent.target_position = target.global_position
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	velocity = safe_velocity
