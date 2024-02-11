@@ -15,7 +15,7 @@ region_enabled = true
 region_rect = Rect2(349, 435, 18, 13)
 
 [node name="GunBarrel" type="Marker2D" parent="."]
-position = Vector2(28, 0)
+position = Vector2(24, 0)
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.25
