@@ -13,6 +13,15 @@ func exit():
 	
 func update(delta):
 	if character.target == null or character.weapon == null:
+		if character.target != null:
+			return
+			
+		character.turn_to(character.get_next_pos(), character.rotation_speed * delta)
+		
+		if character.global_position.distance_to(character.get_next_pos()) < 20:
+			change_state.emit(CharacterState.IDLE)
+		
+		move_character(delta)
 		return
 	
 	character.turn_to(character.target.global_position, character.rotation_speed * delta)
@@ -28,18 +37,18 @@ func update(delta):
 	move_character(delta)
 
 func move_character(delta):
-	if character.target:
-		character.velocity 		  = character.get_move_direction() * character.speed
-		character.target_distance = character.global_position.distance_to(character.target.global_position)
-	else: 
-		character.velocity = Vector2.ZERO
-		character.arget_distance = -1
+	var distance_to_target: float = -1
 	
-	#if character.target_distance > 300:
-	#	character.velocity *= character.speed
-	#elif character.target_distance < 150:
-	#	character.velocity *= -character.speed
-	#else:
-	#	character.velocity = Vector2.ZERO
-		
+	if character.target:
+		distance_to_target = character.global_position.distance_to(character.target.global_position)
+	
+	if distance_to_target > 300 or distance_to_target == -1:
+		character.velocity = character.get_move_direction() * character.speed
+	else:
+		character.velocity = character.global_position.direction_to(character.target.global_position)
+		if distance_to_target > 250:
+			character.velocity *= character.speed
+		elif distance_to_target < 150:
+			character.velocity *= -character.speed
+	
 	character.move_and_slide()

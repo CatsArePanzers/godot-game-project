@@ -14,11 +14,6 @@ class_name Player
 @export var speed: 	float = 400
 @export var health: int = 1
 
-var can_move_up:    bool = true
-var can_move_down:	bool = true
-var can_move_left:	bool = true
-var can_move_right: bool = true
-
 func get_camera():
 	return $Camera
 
@@ -31,13 +26,13 @@ func _ready():
 func _physics_process(_delta):
 	velocity = Vector2.ZERO
 	
-	if Input.is_action_pressed("move_up") and can_move_up:
+	if Input.is_action_pressed("move_up"):
 		velocity.y = -1;
-	if Input.is_action_pressed("move_down") and can_move_down:
+	if Input.is_action_pressed("move_down"):
 		velocity.y = 1
-	if Input.is_action_pressed("move_left") and can_move_left:
+	if Input.is_action_pressed("move_left"):
 		velocity.x = -1
-	if Input.is_action_pressed("move_right")and can_move_right:
+	if Input.is_action_pressed("move_right"):
 		velocity.x = 1
 	
 	velocity = velocity.normalized() * speed
