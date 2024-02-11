@@ -31,15 +31,16 @@ func get_state():
 @onready var animations = $AnimationPlayer
 @onready var sprite 	= $CharacterSprite
 
-@onready var team		= $Team
+@onready var team			= $Team
 @onready var shoot_cooldown = $Cooldown
 
-var move_pos: Vector2 = Vector2.ZERO
+var move_pos := Vector2.ZERO
 
 @export var speed: int = 300
-@export var rotation_speed = PI 
+@export var rotation_speed = PI * 1.1
 
-var targets_queue = Array()
+var targets_queue := Array()
+var potential_targets := Array()
 
 var target = null
 var target_distance = -1
@@ -62,6 +63,9 @@ func set_move_pos(new_pos):
 	move_pos = new_pos
 
 func _physics_process(_delta):
+	if potential_targets:
+		track_target(potential_targets[0])
+	
 	nav_agent.set_velocity(velocity)
 	animate()
 
@@ -82,14 +86,12 @@ func animate():
 
 func _on_detection_zone_body_entered(body):
 	if (
-			body.has_method("get_team")  
-			and body.get_team() != team.team
+			!body.has_method("get_team")  
+			or body.get_team() == team.team
 	):
-		targets_queue.append(body)
-		if target == null:
-			target = targets_queue[0]
-			target = target
-		state = CharacterState.ATTACK
+		return
+	
+	potential_targets.push_front(body)
 
 func _on_detection_zone_body_exited(body):
 	if (
@@ -98,8 +100,13 @@ func _on_detection_zone_body_exited(body):
 	):
 		return
 	
+	var idx = potential_targets.find(body)
+	if idx != -1:
+		targets_queue.pop_at(idx)
+		print("cat")
+	
 	if target != body:
-		var idx = targets_queue.find(body)
+		idx = targets_queue.find(body)
 		if idx == -1:
 			print("Error this shouldn't happen for the enemy")
 			return 
@@ -114,6 +121,25 @@ func _on_detection_zone_body_exited(body):
 			targets_queue.pop_front()
 			target = targets_queue[0]
 		target = target
+
+func track_target(body):
+	if body == null:
+		return
+	
+	var ray = create_ray(global_position, body.global_position)
+	
+	if (ray["collider"] != body):
+		return
+	
+	potential_targets.pop_front()
+	targets_queue.append(body)
+	
+	if target == null:
+		target = targets_queue[0]
+		target = target
+		_on_nav_update_timeout()
+	state = CharacterState.ATTACK
+	pass
 
 func turn_to(pos, p_rotation_speed = PI):
 	var final_pos = weapon.global_position.direction_to(pos)
@@ -135,6 +161,11 @@ func _on_nav_update_timeout():
 	if target != null:
 		nav_agent.target_position = target.global_position
 
-
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	velocity = safe_velocity
+
+func create_ray(from: Vector2, to: Vector2):
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(from, to)
+	query.exclude = [self]
+	return space_state.intersect_ray(query)

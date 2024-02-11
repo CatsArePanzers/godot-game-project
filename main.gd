@@ -11,7 +11,6 @@ func spawn_enemy():
 	var new_enemy: Character = preload("res://entities/character.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
-	print(%PathFollow2D.global_position)
 	add_child(new_enemy)
 	var rand_rotation = randf() * PI * 2
 	new_enemy.weapon.rotation 				 = rand_rotation
@@ -34,9 +33,9 @@ func _ready():
 	allies.push_front($Player)
 	spawn_enemy()
 	#spawn_ally()
-	spawn_enemy()
+	#spawn_enemy()
 	#spawn_ally()
-	spawn_enemy()
+	#spawn_enemy()
 	#spawn_ally()
 	
 	allies[0].get_camera().make_current()
@@ -68,7 +67,7 @@ func _process(_delta):
 	pass
 
 func _on_spawner_timeout():
-	spawn_enemy()
+	#spawn_enemy()
 	#spawn_ally()
 	pass
 	
