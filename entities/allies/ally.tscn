@@ -1,21 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8dtul6hb2rdb"]
+[gd_scene load_steps=11 format=3 uid="uid://b6m0c4ypevo2w"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_kf25d"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_emytg"]
-[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_8yqyf"]
-[ext_resource type="Script" path="res://entities/allies/ally_ai.gd" id="4_64l1l"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_xa53s"]
+[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_h2hin"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_6rg4l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
-radius = 15.0
-height = 46.0
+radius = 11.0
+height = 32.0
 
 [sub_resource type="Animation" id="Animation_od7ud"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AllySprite:region_enabled")
+tracks/0/path = NodePath("CharacterSprite:region_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,7 +26,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AllySprite:hframes")
+tracks/1/path = NodePath("CharacterSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,7 +38,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AllySprite:vframes")
+tracks/2/path = NodePath("CharacterSprite:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -51,7 +50,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AllySprite:frame")
+tracks/3/path = NodePath("CharacterSprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -63,7 +62,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AllySprite:region_rect")
+tracks/4/path = NodePath("CharacterSprite:region_rect")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -79,7 +78,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AllySprite:region_enabled")
+tracks/0/path = NodePath("CharacterSprite:region_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +90,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AllySprite:hframes")
+tracks/1/path = NodePath("CharacterSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +102,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AllySprite:vframes")
+tracks/2/path = NodePath("CharacterSprite:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -115,7 +114,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AllySprite:frame")
+tracks/3/path = NodePath("CharacterSprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -127,7 +126,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AllySprite:region_rect")
+tracks/4/path = NodePath("CharacterSprite:region_rect")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -143,7 +142,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AllySprite:hframes")
+tracks/0/path = NodePath("CharacterSprite:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -155,7 +154,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AllySprite:vframes")
+tracks/1/path = NodePath("CharacterSprite:vframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -167,7 +166,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AllySprite:region_enabled")
+tracks/2/path = NodePath("CharacterSprite:region_enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -179,7 +178,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AllySprite:region_rect")
+tracks/3/path = NodePath("CharacterSprite:region_rect")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -191,7 +190,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AllySprite:frame")
+tracks/4/path = NodePath("CharacterSprite:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -215,45 +214,65 @@ height = 231.897
 [node name="Ally" type="CharacterBody2D"]
 position = Vector2(564, -3)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 135
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 0.0
+safe_margin = 2.0
 script = ExtResource("1_kf25d")
 
-[node name="AllySprite" type="Sprite2D" parent="."]
+[node name="CharacterSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_emytg")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(2, -1)
+position = Vector2(1, -2)
 shape = SubResource("CapsuleShape2D_f15xe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
+autoplay = "idle"
 
-[node name="Gun" parent="." instance=ExtResource("3_8yqyf")]
+[node name="Weapon" parent="." instance=ExtResource("3_h2hin")]
 
-[node name="AI" type="Node2D" parent="."]
-script = ExtResource("4_64l1l")
-
-[node name="DetectionZone" type="Area2D" parent="AI" groups=["Enemy"]]
+[node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
-collision_layer = 4
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
-[node name="FOV" type="CollisionShape2D" parent="AI/DetectionZone"]
+[node name="FOV" type="CollisionShape2D" parent="DetectionZone"]
 position = Vector2(1.22951, -115.086)
 shape = SubResource("CapsuleShape2D_1og35")
 
-[node name="EndOfFOV" type="Marker2D" parent="AI/DetectionZone"]
+[node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
 position = Vector2(-1.63934, -230.172)
 
-[node name="Cooldown" type="Timer" parent="AI"]
+[node name="Team" parent="." instance=ExtResource("4_6rg4l")]
+team = 1
+
+[node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[node name="Team" parent="." instance=ExtResource("5_xa53s")]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 30.0
+target_desired_distance = 100.0
+path_max_distance = 200.0
+navigation_layers = 129
+avoidance_enabled = true
+radius = 50.0
+neighbor_distance = 200.0
+max_neighbors = 4
+max_speed = 1000.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 1, 1)
+
+[node name="NavUpdate" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
 
 [node name="Camera" type="Camera2D" parent="."]
 process_priority = 1
@@ -262,5 +281,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 rotation_smoothing_enabled = true
 
-[connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_exited"]
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="NavUpdate" to="." method="_on_nav_update_timeout"]
