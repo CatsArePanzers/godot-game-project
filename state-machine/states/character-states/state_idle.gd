@@ -5,8 +5,8 @@ class_name StateIdle
 func _ready():
 	state_name = CharacterState.IDLE
 	
-func enter(p_character):
-	super(p_character)
+func enter():
+	super()
 	
 func exit():
 	pass

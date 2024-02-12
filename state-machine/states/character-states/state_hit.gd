@@ -5,8 +5,8 @@ class_name StateHit
 func _ready():
 	state_name = CharacterState.HIT
 	
-func enter(p_character):
-	super(p_character)
+func enter():
+	super()
 	
 func exit():
 	pass
@@ -16,17 +16,15 @@ func update(delta):
 		change_state.emit(CharacterState.ATTACK)
 		return
 		
-	#var hit_direction = character.global_position.direction_to(character.move_pos)
-		
-	character.turn_to(character.move_pos, character.rotation_speed * delta * 5)
+	character.turn_to(character.target_pos, character.rotation_speed * delta * 5)
 			
-	var angle = character.weapon.global_position.direction_to(character.move_pos).angle()
+	var angle = character.global_position.direction_to(character.target_pos).angle()
 	
 	if (
-			character.global_position.distance_to(character.move_pos) >= 20
-			and abs(character.weapon.global_rotation - angle) <= PI/360
+				character.global_position.distance_to(character.target_pos) >= 20
+				and abs(character.weapon.global_rotation - angle) <= PI/36
 		):
-		character.velocity = character.global_position.direction_to(character.move_pos).normalized() * character.speed
-		character.move_and_slide()
-	elif character.global_position.distance_to(character.move_pos) <= 20:
+			character.velocity = character.get_move_direction() * character.speed
+			character.move_and_slide()
+	elif character.global_position.distance_to(character.target_pos) <= 20:
 		change_state.emit(CharacterState.IDLE)
