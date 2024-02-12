@@ -3,8 +3,10 @@ extends CharacterBody2D
 class_name Character
 
 signal died
+signal commenced_attack
+signal got_hit
 
-var state = CharacterState.IDLE:
+var state := CharacterState.IDLE:
 	set(new_state):
 		if new_state == state:
 			return
@@ -34,8 +36,6 @@ func get_state():
 @onready var team			= $Team
 @onready var shoot_cooldown = $Cooldown
 
-var move_pos := Vector2.ZERO
-
 @export var speed: int = 300
 @export var rotation_speed = PI * 1.1
 
@@ -44,6 +44,7 @@ var potential_targets := Array()
 var potential_target_idx: int = 0
 
 var target = null
+var target_pos: Vector2
 var target_distance = -1
 
 @export var health: int = 100
@@ -60,9 +61,6 @@ func set_target(new_target):
 func get_target():
 	return target
 
-func set_move_pos(new_pos):
-	move_pos = new_pos
-
 func _physics_process(_delta):
 	if !potential_targets.is_empty():
 		track_potential_target(potential_targets[potential_target_idx])
@@ -70,9 +68,8 @@ func _physics_process(_delta):
 			potential_target_idx += 1
 			potential_target_idx %= potential_targets.size()
 	
-	print(potential_targets)
-	
 	track_target()
+	
 	nav_agent.set_velocity(velocity)
 	animate()
 
@@ -142,7 +139,8 @@ func track_potential_target(body):
 		target = targets_queue[0]
 		target = target
 		_on_nav_update_timeout()
-	state = CharacterState.ATTACK
+	
+	commenced_attack.emit()
 
 func track_target():
 	if target == null:
@@ -163,9 +161,18 @@ func track_target():
 			_on_nav_update_timeout()
 
 
-func turn_to(pos, p_rotation_speed = PI):
-	var final_pos = weapon.global_position.direction_to(pos)
-	var angle = lerp_angle(weapon.rotation, final_pos.angle(), 1)
+func turn_to(target, p_rotation_speed = PI):
+	match typeof(target):
+		TYPE_FLOAT:
+			turn_to_angle(target, p_rotation_speed)
+		TYPE_VECTOR2:
+			var turn_angle = weapon.global_position.direction_to(target).angle()
+			turn_to_angle(turn_angle, p_rotation_speed)
+		_:
+			return 
+
+func turn_to_angle(p_angle: float, p_rotation_speed = PI):
+	var angle = lerp_angle(weapon.rotation, p_angle, 1)
 	var direction = clamp(angle, weapon.rotation - p_rotation_speed, weapon.rotation + p_rotation_speed)
 	weapon.rotation = direction
 	detection_zone.rotation = weapon.rotation + PI/2
@@ -186,11 +193,28 @@ func _on_nav_update_timeout():
 	if target != null:
 		nav_agent.target_position = target.global_position
 
+func set_nav_agent_target_pos(p_pos):
+	nav_agent.target_position = p_pos
+
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
-	velocity = safe_velocity
+	clamp(velocity, Vector2.ZERO, safe_velocity)
 
 func create_ray(from: Vector2, to: Vector2) -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(from, to, collision_mask ^ collision_layer, [self])
-	query.exclude = [self]
 	return space_state.intersect_ray(query)
+
+func get_hit_from(p_hit_from: Vector2):
+	if state == CharacterState.ATTACK:
+		return
+	
+	var move_distance = global_position.distance_to(end_of_fov.global_position)
+	target_pos = global_position + move_distance * p_hit_from.normalized()
+	var ray: Dictionary = create_ray(global_position, target_pos)
+	
+	if !ray.is_empty():
+		target_pos = ray["position"]
+	
+	set_nav_agent_target_pos(target_pos)
+	
+	got_hit.emit()

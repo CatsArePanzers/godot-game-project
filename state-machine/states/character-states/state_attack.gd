@@ -4,10 +4,10 @@ class_name StateAttack
 
 func _ready():
 	state_name = CharacterState.ATTACK
-	
-func enter(p_character):
-	super(p_character)
-	
+
+func enter():
+	super()
+
 func exit():
 	pass
 	
