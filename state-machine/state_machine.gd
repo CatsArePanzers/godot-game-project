@@ -5,6 +5,9 @@ var curr_state: State
 var states: Dictionary = {}
 var character: Character
 
+func _init():
+	pass
+
 func _ready():
 	for child in get_children():
 		if child is State:
@@ -17,24 +20,24 @@ func set_character(p_character: Character):
 		return
 	
 	character = p_character
-	change_state(character.state)
-
-func update(delta):
-	if curr_state and character:
-		curr_state.update(delta)
+	curr_state = states[p_character.get_state()]
 	
-func update_physics(delta):
+	for state in states:
+		states[state].set_character(p_character)
+
+func _physics_process(delta):
 	if curr_state and character:
+		#print(curr_state.name)
 		curr_state.update(delta)
 
 func change_state(new_state_name):
 	if curr_state == null:
 		curr_state = states[CharacterState.IDLE]
-		curr_state.enter(character)
+		curr_state.enter()
 	
 	if curr_state.state_name == new_state_name:
-		curr_state.enter(character)
+		curr_state.enter()
 
 	curr_state.exit()
 	curr_state = states[new_state_name]
-	curr_state.enter(character)
+	curr_state.enter()

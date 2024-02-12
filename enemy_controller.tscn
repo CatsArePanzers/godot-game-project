@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://mn0jsk2cixli"]
+
+[ext_resource type="Script" path="res://state-machine/state_machine.gd" id="1_a3urx"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_idle.gd" id="2_8oasy"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_attack.gd" id="3_n66yv"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_hit.gd" id="4_hqut2"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_a3urx")
+
+[node name="StateIdle" type="Node" parent="."]
+script = ExtResource("2_8oasy")
+
+[node name="StateAttack" type="Node" parent="."]
+script = ExtResource("3_n66yv")
+
+[node name="StateHit" type="Node" parent="."]
+script = ExtResource("4_hqut2")

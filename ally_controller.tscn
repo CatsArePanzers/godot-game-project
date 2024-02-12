@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsygyr4xt4ri5"]
+
+[ext_resource type="Script" path="res://state-machine/state_machine.gd" id="1_mddgu"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_idle.gd" id="2_n72vx"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_attack.gd" id="3_squyd"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_hit.gd" id="4_kfic6"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_mddgu")
+
+[node name="StateIdle" type="Node" parent="."]
+script = ExtResource("2_n72vx")
+
+[node name="StateAttack" type="Node" parent="."]
+script = ExtResource("3_squyd")
+
+[node name="StateHit" type="Node" parent="."]
+script = ExtResource("4_kfic6")
