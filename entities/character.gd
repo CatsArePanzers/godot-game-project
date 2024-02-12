@@ -26,18 +26,15 @@ func get_state():
 @onready var fov			= $DetectionZone/FOV
 @onready var end_of_fov		= $DetectionZone/EndOfFOV
 
-@onready var weapon   		= $Gun
-@onready var barrel     	= $Gun/GunBarrel
-@onready var weapon_sprite 	= $Gun/GunSprite
+@onready var weapon   		= $Weapon
+@onready var barrel     	= $Weapon/GunBarrel
+@onready var weapon_sprite 	= $Weapon/GunSprite
 
 @onready var animations = $AnimationPlayer
 @onready var sprite 	= $CharacterSprite
 
 @onready var team			= $Team
 @onready var shoot_cooldown = $Cooldown
-
-@export var speed: int = 300
-@export var rotation_speed = PI * 1.1
 
 var targets_queue := Array()
 var potential_targets := Array()
@@ -48,6 +45,8 @@ var target_pos: Vector2
 var target_distance = -1
 
 @export var health: int = 100
+@export var speed: int = 300
+@export var rotation_speed = PI * 1.1
 
 func _ready():
 	pass
@@ -205,7 +204,7 @@ func create_ray(from: Vector2, to: Vector2) -> Dictionary:
 	return space_state.intersect_ray(query)
 
 func get_hit_from(p_hit_from: Vector2):
-	if state == CharacterState.ATTACK:
+	if state == CharacterState.ATTACK or state == CharacterState.PLAYER:
 		return
 	
 	var move_distance = global_position.distance_to(end_of_fov.global_position)

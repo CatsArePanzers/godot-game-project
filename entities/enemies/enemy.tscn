@@ -1,20 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://dluwqd4oqg0ws"]
+[gd_scene load_steps=11 format=3 uid="uid://c0jxhbup3fig5"]
 
-[ext_resource type="Script" path="res://entities/player/player.gd" id="1_7plj8"]
-[ext_resource type="Texture2D" uid="uid://dulns1vrtabso" path="res://assets/player.png" id="3_xyece"]
-[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="4_beaok"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_n5ttn"]
+[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_nwa4n"]
+[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_k646f"]
+[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_ccc2e"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_jw2b7"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pe8ln"]
-radius = 11.0
-height = 38.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
+radius = 13.0
+height = 46.0
 
 [sub_resource type="Animation" id="Animation_od7ud"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:region_enabled")
+tracks/0/path = NodePath("CharacterSprite:region_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +26,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:hframes")
+tracks/1/path = NodePath("CharacterSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -38,7 +38,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerSprite:vframes")
+tracks/2/path = NodePath("CharacterSprite:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -50,7 +50,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerSprite:frame")
+tracks/3/path = NodePath("CharacterSprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -62,7 +62,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerSprite:region_rect")
+tracks/4/path = NodePath("CharacterSprite:region_rect")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -78,7 +78,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:region_enabled")
+tracks/0/path = NodePath("CharacterSprite:region_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -90,7 +90,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:hframes")
+tracks/1/path = NodePath("CharacterSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -102,7 +102,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerSprite:vframes")
+tracks/2/path = NodePath("CharacterSprite:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -114,7 +114,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerSprite:frame")
+tracks/3/path = NodePath("CharacterSprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -126,7 +126,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerSprite:region_rect")
+tracks/4/path = NodePath("CharacterSprite:region_rect")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -142,7 +142,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:hframes")
+tracks/0/path = NodePath("CharacterSprite:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -154,7 +154,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:vframes")
+tracks/1/path = NodePath("CharacterSprite:vframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -166,7 +166,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerSprite:region_enabled")
+tracks/2/path = NodePath("CharacterSprite:region_enabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -178,7 +178,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerSprite:region_rect")
+tracks/3/path = NodePath("CharacterSprite:region_rect")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -190,7 +190,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerSprite:frame")
+tracks/4/path = NodePath("CharacterSprite:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -207,32 +207,73 @@ _data = {
 "run": SubResource("Animation_uo48r")
 }
 
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 129
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1og35"]
+radius = 56.5574
+height = 231.897
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(564, -3)
+collision_layer = 2
 collision_mask = 135
 motion_mode = 1
+slide_on_ceiling = false
 wall_min_slide_angle = 0.0
-script = ExtResource("1_7plj8")
-health = 100
+safe_margin = 2.0
+script = ExtResource("1_nwa4n")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
-shape = SubResource("CapsuleShape2D_pe8ln")
-
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-texture = ExtResource("3_xyece")
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_k646f")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_f15xe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
 
-[node name="Gun" parent="." instance=ExtResource("4_beaok")]
+[node name="Weapon" parent="." instance=ExtResource("3_ccc2e")]
 
-[node name="Team" parent="." instance=ExtResource("4_n5ttn")]
+[node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
+scale = Vector2(2.44, 2.32)
+collision_layer = 7
+collision_mask = 7
 
-[node name="Camera" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
+[node name="FOV" type="CollisionShape2D" parent="DetectionZone"]
+position = Vector2(1.22951, -115.086)
+shape = SubResource("CapsuleShape2D_1og35")
+
+[node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
+position = Vector2(-1.63934, -230.172)
+
+[node name="Team" parent="." instance=ExtResource("4_jw2b7")]
+team = 1
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 30.0
+target_desired_distance = 100.0
+path_max_distance = 200.0
+navigation_layers = 129
+avoidance_enabled = true
+radius = 50.0
+neighbor_distance = 200.0
+max_neighbors = 4
+max_speed = 1000.0
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 1, 1)
+
+[node name="NavUpdate" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="NavUpdate" to="." method="_on_nav_update_timeout"]

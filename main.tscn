@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca0o866hwfhy8"]
+[gd_scene load_steps=15 format=3 uid="uid://ca0o866hwfhy8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_hkor1"]
-[ext_resource type="PackedScene" uid="uid://dluwqd4oqg0ws" path="res://entities/player/player.tscn" id="2_diwyk"]
 [ext_resource type="Texture2D" uid="uid://cdsusbffmrekk" path="res://assets/tile_set.png" id="4_8jw83"]
 [ext_resource type="Script" path="res://weapons/bullet_manager.gd" id="5_bl2cg"]
 
@@ -708,10 +707,6 @@ layer_2/tile_data = PackedInt32Array(2687048, 65536, 4, 2621512, 65536, 4, 25559
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("5_bl2cg")
-
-[node name="Player" parent="." instance=ExtResource("2_diwyk")]
-floor_constant_speed = true
-health = 500
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-1, 8)
