@@ -220,6 +220,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
 script = ExtResource("1_nwa4n")
+rotation_speed = 3.025
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_k646f")

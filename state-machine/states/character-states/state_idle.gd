@@ -13,3 +13,7 @@ func exit():
 	
 func update(_delta):
 	character.velocity = Vector2.ZERO
+	
+	if character.target != null:
+		change_state.emit(CharacterState.ATTACK)
+		return

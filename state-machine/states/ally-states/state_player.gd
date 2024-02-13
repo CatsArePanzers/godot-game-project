@@ -33,6 +33,7 @@ func update(_delta):
 	character.turn_to(character.get_global_mouse_position())
 
 func _unhandled_input(event):
-	if event.is_action_released("shoot"):
+	if event.is_action_released("shoot") and character.state == CharacterState.PLAYER:
 		character.weapon.shoot()
+		get_viewport().set_input_as_handled()
 

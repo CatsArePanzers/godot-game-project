@@ -220,6 +220,9 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
 script = ExtResource("1_kf25d")
+health = 200
+speed = 400
+rotation_speed = 3.6
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_emytg")
@@ -251,14 +254,13 @@ shape = SubResource("CapsuleShape2D_1og35")
 position = Vector2(-1.63934, -230.172)
 
 [node name="Team" parent="." instance=ExtResource("4_6rg4l")]
-team = 1
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 30.0
+path_desired_distance = 50.0
 target_desired_distance = 100.0
 path_max_distance = 200.0
 navigation_layers = 129

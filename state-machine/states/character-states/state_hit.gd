@@ -15,9 +15,9 @@ func update(delta):
 	if character.target != null:
 		change_state.emit(CharacterState.ATTACK)
 		return
-		
+	
 	character.turn_to(character.target_pos, character.rotation_speed * delta * 5)
-			
+
 	var angle = character.global_position.direction_to(character.target_pos).angle()
 	
 	if (

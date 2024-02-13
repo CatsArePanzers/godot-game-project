@@ -1,5 +1,7 @@
 extends Character
 
+class_name Ally
+
 @onready var camera = $Camera
 
 func _physics_process(delta):

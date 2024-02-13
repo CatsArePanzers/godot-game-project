@@ -25,7 +25,9 @@ func update(_delta):
 	pass
 
 func change_state_attack():
-	change_state.emit(CharacterState.ATTACK)
+	if character.state != CharacterState.PLAYER:
+		change_state.emit(CharacterState.ATTACK)
 
 func change_state_hit():
-	change_state.emit(CharacterState.HIT)
+	if character.state != CharacterState.PLAYER:
+		change_state.emit(CharacterState.HIT)

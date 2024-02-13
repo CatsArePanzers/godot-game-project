@@ -128,7 +128,7 @@ func track_potential_target(body):
 	
 	var ray = create_ray(global_position, body.global_position)
 	
-	if (ray["collider"] != body):
+	if (ray["collider"] != body and !ray.is_empty()):
 		return
 	
 	potential_targets.pop_at(potential_targets.find(body))
