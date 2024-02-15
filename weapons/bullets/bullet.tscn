@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://xnajdijjnp6t"]
 
-[ext_resource type="Script" path="res://weapons/bullet.gd" id="1_rhprv"]
-[ext_resource type="Texture2D" uid="uid://crduau12sbm1a" path="res://assets/bullet.png" id="2_eemrb"]
+[ext_resource type="Script" path="res://weapons/bullets/bullet.gd" id="1_tqc3h"]
+[ext_resource type="Texture2D" uid="uid://crduau12sbm1a" path="res://assets/bullet.png" id="2_80ofr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qo1li"]
 radius = 2.0
@@ -10,10 +10,10 @@ radius = 2.0
 top_level = true
 collision_layer = 8
 collision_mask = 7
-script = ExtResource("1_rhprv")
+script = ExtResource("1_tqc3h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_eemrb")
+texture = ExtResource("2_80ofr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qo1li")

@@ -68,11 +68,11 @@ func _ready():
 	#spawn_ally()
 	
 	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
+	#spawn_enemy()
+	#spawn_enemy()
+	#spawn_enemy()
+	#spawn_enemy()
+	#spawn_enemy()
 	
 	allies[0].get_camera().make_current()
 	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)

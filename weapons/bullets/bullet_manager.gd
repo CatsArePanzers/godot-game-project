@@ -4,6 +4,7 @@ func _ready():
 	GlobalShooting.bullet_fired.connect(handle_bullet)
 
 func handle_bullet(bullet: Bullet, pos, direction, team, damage, speed):
+	bullet.rotation = pos.direction_to(direction * 2000000).angle()
 	bullet.global_position = pos
 	bullet.team = team
 	bullet.damage = damage

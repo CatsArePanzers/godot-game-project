@@ -63,7 +63,7 @@ func get_target():
 func _physics_process(_delta):
 	if !potential_targets.is_empty():
 		potential_target_idx %= potential_targets.size()
-		print(potential_target_idx, " ", potential_targets.size())
+		#print(potential_target_idx, " ", potential_targets.size())
 		track_potential_target(potential_targets[potential_target_idx])
 		potential_target_idx += 1
 	
