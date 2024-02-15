@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://state-machine/state_machine.gd" id="1_ds7wk"]
 [ext_resource type="Script" path="res://state-machine/states/character-states/state_idle.gd" id="2_4wt47"]
 [ext_resource type="Script" path="res://state-machine/states/character-states/state_attack.gd" id="3_sklgt"]
-[ext_resource type="Script" path="res://state-machine/states/character-states/state_hit.gd" id="4_46lxi"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_move_to.gd" id="4_d5yqu"]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource("1_ds7wk")
@@ -15,4 +15,4 @@ script = ExtResource("2_4wt47")
 script = ExtResource("3_sklgt")
 
 [node name="StateHit" type="Node" parent="."]
-script = ExtResource("4_46lxi")
+script = ExtResource("4_d5yqu")

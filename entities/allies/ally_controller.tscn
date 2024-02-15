@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://state-machine/state_machine.gd" id="1_q2q6w"]
 [ext_resource type="Script" path="res://state-machine/states/character-states/state_idle.gd" id="2_tlp8b"]
 [ext_resource type="Script" path="res://state-machine/states/character-states/state_attack.gd" id="3_e0sb7"]
-[ext_resource type="Script" path="res://state-machine/states/character-states/state_hit.gd" id="4_d1nlo"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_move_to.gd" id="4_rkthu"]
 [ext_resource type="Script" path="res://state-machine/states/ally-states/state_player.gd" id="5_246pj"]
 [ext_resource type="Texture2D" uid="uid://dulns1vrtabso" path="res://assets/player.png" id="6_nlvns"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="7_lqu7d"]
@@ -18,7 +18,7 @@ script = ExtResource("2_tlp8b")
 script = ExtResource("3_e0sb7")
 
 [node name="StateHit" type="Node" parent="."]
-script = ExtResource("4_d1nlo")
+script = ExtResource("4_rkthu")
 
 [node name="StatePlayer" type="Node" parent="."]
 script = ExtResource("5_246pj")

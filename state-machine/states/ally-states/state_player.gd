@@ -18,6 +18,9 @@ func exit():
 func update(_delta):
 	character.velocity = Vector2.ZERO
 	
+	if Input.is_action_pressed("shoot"):
+		character.weapon.shoot()
+	
 	if Input.is_action_pressed("move_up"):
 		character.velocity.y = -1;
 	if Input.is_action_pressed("move_down"):

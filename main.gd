@@ -47,7 +47,7 @@ func spawn_ally():
 	add_child(new_ally)
 	
 	var rand_rotation = randf() * PI * 2
-	new_ally.weapon.rotation 			= rand_rotation
+	new_ally.weapon.rotation 		 = rand_rotation
 	new_ally.detection_zone.rotation = rand_rotation + PI/2
 	
 	allies.append(new_ally)
@@ -63,9 +63,16 @@ func spawn_ally():
 
 func _ready():
 	spawn_ally()
-	spawn_ally()
-	spawn_ally()
-	spawn_ally()
+	#spawn_ally()
+	#spawn_ally()
+	#spawn_ally()
+	
+	spawn_enemy()
+	spawn_enemy()
+	spawn_enemy()
+	spawn_enemy()
+	spawn_enemy()
+	spawn_enemy()
 	
 	allies[0].get_camera().make_current()
 	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)
@@ -81,7 +88,7 @@ func _process(_delta):
 	pass
 
 func _on_spawner_timeout():
-	spawn_enemy()
+	#spawn_enemy()
 	#spawn_ally()
 	pass
 
