@@ -127,6 +127,8 @@ func remove_dead_ally(dead_ally: Ally):
 		switch_player()
 
 func remove_dead_enemy(dead_enemy):
+	if enemy_controllers.get(dead_enemy) == null:
+		return
 	enemy_controllers[dead_enemy].queue_free()
 	enemy_controllers.erase(dead_enemy)
 	enemies.pop_at(enemies.find(dead_enemy))
