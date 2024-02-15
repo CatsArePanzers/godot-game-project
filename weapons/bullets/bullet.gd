@@ -2,11 +2,13 @@ extends Area2D
 
 class_name Bullet
 
-var speed: int = 1000
 var direction := Vector2.ZERO
 var velocity  := Vector2.ZERO
-var damage: int
-var team: int
+var speed: 		 int = 1000
+var damage: 	 int
+var team: 		 int
+
+@export var piercing: int = 1
 
 func _physics_process(delta):
 	if direction != Vector2.ZERO:
@@ -22,7 +24,6 @@ func _on_body_entered(body):
 		return
 	
 	if body.get_team() == team:
-		queue_free()
 		return
 	
 	if body.has_method("take_damage"):
@@ -34,4 +35,7 @@ func _on_body_entered(body):
 		#print((body.global_position - direction * 2000000000).angle())
 		body.get_hit_from(body.global_position - direction * 2000000000)
 	
-	queue_free()
+	piercing -= 1
+	
+	if piercing <= 0:
+		queue_free()

@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Weapon
 
-@export var Bullet: PackedScene
+@export var bullet: PackedScene
 
 @onready var barrel = $GunBarrel
 @onready var sprite = $GunSprite
@@ -30,7 +30,7 @@ func shoot():
 	if $Cooldown.is_stopped() == false:
 		return
 	
-	var new_bullet = preload("res://weapons/bullet.tscn").instantiate()
+	var new_bullet = bullet.instantiate()
 	var bullet_direction = (barrel.global_position - self.global_position - generate_bullet_spread()).normalized()
 	GlobalShooting.bullet_fired.emit(new_bullet, barrel.global_position, bullet_direction, team, damage, shot_velocity)
 	$Cooldown.start()

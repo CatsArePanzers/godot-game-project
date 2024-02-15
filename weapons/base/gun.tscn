@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://cobvkoy8n5f5w"]
 
 [ext_resource type="Script" path="res://weapons/base/gun.gd" id="1_pm4pt"]
-[ext_resource type="PackedScene" uid="uid://xnajdijjnp6t" path="res://weapons/bullet.tscn" id="2_drgp2"]
+[ext_resource type="PackedScene" uid="uid://xnajdijjnp6t" path="res://weapons/bullets/bullet.tscn" id="2_drgp2"]
 [ext_resource type="Texture2D" uid="uid://dulns1vrtabso" path="res://assets/player.png" id="3_ubofo"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_pm4pt")
-Bullet = ExtResource("2_drgp2")
+bullet = ExtResource("2_drgp2")
 damage = 20
 max_spread = 1.0
 

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://1uf3y2ee7v7h"]
+
+[ext_resource type="Script" path="res://weapons/bullets/bullet.gd" id="1_s5bue"]
+[ext_resource type="Texture2D" uid="uid://bniisxskgi0ss" path="res://assets/sniper_bullet.png" id="2_5kwbw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqgsv"]
+size = Vector2(32, 4)
+
+[node name="SniperBullet" type="Area2D"]
+top_level = true
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_s5bue")
+piercing = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5kwbw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rqgsv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
