@@ -7,6 +7,7 @@ class_name Weapon
 @onready var barrel = $GunBarrel
 @onready var sprite = $GunSprite
 
+@export var shots_amount:  int = 0
 @export var shot_velocity: int = 0
 @export var damage: 	   int = 0
 
@@ -30,9 +31,11 @@ func shoot():
 	if $Cooldown.is_stopped() == false:
 		return
 	
-	var new_bullet = bullet.instantiate()
-	var bullet_direction = (barrel.global_position - self.global_position - generate_bullet_spread()).normalized()
-	GlobalShooting.bullet_fired.emit(new_bullet, barrel.global_position, bullet_direction, team, damage, shot_velocity)
+	for i in shots_amount:
+		var new_bullet = bullet.instantiate()
+		var bullet_direction = (barrel.global_position - self.global_position - generate_bullet_spread()).normalized()
+		GlobalShooting.bullet_fired.emit(new_bullet, barrel.global_position, bullet_direction, team, damage, shot_velocity)
+		
 	$Cooldown.start()
 	
 	$SpreadTimer.start()
@@ -48,8 +51,8 @@ func generate_bullet_spread() -> Vector2:
 	
 	var spread_direction = randi_range(-1, 1)
 	
-	while spread_direction == 0:
-		spread_direction = randi_range(-1, 1)
+	#while spread_direction == 0:
+	#	spread_direction = randi_range(-1, 1)
 	
 	if abs(fmod(global_rotation, PI * 3/4)) < PI/4:
 		bullet_spread.y = min_spread + spread

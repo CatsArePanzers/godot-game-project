@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6m0c4ypevo2w"]
+[gd_scene load_steps=15 format=3 uid="uid://b6m0c4ypevo2w"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_kf25d"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_emytg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dnf4ifbbuyirc" path="res://weapons/sniper.tscn" id="3_kbuka"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_6rg4l"]
 [ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="4_ft6o3"]
+[ext_resource type="PackedScene" uid="uid://e5o8u7v1i8wc" path="res://weapons/shotgun.tscn" id="4_hlhdo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -244,7 +245,18 @@ autoplay = "idle"
 
 [node name="WeaponComponent" parent="." instance=ExtResource("3_3nq64")]
 
+[node name="Shotgun" parent="WeaponComponent" instance=ExtResource("4_hlhdo")]
+position = Vector2(4, -3)
+min_spread = 3.0
+max_spread = 5.0
+offset = 10
+
+[node name="Assault" parent="WeaponComponent" instance=ExtResource("2_xh4n6")]
+visible = false
+offset = 5
+
 [node name="Pistol" parent="WeaponComponent" instance=ExtResource("4_ft6o3")]
+visible = false
 position = Vector2(3, -4)
 offset = 4
 
@@ -253,9 +265,6 @@ visible = false
 position = Vector2(1, -6)
 shot_velocity = 2500
 offset = 3
-
-[node name="Assault" parent="WeaponComponent" instance=ExtResource("2_xh4n6")]
-visible = false
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)

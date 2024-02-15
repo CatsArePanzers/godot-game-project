@@ -7,6 +7,7 @@
 [node name="Sniper" type="Node2D"]
 script = ExtResource("1_eaujs")
 bullet = ExtResource("2_7cxoj")
+shots_amount = 1
 shot_velocity = 4000
 damage = 500
 
@@ -17,7 +18,7 @@ region_enabled = true
 region_rect = Rect2(98, 201, 89, 19)
 
 [node name="GunBarrel" type="Marker2D" parent="."]
-position = Vector2(61, 0)
+position = Vector2(64, 0)
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.8
