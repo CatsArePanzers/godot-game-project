@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0jxhbup3fig5"]
+[gd_scene load_steps=12 format=3 uid="uid://c0jxhbup3fig5"]
 
 [ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_nwa4n"]
 [ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_k646f"]
-[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_ccc2e"]
+[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_cpsqu"]
+[ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="3_hugab"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_jw2b7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
-radius = 13.0
-height = 46.0
+radius = 11.0
+height = 40.0
 
 [sub_resource type="Animation" id="Animation_od7ud"]
 length = 0.001
@@ -218,7 +219,7 @@ collision_mask = 135
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
-safe_margin = 2.0
+safe_margin = 1.0
 script = ExtResource("1_nwa4n")
 rotation_speed = 3.025
 
@@ -228,7 +229,7 @@ region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_f15xe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -236,7 +237,9 @@ libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
 
-[node name="Weapon" parent="." instance=ExtResource("3_ccc2e")]
+[node name="WeaponComponent" parent="." instance=ExtResource("3_cpsqu")]
+
+[node name="Pistol" parent="WeaponComponent" instance=ExtResource("3_hugab")]
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
@@ -258,9 +261,8 @@ wait_time = 0.5
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 30.0
-target_desired_distance = 100.0
-path_max_distance = 200.0
+path_desired_distance = 9.0
+target_desired_distance = 30.0
 navigation_layers = 129
 avoidance_enabled = true
 radius = 50.0

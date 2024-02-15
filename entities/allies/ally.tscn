@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6m0c4ypevo2w"]
+[gd_scene load_steps=12 format=3 uid="uid://b6m0c4ypevo2w"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_kf25d"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_emytg"]
-[ext_resource type="PackedScene" uid="uid://cobvkoy8n5f5w" path="res://weapons/gun.tscn" id="3_h2hin"]
+[ext_resource type="PackedScene" uid="uid://dswwlc4kc7uco" path="res://weapons/assault.tscn" id="2_xh4n6"]
+[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_3nq64"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_6rg4l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
@@ -220,7 +221,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
 script = ExtResource("1_kf25d")
-health = 200
+health = 10000
 speed = 400
 rotation_speed = 3.6
 
@@ -239,7 +240,9 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="Weapon" parent="." instance=ExtResource("3_h2hin")]
+[node name="WeaponComponent" parent="." instance=ExtResource("3_3nq64")]
+
+[node name="Assault" parent="WeaponComponent" instance=ExtResource("2_xh4n6")]
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
@@ -260,9 +263,8 @@ wait_time = 0.5
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 50.0
-target_desired_distance = 100.0
-path_max_distance = 200.0
+path_desired_distance = 24.0
+target_desired_distance = 24.0
 navigation_layers = 129
 avoidance_enabled = true
 radius = 50.0

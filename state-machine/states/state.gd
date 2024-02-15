@@ -30,4 +30,4 @@ func change_state_attack():
 
 func change_state_hit():
 	if character.state != CharacterState.PLAYER:
-		change_state.emit(CharacterState.HIT)
+		change_state.emit(CharacterState.MOVE_TO)

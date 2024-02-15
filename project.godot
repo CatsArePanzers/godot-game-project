@@ -61,8 +61,10 @@ switch_player={
 
 [layer_names]
 
-2d_physics/layer_1="Character"
-2d_physics/layer_2="Bullet"
+2d_physics/layer_1="Wall"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Ally"
+2d_physics/layer_4="Bullet"
 
 [navigation]
 

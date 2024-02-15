@@ -26,15 +26,14 @@ func get_state():
 @onready var fov			= $DetectionZone/FOV
 @onready var end_of_fov		= $DetectionZone/EndOfFOV
 
-@onready var weapon   		= $Weapon
-@onready var barrel     	= $Weapon/GunBarrel
-@onready var weapon_sprite 	= $Weapon/GunSprite
-
 @onready var animations = $AnimationPlayer
 @onready var sprite 	= $CharacterSprite
 
 @onready var team			= $Team
 @onready var shoot_cooldown = $Cooldown
+
+@onready var weapon_component: WeaponComponent = $WeaponComponent
+@onready var weapon
 
 var targets_queue := Array()
 var potential_targets := Array()
@@ -49,7 +48,8 @@ var target_distance = -1
 @export var rotation_speed = PI * 1.1
 
 func _ready():
-	pass
+	weapon_component.set_team(team.team)
+	weapon = weapon_component.get_current_weapon()
 
 func get_team():
 	return team.team
@@ -62,10 +62,10 @@ func get_target():
 
 func _physics_process(_delta):
 	if !potential_targets.is_empty():
+		potential_target_idx %= potential_targets.size()
+		print(potential_target_idx, " ", potential_targets.size())
 		track_potential_target(potential_targets[potential_target_idx])
-		if !potential_targets.is_empty():
-			potential_target_idx += 1
-			potential_target_idx %= potential_targets.size()
+		potential_target_idx += 1
 	
 	track_target()
 	
@@ -78,13 +78,13 @@ func animate():
 	else: 
 		animations.play("run")
 	
-	if barrel.global_position.x - self.global_position.x < 0:
-		weapon_sprite.flip_v = true
-		weapon_sprite.offset = Vector2(0, -2)
+	if weapon.barrel.global_position.x - self.global_position.x < 0:
+		weapon.sprite.flip_v = true
+		weapon.sprite.offset = Vector2(0, -weapon.offset)
 		sprite.flip_h = true
 	else:
-		weapon_sprite.flip_v = false
-		weapon_sprite.offset = Vector2(0, 2)
+		weapon.sprite.flip_v = false
+		weapon.sprite.offset = Vector2(0, 0)
 		sprite.flip_h = false
 
 func _on_detection_zone_body_entered(body):
@@ -160,12 +160,12 @@ func track_target():
 			_on_nav_update_timeout()
 
 
-func turn_to(target, p_rotation_speed = PI):
-	match typeof(target):
+func turn_to(p_target, p_rotation_speed = PI):
+	match typeof(p_target):
 		TYPE_FLOAT:
-			turn_to_angle(target, p_rotation_speed)
+			turn_to_angle(p_target, p_rotation_speed)
 		TYPE_VECTOR2:
-			var turn_angle = weapon.global_position.direction_to(target).angle()
+			var turn_angle = weapon.global_position.direction_to(p_target).angle()
 			turn_to_angle(turn_angle, p_rotation_speed)
 		_:
 			return 
@@ -194,9 +194,13 @@ func _on_nav_update_timeout():
 
 func set_nav_agent_target_pos(p_pos):
 	nav_agent.target_position = p_pos
+	
+	if !nav_agent.is_target_reachable():
+		nav_agent.target_position = nav_agent.get_final_position() 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	clamp(velocity, Vector2.ZERO, safe_velocity)
+	velocity = velocity as Vector2i
 
 func create_ray(from: Vector2, to: Vector2) -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
@@ -207,13 +211,16 @@ func get_hit_from(p_hit_from: Vector2):
 	if state == CharacterState.ATTACK or state == CharacterState.PLAYER:
 		return
 	
+	set_move_target(p_hit_from)
+	
+	got_hit.emit()
+
+func set_move_target(p_tp: Vector2):
 	var move_distance = global_position.distance_to(end_of_fov.global_position)
-	target_pos = global_position + move_distance * p_hit_from.normalized()
+	target_pos = global_position + move_distance * p_tp.normalized()
 	var ray: Dictionary = create_ray(global_position, target_pos)
 	
 	if !ray.is_empty():
 		target_pos = ray["position"]
 	
 	set_nav_agent_target_pos(target_pos)
-	
-	got_hit.emit()

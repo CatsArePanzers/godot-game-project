@@ -18,8 +18,8 @@ func update(delta):
 		
 		character.turn_to(character.get_next_pos(), character.rotation_speed * delta)
 		
-		if character.global_position.distance_to(character.get_next_pos()) < 20:
-			change_state.emit(CharacterState.IDLE)
+		if character.nav_agent.is_target_reached():
+			change_state.emit(CharacterState.MOVE_TO)
 		
 		move_character(delta)
 		return

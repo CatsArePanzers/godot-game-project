@@ -1,12 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cobvkoy8n5f5w"]
 
-[ext_resource type="Script" path="res://weapons/gun.gd" id="1_pm4pt"]
+[ext_resource type="Script" path="res://weapons/base/gun.gd" id="1_pm4pt"]
 [ext_resource type="PackedScene" uid="uid://xnajdijjnp6t" path="res://weapons/bullet.tscn" id="2_drgp2"]
 [ext_resource type="Texture2D" uid="uid://dulns1vrtabso" path="res://assets/player.png" id="3_ubofo"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_pm4pt")
 Bullet = ExtResource("2_drgp2")
+damage = 20
+max_spread = 1.0
 
 [node name="GunSprite" type="Sprite2D" parent="."]
 position = Vector2(16, 1)
@@ -21,4 +23,9 @@ position = Vector2(24, 0)
 wait_time = 0.25
 one_shot = true
 
+[node name="SpreadTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
 [connection signal="timeout" from="Cooldown" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SpreadTimer" to="." method="_on_spread_timer_timeout"]

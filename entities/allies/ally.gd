@@ -4,6 +4,9 @@ class_name Ally
 
 @onready var camera = $Camera
 
+func _ready():
+	super()
+
 func _physics_process(delta):
 	super(delta)
 

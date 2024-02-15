@@ -1,9 +1,11 @@
 extends Area2D
 
-@export var speed: int = 1000
+class_name Bullet
+
+var speed: int = 1000
 var direction := Vector2.ZERO
 var velocity  := Vector2.ZERO
-
+var damage: int
 var team: int
 
 func _physics_process(delta):
@@ -24,7 +26,7 @@ func _on_body_entered(body):
 		return
 	
 	if body.has_method("take_damage"):
-		body.take_damage(20)
+		body.take_damage(damage)
 	
 	if body.has_method("get_state"):
 		#print(body.global_position.direction_to(global_position - velocity * 2000).angle())
