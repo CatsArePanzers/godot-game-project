@@ -14,15 +14,16 @@ min_spread = 2.0
 spread = 1.0
 max_rand_spread = 1.0
 max_spread = 4.0
+sprite_offset = 12
 
 [node name="GunSprite" type="Sprite2D" parent="."]
-position = Vector2(16, 1)
+position = Vector2(16, 6)
 texture = ExtResource("3_4fgvf")
 region_enabled = true
 region_rect = Rect2(0, 160, 70, 14)
 
 [node name="GunBarrel" type="Marker2D" parent="."]
-position = Vector2(51, -5)
+position = Vector2(51, 0)
 
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true

@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://e1odj2nuhxja"]
 
-[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_7g32k"]
-[ext_resource type="Texture2D" uid="uid://c161q5h67eld2" path="res://assets/tank_enemy.png" id="2_vemsy"]
-[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_o2dmd"]
-[ext_resource type="PackedScene" uid="uid://e5o8u7v1i8wc" path="res://weapons/shotgun.tscn" id="4_fd3gc"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_sbelg"]
+[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_foqfg"]
+[ext_resource type="Texture2D" uid="uid://c161q5h67eld2" path="res://assets/tank_enemy.png" id="2_i8h20"]
+[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_rjhp4"]
+[ext_resource type="PackedScene" uid="uid://e5o8u7v1i8wc" path="res://weapons/shotgun.tscn" id="4_p8ncq"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_3xef1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 22.0
@@ -212,7 +212,7 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="EnemyTank" type="CharacterBody2D"]
 position = Vector2(564, -3)
 collision_layer = 2
 collision_mask = 135
@@ -220,13 +220,13 @@ motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 3.0
-script = ExtResource("1_7g32k")
+script = ExtResource("1_foqfg")
 health = 1000
 speed = 150
 rotation_speed = 1.7
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_vemsy")
+texture = ExtResource("2_i8h20")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
@@ -239,9 +239,9 @@ libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
 
-[node name="WeaponComponent" parent="." instance=ExtResource("3_o2dmd")]
+[node name="WeaponComponent" parent="." instance=ExtResource("3_rjhp4")]
 
-[node name="Shotgun" parent="WeaponComponent" instance=ExtResource("4_fd3gc")]
+[node name="Shotgun" parent="WeaponComponent" instance=ExtResource("4_p8ncq")]
 shots_amount = 8
 min_spread = 3.0
 max_spread = 5.0
@@ -258,7 +258,7 @@ shape = SubResource("CapsuleShape2D_1og35")
 [node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
 position = Vector2(-1.63934, -230.172)
 
-[node name="Team" parent="." instance=ExtResource("5_sbelg")]
+[node name="Team" parent="." instance=ExtResource("5_3xef1")]
 team = 1
 
 [node name="Cooldown" type="Timer" parent="."]
