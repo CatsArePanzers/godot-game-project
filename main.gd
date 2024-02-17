@@ -63,7 +63,7 @@ func spawn_ally():
 
 func _ready():
 	spawn_ally()
-	#spawn_ally()
+	spawn_ally()
 	#spawn_ally()
 	#spawn_ally()
 	
@@ -101,7 +101,6 @@ func switch_player():
 		
 	if allies[player_idx] == null:
 		allies.pop_at(player_idx)
-		#print("meow ", allies.size(), " ", player_idx)
 		player_idx %= allies.size()
 		
 	ally_controllers[allies[player_idx - 1]].change_state(CharacterState.IDLE)

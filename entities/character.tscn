@@ -278,6 +278,7 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 wait_time = 0.3
 autostart = true
 
+[connection signal="change_weapon" from="WeaponComponent" to="." method="_on_weapon_component_change_weapon"]
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

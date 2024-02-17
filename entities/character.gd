@@ -50,6 +50,7 @@ var target_distance = -1
 func _ready():
 	weapon_component.set_team(team.team)
 	weapon = weapon_component.get_current_weapon()
+	weapon_component.change_weapon.connect(change_weapon)
 
 func get_team():
 	return team.team
@@ -80,7 +81,7 @@ func animate():
 	
 	if weapon.barrel.global_position.x - self.global_position.x < 0:
 		weapon.sprite.flip_v = true
-		weapon.sprite.offset = Vector2(0, -weapon.offset)
+		weapon.sprite.offset = Vector2(0, -weapon.sprite_offset)
 		sprite.flip_h = true
 	else:
 		weapon.sprite.flip_v = false
@@ -224,3 +225,6 @@ func set_move_target(p_tp: Vector2):
 		target_pos = ray["position"]
 	
 	set_nav_agent_target_pos(target_pos)
+
+func change_weapon(new_weapon):
+	weapon = new_weapon
