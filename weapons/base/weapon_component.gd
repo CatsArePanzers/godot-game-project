@@ -42,6 +42,6 @@ func _ready():
 		
 	curr_weapon = weapons[0]
 
-func _process(delta):
+func _process(_delta):
 	pass
 

@@ -6,7 +6,7 @@ signal died
 signal commenced_attack
 signal got_hit
 
-var state := CharacterState.IDLE:
+@onready var state := CharacterState.IDLE:
 	set(new_state):
 		if new_state == state:
 			return
@@ -33,7 +33,7 @@ func get_state():
 @onready var shoot_cooldown = $Cooldown
 
 @onready var weapon_component: WeaponComponent = $WeaponComponent
-@onready var weapon
+@onready var weapon: Weapon
 
 var targets_queue := Array()
 var potential_targets := Array()

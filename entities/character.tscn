@@ -212,7 +212,7 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="Character" type="CharacterBody2D"]
+[node name="Ally" type="CharacterBody2D"]
 position = Vector2(564, -3)
 collision_layer = 2
 collision_mask = 135

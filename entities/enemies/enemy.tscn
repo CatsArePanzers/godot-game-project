@@ -242,7 +242,7 @@ libraries = {
 [node name="Pistol" parent="WeaponComponent" instance=ExtResource("3_hugab")]
 position = Vector2(4, -4)
 
-[node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
+[node name="DetectionZone" type="Area2D" parent="."]
 scale = Vector2(2.44, 2.32)
 collision_layer = 7
 collision_mask = 7

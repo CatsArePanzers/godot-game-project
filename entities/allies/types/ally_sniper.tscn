@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr0m43ux0o2x6"]
+[gd_scene load_steps=14 format=3 uid="uid://cr0m43ux0o2x6"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_fg2wk"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_dbqgw"]
@@ -211,7 +211,10 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1og35"]
 radius = 56.5574
-height = 1001.72
+height = 1300.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ogth"]
+radius = 266.017
 
 [node name="AllySniper" type="CharacterBody2D"]
 position = Vector2(564, -3)
@@ -222,7 +225,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
 script = ExtResource("1_fg2wk")
-health = 600
+health = 1000
 speed = 500
 rotation_speed = 4.0
 
@@ -241,33 +244,41 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="WeaponComponent" parent="." instance=ExtResource("3_1bdme")]
-
-[node name="Sniper" parent="WeaponComponent" instance=ExtResource("4_6lxxk")]
-position = Vector2(1, -6)
-shot_velocity = 2500
-
-[node name="Pistol" parent="WeaponComponent" instance=ExtResource("5_4abpq")]
-visible = false
-position = Vector2(3, -4)
-sprite_offset = 4
-
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
 collision_layer = 7
 collision_mask = 7
 
 [node name="FOV" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2(1.78814e-06, -500.862)
+position = Vector2(0, -650)
 shape = SubResource("CapsuleShape2D_1og35")
 
 [node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
-position = Vector2(0.40984, -1001.29)
+position = Vector2(0, -1300)
+
+[node name="StayingRange" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="StayRangeBody" type="CollisionShape2D" parent="StayingRange"]
+shape = SubResource("CircleShape2D_4ogth")
+
+[node name="WeaponComponent" parent="." instance=ExtResource("3_1bdme")]
+
+[node name="Sniper" parent="WeaponComponent" instance=ExtResource("4_6lxxk")]
+position = Vector2(1, -6)
+shot_velocity = 2500
+desired_range = 1200.0
+
+[node name="Pistol" parent="WeaponComponent" instance=ExtResource("5_4abpq")]
+visible = false
+position = Vector2(3, -4)
+sprite_offset = 4
 
 [node name="Team" parent="." instance=ExtResource("8_h7wd8")]
 
 [node name="Cooldown" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.9
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -294,5 +305,7 @@ rotation_smoothing_enabled = true
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
+[connection signal="body_entered" from="StayingRange" to="." method="_on_staying_range_body_entered"]
+[connection signal="body_exited" from="StayingRange" to="." method="_on_staying_range_body_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavUpdate" to="." method="_on_nav_update_timeout"]

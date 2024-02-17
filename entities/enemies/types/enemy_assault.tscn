@@ -249,11 +249,11 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="FOV" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2(1.22951, -115.086)
+position = Vector2(0, -115.086)
 shape = SubResource("CapsuleShape2D_1og35")
 
 [node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
-position = Vector2(-1.63934, -230.172)
+position = Vector2(0, -230.172)
 
 [node name="Team" parent="." instance=ExtResource("5_qfbrc")]
 team = 1

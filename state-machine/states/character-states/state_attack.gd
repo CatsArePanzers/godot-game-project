@@ -36,19 +36,19 @@ func update(delta):
 	
 	move_character(delta)
 
-func move_character(delta):
+func move_character(_delta):
 	var distance_to_target: float = -1
 	
 	if character.target:
 		distance_to_target = character.global_position.distance_to(character.target.global_position)
 	
-	if distance_to_target > 500 or distance_to_target == -1:
+	if distance_to_target > character.weapon.desired_range or distance_to_target == -1:
 		character.velocity = character.get_move_direction() * character.speed
 	else:
 		character.velocity = character.global_position.direction_to(character.target.global_position)
-		if distance_to_target > 350:
+		if distance_to_target > character.weapon.desired_range:
 			character.velocity *= character.speed
-		elif distance_to_target < 150:
+		elif distance_to_target < character.weapon.desired_range / 4:
 			character.velocity *= -character.speed
 		else:
 			character.velocity = Vector2.ZERO
