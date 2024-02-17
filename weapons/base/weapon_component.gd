@@ -30,6 +30,9 @@ func set_team(p_team):
 	
 	for weapon: Weapon in weapons:
 		weapon.set_team(team)
+		
+		if weapon.has_node("LaserDetection"):
+			weapon.get_node("LaserDetection").collision_mask = get_parent().collision_mask ^ get_parent().collision_layer
 
 func get_current_weapon() -> Weapon:
 	return curr_weapon
