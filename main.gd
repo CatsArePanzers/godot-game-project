@@ -14,7 +14,7 @@ var enemy_controllers := Dictionary()
 @onready var map: NavigationRegion2D = $NavigationRegion2D
 
 func spawn_enemy():
-	var new_enemy: Character = preload("res://entities/enemies/types/enemy_tank.tscn").instantiate()
+	var new_enemy: Character = preload("res://entities/enemies/types/enemy_sniper.tscn").instantiate()
 	
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
@@ -39,7 +39,7 @@ func spawn_enemy():
 
 
 func spawn_ally():
-	var new_ally: Character = preload("res://entities/allies/ally.tscn").instantiate()
+	var new_ally: Character = preload("res://entities/allies/types/ally_sniper.tscn").instantiate()
 	
 	%PathFollow2D.progress_ratio = randf()
 	new_ally.global_position = %PathFollow2D.global_position
@@ -67,7 +67,7 @@ func _ready():
 	#spawn_ally()
 	#spawn_ally()
 	
-	spawn_enemy()
+	#spawn_enemy()
 	#spawn_enemy()
 	#spawn_enemy()
 	#spawn_enemy()
@@ -81,7 +81,7 @@ func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
 		switch_player()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass
 
 func _process(_delta):

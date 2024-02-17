@@ -11,7 +11,9 @@ class_name Weapon
 @export var shot_velocity: int = 0
 @export var damage: 	   int = 0
 
-@export var min_spread:    	 float
+@export var desired_range: float = 200
+
+@export var min_spread:    	 float = 0
 @export var spread: 	   	 float
 @export var max_rand_spread: float
 @export var max_spread:      float

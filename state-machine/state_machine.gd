@@ -26,6 +26,9 @@ func set_character(p_character: Character):
 		states[state].set_character(p_character)
 
 func _physics_process(delta):
+	if character.state != curr_state.state_name:
+		change_state(character.state)
+	
 	if curr_state and character:
 		curr_state.update(delta)
 

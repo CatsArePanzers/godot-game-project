@@ -10,6 +10,7 @@ bullet = ExtResource("2_7bse7")
 shots_amount = 10
 shot_velocity = 1500
 damage = 20
+desired_range = 50.0
 min_spread = 2.0
 spread = 1.0
 max_rand_spread = 1.0

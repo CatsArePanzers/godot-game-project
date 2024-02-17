@@ -1,6 +1,6 @@
 extends State
 
-class_name StateHit
+class_name StateMoveTo
 
 var last_pos := Vector2.ZERO
 

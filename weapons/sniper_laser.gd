@@ -6,9 +6,9 @@ extends RayCast2D
 func _ready():
 	collision_mask = laser_collision_mask
 
-func _process(delta):
+func _process(_delta):
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_collider():
 		laser_body.size = Vector2(global_position.distance_to(get_collision_point()), 1)
