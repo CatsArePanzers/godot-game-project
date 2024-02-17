@@ -245,26 +245,23 @@ autoplay = "idle"
 
 [node name="WeaponComponent" parent="." instance=ExtResource("3_3nq64")]
 
-[node name="Shotgun" parent="WeaponComponent" instance=ExtResource("4_hlhdo")]
-position = Vector2(4, -3)
-min_spread = 3.0
-max_spread = 5.0
-offset = 10
-
-[node name="Assault" parent="WeaponComponent" instance=ExtResource("2_xh4n6")]
-visible = false
-offset = 5
+[node name="Sniper" parent="WeaponComponent" instance=ExtResource("3_kbuka")]
+position = Vector2(1, -6)
+shot_velocity = 2500
 
 [node name="Pistol" parent="WeaponComponent" instance=ExtResource("4_ft6o3")]
 visible = false
 position = Vector2(3, -4)
-offset = 4
+sprite_offset = 4
 
-[node name="Sniper" parent="WeaponComponent" instance=ExtResource("3_kbuka")]
+[node name="Shotgun" parent="WeaponComponent" instance=ExtResource("4_hlhdo")]
 visible = false
-position = Vector2(1, -6)
-shot_velocity = 2500
-offset = 3
+position = Vector2(4, -3)
+min_spread = 3.0
+max_spread = 5.0
+
+[node name="Assault" parent="WeaponComponent" instance=ExtResource("2_xh4n6")]
+visible = false
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
@@ -285,9 +282,8 @@ wait_time = 0.5
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 24.0
-target_desired_distance = 24.0
-navigation_layers = 129
+path_desired_distance = 9.0
+target_desired_distance = 27.0
 avoidance_enabled = true
 radius = 50.0
 neighbor_distance = 200.0

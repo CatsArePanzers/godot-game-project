@@ -11,11 +11,12 @@ class_name Weapon
 @export var shot_velocity: int = 0
 @export var damage: 	   int = 0
 
-@export var min_spread:    float
-@export var spread: 	   float
-@export var max_spread:    float
+@export var min_spread:    	 float
+@export var spread: 	   	 float
+@export var max_rand_spread: float
+@export var max_spread:      float
 
-@export var offset:		   int
+@export var sprite_offset:	 int
 
 @onready var team
 
@@ -47,12 +48,9 @@ func generate_bullet_spread() -> Vector2:
 	
 	spread = clamp(spread, 0, max_spread - min_spread)
 	
-	var rand_spread = randf_range(-1, 1)
+	var rand_spread = randf_range(-max_rand_spread, max_rand_spread)
 	
 	var spread_direction = randi_range(-1, 1)
-	
-	#while spread_direction == 0:
-	#	spread_direction = randi_range(-1, 1)
 	
 	if abs(fmod(global_rotation, PI * 3/4)) < PI/4:
 		bullet_spread.y = min_spread + spread
