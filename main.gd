@@ -14,7 +14,7 @@ var enemy_controllers := Dictionary()
 @onready var map: NavigationRegion2D = $NavigationRegion2D
 
 func spawn_enemy():
-	var new_enemy: Character = preload("res://entities/enemies/enemy.tscn").instantiate()
+	var new_enemy: Character = preload("res://entities/enemies/types/tank.tscn").instantiate()
 	
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
@@ -63,7 +63,7 @@ func spawn_ally():
 
 func _ready():
 	spawn_ally()
-	spawn_ally()
+	#spawn_ally()
 	#spawn_ally()
 	#spawn_ally()
 	
@@ -118,6 +118,9 @@ func switch_camera(curr_camera: Camera2D, new_camera: Camera2D):
 	await tween.finished
 
 func remove_dead_ally(dead_ally: Ally):
+	if ally_controllers.get(dead_ally) == null:
+		return
+	
 	ally_controllers[dead_ally].queue_free()
 	ally_controllers.erase(dead_ally)
 	allies.pop_at(allies.find(dead_ally))
