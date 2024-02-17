@@ -1,13 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6m0c4ypevo2w"]
+[gd_scene load_steps=13 format=3 uid="uid://bgm0uw8jm5b5a"]
 
-[ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_kf25d"]
-[ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_emytg"]
-[ext_resource type="PackedScene" uid="uid://dswwlc4kc7uco" path="res://weapons/assault.tscn" id="2_xh4n6"]
-[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_3nq64"]
-[ext_resource type="PackedScene" uid="uid://dnf4ifbbuyirc" path="res://weapons/sniper.tscn" id="3_kbuka"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_6rg4l"]
-[ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="4_ft6o3"]
-[ext_resource type="PackedScene" uid="uid://e5o8u7v1i8wc" path="res://weapons/shotgun.tscn" id="4_hlhdo"]
+[ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_05wh5"]
+[ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_u4low"]
+[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_wmswy"]
+[ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="5_8h02g"]
+[ext_resource type="PackedScene" uid="uid://dswwlc4kc7uco" path="res://weapons/assault.tscn" id="7_ty8dv"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="8_elvx3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -215,7 +213,7 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="Ally" type="CharacterBody2D"]
+[node name="AllyAssault" type="CharacterBody2D"]
 position = Vector2(564, -3)
 collision_layer = 4
 collision_mask = 135
@@ -223,13 +221,13 @@ motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
-script = ExtResource("1_kf25d")
-health = 1000
+script = ExtResource("1_05wh5")
+health = 1500
 speed = 400
 rotation_speed = 3.6
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_emytg")
+texture = ExtResource("2_u4low")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
@@ -243,25 +241,14 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="WeaponComponent" parent="." instance=ExtResource("3_3nq64")]
+[node name="WeaponComponent" parent="." instance=ExtResource("3_wmswy")]
 
-[node name="Pistol" parent="WeaponComponent" instance=ExtResource("4_ft6o3")]
+[node name="Assault" parent="WeaponComponent" instance=ExtResource("7_ty8dv")]
+
+[node name="Pistol" parent="WeaponComponent" instance=ExtResource("5_8h02g")]
+visible = false
 position = Vector2(3, -4)
 sprite_offset = 4
-
-[node name="Shotgun" parent="WeaponComponent" instance=ExtResource("4_hlhdo")]
-visible = false
-position = Vector2(4, -3)
-min_spread = 3.0
-max_spread = 5.0
-
-[node name="Assault" parent="WeaponComponent" instance=ExtResource("2_xh4n6")]
-visible = false
-
-[node name="Sniper" parent="WeaponComponent" instance=ExtResource("3_kbuka")]
-visible = false
-position = Vector2(1, -6)
-shot_velocity = 2500
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
@@ -275,7 +262,7 @@ shape = SubResource("CapsuleShape2D_1og35")
 [node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
 position = Vector2(-1.63934, -230.172)
 
-[node name="Team" parent="." instance=ExtResource("4_6rg4l")]
+[node name="Team" parent="." instance=ExtResource("8_elvx3")]
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.5

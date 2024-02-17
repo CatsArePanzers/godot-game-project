@@ -14,7 +14,7 @@ var enemy_controllers := Dictionary()
 @onready var map: NavigationRegion2D = $NavigationRegion2D
 
 func spawn_enemy():
-	var new_enemy: Character = preload("res://entities/enemies/types/tank.tscn").instantiate()
+	var new_enemy: Character = preload("res://entities/enemies/types/enemy_tank.tscn").instantiate()
 	
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position

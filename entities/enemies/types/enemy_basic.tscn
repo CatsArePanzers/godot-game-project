@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://dm04elmgnq028"]
 
-[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_w5nyc"]
-[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_05e8d"]
-[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_b5nug"]
-[ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="4_8i1nn"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_k7iia"]
+[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_oe1nc"]
+[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_pkd3s"]
+[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_s0oks"]
+[ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="4_68m00"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_13rvw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -212,7 +212,7 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="EnemyBasic" type="CharacterBody2D"]
 position = Vector2(564, -3)
 collision_layer = 2
 collision_mask = 135
@@ -220,12 +220,12 @@ motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 3.0
-script = ExtResource("1_w5nyc")
+script = ExtResource("1_oe1nc")
 speed = 250
 rotation_speed = 2.5
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_05e8d")
+texture = ExtResource("2_pkd3s")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
@@ -238,9 +238,9 @@ libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
 
-[node name="WeaponComponent" parent="." instance=ExtResource("3_b5nug")]
+[node name="WeaponComponent" parent="." instance=ExtResource("3_s0oks")]
 
-[node name="Pistol" parent="WeaponComponent" instance=ExtResource("4_8i1nn")]
+[node name="Pistol" parent="WeaponComponent" instance=ExtResource("4_68m00")]
 position = Vector2(4, -4)
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
@@ -255,7 +255,7 @@ shape = SubResource("CapsuleShape2D_1og35")
 [node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
 position = Vector2(-1.63934, -230.172)
 
-[node name="Team" parent="." instance=ExtResource("5_k7iia")]
+[node name="Team" parent="." instance=ExtResource("5_13rvw")]
 team = 1
 
 [node name="Cooldown" type="Timer" parent="."]
