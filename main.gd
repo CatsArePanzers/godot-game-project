@@ -63,7 +63,7 @@ func spawn_ally():
 
 func _ready():
 	spawn_ally()
-	#spawn_ally()
+	spawn_ally()
 	#spawn_ally()
 	#spawn_ally()
 	
