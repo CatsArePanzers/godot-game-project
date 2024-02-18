@@ -216,7 +216,7 @@ radius = 56.5574
 height = 231.897
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ilcoy"]
-radius = 266.017
+radius = 178.18
 
 [node name="Ally" type="CharacterBody2D"]
 position = Vector2(564, -3)
