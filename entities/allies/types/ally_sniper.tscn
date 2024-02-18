@@ -214,7 +214,7 @@ radius = 56.5574
 height = 1300.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ogth"]
-radius = 266.017
+radius = 329.006
 
 [node name="AllySniper" type="CharacterBody2D"]
 position = Vector2(564, -3)

@@ -214,7 +214,7 @@ radius = 56.5574
 height = 500.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7yhk"]
-radius = 266.017
+radius = 94.3932
 
 [node name="AllyAssault" type="CharacterBody2D"]
 position = Vector2(564, -3)
