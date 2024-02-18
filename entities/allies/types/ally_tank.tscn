@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://dc7s6jjn2w6d4"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_on84k"]
-[ext_resource type="Texture2D" uid="uid://nexep0rlbbgn" path="res://assets/tank_ally.png" id="2_fsjrf"]
+[ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_md44j"]
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_xccam"]
 [ext_resource type="PackedScene" uid="uid://e5o8u7v1i8wc" path="res://weapons/shotgun.tscn" id="4_jujhh"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_7gksf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
-radius = 15.0
-height = 42.0
+radius = 23.0
+height = 46.0
 
 [sub_resource type="Animation" id="Animation_od7ud"]
 length = 0.001
@@ -70,7 +70,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(15, 28, 48, 48)]
+"values": [Rect2(19, 597, 65, 64)]
 }
 
 [sub_resource type="Animation" id="Animation_622tn"]
@@ -134,7 +134,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(15, 28, 48, 54)]
+"values": [Rect2(19, 596, 65, 65)]
 }
 
 [sub_resource type="Animation" id="Animation_uo48r"]
@@ -183,10 +183,10 @@ tracks/3/path = NodePath("CharacterSprite:region_rect")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0145578),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Rect2(-12, 296, 392, 81)]
+"values": [Rect2(-24, 952, 529, 106), Rect2(-11, 964, 518, 77)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -195,7 +195,7 @@ tracks/4/path = NodePath("CharacterSprite:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"times": PackedFloat32Array(0, 0.4, 0.7, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -217,7 +217,7 @@ radius = 266.017
 
 [node name="AllyTank" type="CharacterBody2D"]
 position = Vector2(564, -3)
-collision_layer = 2
+collision_layer = 4
 collision_mask = 135
 motion_mode = 1
 slide_on_ceiling = false
@@ -229,9 +229,10 @@ speed = 200
 rotation_speed = 3.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_fsjrf")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_md44j")
 region_enabled = true
-region_rect = Rect2(15, 28, 48, 48)
+region_rect = Rect2(19, 597, 65, 64)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -271,6 +272,7 @@ min_spread = 1.0
 max_spread = 3.0
 
 [node name="Shotgun2" parent="WeaponComponent" instance=ExtResource("4_jujhh")]
+visible = false
 
 [node name="Team" parent="." instance=ExtResource("5_7gksf")]
 
@@ -292,6 +294,8 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 [node name="NavUpdate" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="Camera" type="Camera2D" parent="."]
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

@@ -2,6 +2,8 @@ extends Character
 
 class_name Enemy
 
+var path: Path2D
+
 func _ready():
 	super()
 

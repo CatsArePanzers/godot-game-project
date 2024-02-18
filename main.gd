@@ -13,8 +13,10 @@ var enemy_controllers := Dictionary()
 
 @onready var map: NavigationRegion2D = $NavigationRegion2D
 
+@onready var wave_manager: SpawnerManager = $SpawnerManager
+
 func spawn_enemy():
-	var new_enemy: Character = preload("res://entities/enemies/types/enemy_sniper.tscn").instantiate()
+	var new_enemy: Character = preload("res://entities/enemies/types/enemy_tank.tscn").instantiate()
 	
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
@@ -38,11 +40,10 @@ func spawn_enemy():
 	new_enemy.died.connect(remove_dead_enemy)
 
 
-func spawn_ally():
-	var new_ally: Character = preload("res://entities/allies/types/ally_sniper.tscn").instantiate()
+func spawn_ally(path_to_resource):
+	var new_ally: Character = load(path_to_resource).instantiate()
 	
-	%PathFollow2D.progress_ratio = randf()
-	new_ally.global_position = %PathFollow2D.global_position
+	new_ally.global_position = Vector2(randi_range(-100, 100), randi_range(-100, 100))
 	
 	add_child(new_ally)
 	
@@ -60,22 +61,11 @@ func spawn_ally():
 	
 	new_ally.died.connect(remove_dead_ally)
 
-
 func _ready():
-	spawn_ally()
-	spawn_ally()
-	spawn_ally()
-	spawn_ally()
-	
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
-	spawn_enemy()
+	spawn_ally("res://entities/allies/types/ally_basic.tscn")
+	spawn_ally("res://entities/allies/types/ally_assault.tscn")
+	spawn_ally("res://entities/allies/types/ally_sniper.tscn")
+	spawn_ally("res://entities/allies/types/ally_tank.tscn")
 	
 	allies[0].get_camera().make_current()
 	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)
@@ -98,17 +88,17 @@ func _on_spawner_timeout():
 func switch_player():
 	if allies.size() <= 1:
 		return
-		
+	
 	player_idx += 1
 	player_idx %= allies.size()
-		
+	
 	if allies[player_idx] == null:
 		allies.pop_at(player_idx)
 		player_idx %= allies.size()
-		
+	
 	ally_controllers[allies[player_idx - 1]].change_state(CharacterState.IDLE)
 	ally_controllers[allies[player_idx]].change_state(CharacterState.PLAYER)
-		
+	
 	switch_camera(allies[player_idx - 1].get_camera(), allies[player_idx].get_camera())	
 
 func switch_camera(curr_camera: Camera2D, new_camera: Camera2D):	
@@ -134,6 +124,7 @@ func remove_dead_ally(dead_ally: Ally):
 func remove_dead_enemy(dead_enemy):
 	if enemy_controllers.get(dead_enemy) == null:
 		return
+	
 	enemy_controllers[dead_enemy].queue_free()
 	enemy_controllers.erase(dead_enemy)
 	enemies.pop_at(enemies.find(dead_enemy))

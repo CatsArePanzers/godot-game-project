@@ -7,6 +7,8 @@ class_name Weapon
 @onready var barrel = $GunBarrel
 @onready var sprite = $GunSprite
 
+@export var reload_time:   float
+@export var ammo_amounnt:  int = 0
 @export var shots_amount:  int = 0
 @export var shot_velocity: int = 0
 @export var damage: 	   int = 0
@@ -21,6 +23,7 @@ class_name Weapon
 @export var sprite_offset:	 int
 
 @onready var team
+var current_ammo
 
 signal bullet_fired(bullet, pos, direction)
 
@@ -28,6 +31,7 @@ func set_team(p_team):
 	team = p_team
 
 func _ready():
+	current_ammo = ammo_amounnt
 	pass
 
 func shoot():
@@ -38,11 +42,17 @@ func shoot():
 		var new_bullet = bullet.instantiate()
 		var bullet_direction = (barrel.global_position - self.global_position - generate_bullet_spread()).normalized()
 		GlobalShooting.bullet_fired.emit(new_bullet, barrel.global_position, bullet_direction, team, damage, shot_velocity)
-		
-	$Cooldown.start()
+	
+	current_ammo -= 1
 	
 	$SpreadTimer.start()
-
+	
+	if current_ammo == 0:
+		await get_tree().create_timer(reload_time).timeout 
+		current_ammo = ammo_amounnt
+	else: 
+		$Cooldown.start()
+	
 func generate_bullet_spread() -> Vector2:
 	var bullet_spread := Vector2.ZERO
 	
