@@ -24,6 +24,7 @@ class_name Weapon
 
 @onready var team
 var current_ammo
+var is_realoading := false
 
 signal bullet_fired(bullet, pos, direction)
 
@@ -35,6 +36,15 @@ func _ready():
 	pass
 
 func shoot():
+	if current_ammo == 0 and !is_realoading:
+		is_realoading = true
+		await get_tree().create_timer(reload_time).timeout
+		current_ammo = ammo_amounnt
+		is_realoading = false
+		return
+	elif is_realoading:
+		return
+	
 	if $Cooldown.is_stopped() == false:
 		return
 	
@@ -47,11 +57,7 @@ func shoot():
 	
 	$SpreadTimer.start()
 	
-	if current_ammo == 0:
-		await get_tree().create_timer(reload_time).timeout 
-		current_ammo = ammo_amounnt
-	else: 
-		$Cooldown.start()
+	$Cooldown.start()
 	
 func generate_bullet_spread() -> Vector2:
 	var bullet_spread := Vector2.ZERO

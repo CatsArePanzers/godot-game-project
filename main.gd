@@ -37,15 +37,18 @@ func spawn_ally(path_to_resource):
 	new_ally.died.connect(remove_dead_ally)
 
 func _ready():
+	spawner_manager.enemy_spawned.connect(on_enemy_spawn)
+	
 	spawn_ally("res://entities/allies/types/ally_basic.tscn")
-	spawn_ally("res://entities/allies/types/ally_assault.tscn")
-	spawn_ally("res://entities/allies/types/ally_sniper.tscn")
-	spawn_ally("res://entities/allies/types/ally_tank.tscn")
 	
 	allies[0].get_camera().make_current()
 	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)
 	
-	spawner_manager.enemy_spawned.connect(on_enemy_spawn)
+	spawn_ally("res://entities/allies/types/ally_assault.tscn")
+	spawn_ally("res://entities/allies/types/ally_sniper.tscn")
+	spawn_ally("res://entities/allies/types/ally_tank.tscn")
+	
+	spawner_manager.activate_spawners()
 
 func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
@@ -80,9 +83,10 @@ func switch_player():
 
 func switch_camera(curr_camera: Camera2D, new_camera: Camera2D):	
 	var tween: Tween = get_tree().create_tween()
-	
-	new_camera.offset = curr_camera.global_position - new_camera.global_position
+
 	new_camera.make_current()
+	
+	new_camera.offset = curr_camera.global_position - new_camera.global_position	
 	
 	tween.tween_property(new_camera, "offset", Vector2.ZERO, 0.3)
 	await tween.finished
@@ -122,3 +126,5 @@ func on_enemy_spawn(new_enemy: Enemy):
 	enemy_controllers[new_enemy] = new_enemy_controller
 	
 	new_enemy.died.connect(remove_dead_enemy)
+	
+	new_enemy.follow_path.emit()

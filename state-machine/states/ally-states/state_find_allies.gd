@@ -11,7 +11,11 @@ func enter():
 func exit():
 	pass
 	
-func update(_delta):	
+func update(_delta):
+	if character.last_seen_ally == null:
+		change_state.emit(CharacterState.IDLE)
+		return
+	
 	character.set_nav_agent_target_pos(character.last_seen_ally.global_position)
 	
 	character.velocity = character.get_move_direction()

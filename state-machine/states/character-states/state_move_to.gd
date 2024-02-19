@@ -30,11 +30,6 @@ func update(delta):
 			
 			character.velocity = character.get_move_direction() * character.speed
 			character.move_and_slide()
-			
-			print(character.nav_agent.distance_to_target())
-			print(character.nav_agent.is_target_reachable())
-			print(character.global_position.distance_to(character.nav_agent.get_final_position()))
-			
 	elif character.nav_agent.is_target_reached():
 		var ray = character.create_ray(character.global_position, character.velocity * 2000)
 		if character.global_position.distance_to(ray["position"]) >= 60:
@@ -46,7 +41,4 @@ func update(delta):
 			character.velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * character.speed
 			character.set_move_target(character.velocity * 2000)
 	else:
-		print("cat")
-		print(character.nav_agent.distance_to_target())
-		print(character.nav_agent.is_target_reachable())
-		print(character.global_position.distance_to(character.nav_agent.get_final_position()))
+		pass

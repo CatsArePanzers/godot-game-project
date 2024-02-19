@@ -129,7 +129,10 @@ func track_potential_target(body):
 	
 	var ray = create_ray(global_position, body.global_position)
 	
-	if (ray["collider"] != body or ray.is_empty()):
+	if ray.is_empty():
+		return
+	
+	if (ray["collider"] != body):
 		return
 	
 	potential_targets.pop_at(potential_targets.find(body))
@@ -148,6 +151,9 @@ func track_target():
 		
 	var ray = create_ray(global_position, target.global_position)
 	
+	if (ray.is_empty()):
+		return
+		
 	if (ray["collider"] != target):
 		if targets_queue.size() <= 1:
 			targets_queue.pop_front()

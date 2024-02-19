@@ -12,8 +12,12 @@ var last_seen_ally: Ally
 func _ready():
 	super()
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	super(delta)
+	
+	if allies_in_range < 1:
+		#print(allies_in_range)
+		find_allies.emit()
 
 func get_camera():
 	return camera
@@ -36,16 +40,12 @@ func _on_staying_range_body_exited(body):
 			or body.get_team() != team.team
 	):
 		return
-
+	
 	allies_in_range -= 1
 	
 	last_seen_ally = body
 	
 	#print(last_seen_ally_pos)
-	
-	if allies_in_range < 1:
-		#state = CharacterState.FIND_ALLIES
-		find_allies.emit()
 	
 	#print(body)
 	#print(allies_in_range)

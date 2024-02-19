@@ -25,15 +25,24 @@ func _ready():
 		queue_free()
 
 func spawn_enemy(enemy_type):
-	spawn_area
+	var new_enemy: Enemy = enemy_basic.instantiate()
 	
+	new_enemy.global_position = create_random_position()
 	
-	#var new_enemy: Enemy = 
+	new_enemy.path_to_follow = path.get_child(0)
 	
-	
-	
-	#enemy_spawned.emit(new_enemy)
-	pass
+	enemy_spawned.emit(new_enemy)
 
-func _process(delta):
-	pass
+func create_random_position() -> Vector2:
+	var spawn_position_rect: Rect2 = spawn_area.shape.get_rect()
+	
+	var spawn_area_start: Vector2 = spawn_area.global_position + spawn_position_rect.position
+	
+	print(spawn_area_start)
+	
+	var rand_deviation := Vector2(randf() * spawn_position_rect.size.x,
+								  randf() * spawn_position_rect.size.y)
+	
+	return spawn_area_start + rand_deviation
+
+

@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://ca0o866hwfhy8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_hkor1"]
-[ext_resource type="Script" path="res://wave_manager.gd" id="4_4xmk4"]
+[ext_resource type="Script" path="res://spawner_manager.gd" id="4_4xmk4"]
 [ext_resource type="Texture2D" uid="uid://cdsusbffmrekk" path="res://assets/tile_set.png" id="4_8jw83"]
 [ext_resource type="PackedScene" uid="uid://b41ifw2mx8pbb" path="res://wave_spawner.tscn" id="4_i015u"]
 [ext_resource type="Script" path="res://weapons/bullets/bullet_manager.gd" id="5_bl2cg"]
@@ -903,9 +903,6 @@ position = Vector2(-564, -1906)
 visible = false
 position = Vector2(-5, 4.5)
 shape = SubResource("RectangleShape2D_0rhlw")
-
-[node name="PathFollow" parent="SpawnerManager/WaveSpawner9/Path" index="0"]
-position = Vector2(-27, 526)
 
 [node name="Spawner4" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(92, 1613)
