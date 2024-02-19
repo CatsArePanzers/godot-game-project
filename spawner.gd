@@ -24,17 +24,20 @@ func _ready():
 		print("Spawner requires CollisionShape2D node as child")
 		queue_free()
 
-func spawn_enemy(enemy_type):
+func spawn_enemy():
 	var new_enemy: Enemy = enemy_basic.instantiate()
 	
 	new_enemy.global_position = create_random_position()
 	
-	new_enemy.path = path
-	
-	new_enemy.path_to_follow = PathFollow2D.new()
-	new_enemy.path.add_child(new_enemy.path_to_follow)
-	new_enemy.path_to_follow.rotates = false
-	new_enemy.path_to_follow.loop = false
+	if path != null:
+		new_enemy.path = path
+		new_enemy.path_to_follow = PathFollow2D.new()
+		new_enemy.path.add_child(new_enemy.path_to_follow)
+		new_enemy.path_to_follow.rotates = false
+		new_enemy.path_to_follow.loop = false
+	else:
+		new_enemy.path_to_follow = PathFollow2D.new()
+		new_enemy.path_to_follow.global_position = Vector2.ZERO
 	
 	enemy_spawned.emit(new_enemy)
 

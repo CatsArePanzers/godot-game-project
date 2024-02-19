@@ -15,6 +15,8 @@ var enemy_controllers := Dictionary()
 
 @onready var spawner_manager: SpawnerManager = $SpawnerManager
 
+@onready var score_counter:	ScoreCounter = $ScoreCounter
+
 func spawn_ally(path_to_resource):
 	var new_ally: Character = load(path_to_resource).instantiate()
 	
@@ -53,7 +55,9 @@ func _unhandled_key_input(event):
 		switch_player()
 
 func _physics_process(_delta):
-	pass
+	if enemies.is_empty():
+		_on_spawner_timeout()
+		$WaveTimer.start()
 
 func _process(_delta):
 	pass
@@ -81,6 +85,10 @@ func switch_camera(curr_camera: Camera2D, new_camera: Camera2D):
 	var tween: Tween = get_tree().create_tween()
 
 	new_camera.make_current()
+
+	new_camera.reset_smoothing()
+	new_camera.global_position = new_camera.get_target_position()
+	new_camera.align()
 	
 	new_camera.offset = curr_camera.global_position - new_camera.global_position	
 	
@@ -98,9 +106,11 @@ func remove_dead_ally(dead_ally: Ally):
 	if(dead_ally.state == CharacterState.PLAYER):
 		switch_player()
 
-func remove_dead_enemy(dead_enemy):
+func remove_dead_enemy(dead_enemy: Enemy):
 	if enemy_controllers.get(dead_enemy) == null:
 		return
+	
+	score_counter.add_score(dead_enemy.score_worth)
 	
 	enemy_controllers[dead_enemy].queue_free()
 	enemy_controllers.erase(dead_enemy)

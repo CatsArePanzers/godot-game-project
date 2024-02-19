@@ -267,13 +267,11 @@ shape = SubResource("CircleShape2D_u7yhk")
 [node name="WeaponComponent" parent="." instance=ExtResource("3_wmswy")]
 
 [node name="Assault" parent="WeaponComponent" instance=ExtResource("7_ty8dv")]
-reload_time = 5.0
 max_spread = 3.0
 
 [node name="Pistol" parent="WeaponComponent" instance=ExtResource("5_8h02g")]
 visible = false
 position = Vector2(3, -4)
-reload_time = 3.0
 sprite_offset = 4
 
 [node name="Team" parent="." instance=ExtResource("8_elvx3")]

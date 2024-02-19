@@ -221,6 +221,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 3.0
 script = ExtResource("1_oe1nc")
+score_worth = 200
 speed = 250
 rotation_speed = 2.5
 
