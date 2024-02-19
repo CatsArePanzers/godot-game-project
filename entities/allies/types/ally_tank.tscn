@@ -303,3 +303,5 @@ autostart = true
 [connection signal="body_exited" from="StayingRange" to="." method="_on_staying_range_body_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavUpdate" to="." method="_on_nav_update_timeout"]
+
+[editable path="WeaponComponent/Shotgun"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ca0o866hwfhy8"]
+[gd_scene load_steps=34 format=3 uid="uid://ca0o866hwfhy8"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_hkor1"]
 [ext_resource type="Script" path="res://wave_manager.gd" id="4_4xmk4"]
@@ -683,84 +683,78 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xmvn"]
-size = Vector2(1362, 1148)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42ga3"]
+size = Vector2(1177, 1143)
 
-[sub_resource type="Curve2D" id="Curve2D_fwi2p"]
+[sub_resource type="Curve2D" id="Curve2D_k0rvt"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -14, -211, 0, 0, 0, 0, 1821, -396, 0, 0, 0, 0, 3497, -494, 0, 0, 0, 0, 3750, -426, 0, 0, 0, 0, 3947, -139, 0, 0, 0, 0, 4437, 73, 0, 0, 0, 0, 4679, 193)
-}
-point_count = 7
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_007dk"]
-size = Vector2(939, 1151)
-
-[sub_resource type="Curve2D" id="Curve2D_ldmu7"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -6, -16, 0, 0, 0, 0, 1211, -616, 0, 0, 0, 0, 2316, -807, 0, 0, 0, 0, 2573, -432, 0, 0, 0, 0, 3096, -233, 0, 0, 0, 0, 3660, 12)
-}
-point_count = 6
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dv6qc"]
-size = Vector2(224, 287)
-
-[sub_resource type="Curve2D" id="Curve2D_raspm"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 15, -3, 0, 0, 0, 0, -14, -258, 0, 0, 0, 0, -981, -240, 0, 0, 0, 0, -1006, -700, 0, 0, 0, 0, 238, -1816, 0, 0, 0, 0, 496, -1859, 0, 0, 0, 0, 1022, -1243)
-}
-point_count = 7
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2gqer"]
-size = Vector2(1064, 474)
-
-[sub_resource type="Curve2D" id="Curve2D_nyhpy"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -315, 33, 0, 0, 0, 0, -674, 937, 0, 0, 0, 0, -1169, 1698, 0, 0, 0, 0, -1169, 2128, 0, 0, 0, 0, -1149, 2321)
-}
-point_count = 5
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_31pvs"]
-size = Vector2(1064, 464)
-
-[sub_resource type="Curve2D" id="Curve2D_m4uoi"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -19, -3, 0, 0, 0, 0, -435, 716, 0, 0, 0, 0, -1314, 678, 0, 0, 0, 0, -1806, 257, 0, 0, 0, 0, -2420, 41, 0, 0, 0, 0, -2720, -103, 0, 0, 0, 0, -3490, 985, 0, 0, 0, 0, -3535, -1152, 0, 0, 0, 0, -1929, -843, 0, 0, 0, 0, -1818, -447, 0, 0, 0, 0, -2840, -522, 0, 0, 0, 0, -2876, 203)
-}
-point_count = 12
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_45q6e"]
-size = Vector2(1064, 1661)
-
-[sub_resource type="Curve2D" id="Curve2D_fssyv"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -19, -3, 0, 0, 0, 0, -474, -71, 0, 0, 0, 0, -960, -926, 0, 0, 0, 0, -1167, -1235)
+"points": PackedVector2Array(0, 0, 0, 0, -43, -202, 0, 0, 0, 0, 1729, -366, 0, 0, 0, 0, 3686, -475, 0, 0, 0, 0, 5125, 115)
 }
 point_count = 4
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qevh"]
-size = Vector2(1064, 1760)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3j3q"]
+size = Vector2(1066, 1143)
 
-[sub_resource type="Curve2D" id="Curve2D_fvbq3"]
+[sub_resource type="Curve2D" id="Curve2D_lw0w7"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -19, -3, 0, 0, 0, 0, -474, -71, 0, 0, 0, 0, -1233, -68, 0, 0, 0, 0, -1580, -83, 0, 0, 0, 0, -2116, -1008)
+"points": PackedVector2Array(0, 0, 0, 0, -7, -43, 0, 0, 0, 0, 801, -462, 0, 0, 0, 0, 2345, -826, 0, 0, 0, 0, 3006, 230, 0, 0, 0, 0, 3149, 370)
 }
 point_count = 5
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8xpa"]
-size = Vector2(517, 988)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wox5j"]
+size = Vector2(192, 280)
 
-[sub_resource type="Curve2D" id="Curve2D_smp8u"]
+[sub_resource type="Curve2D" id="Curve2D_rwqky"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -19, -3, 0, 0, 0, 0, 1, 535, 0, 0, 0, 0, 549, 1833)
+"points": PackedVector2Array(0, 0, 0, 0, -16, -23, 0, 0, 0, 0, -12, -253, 0, 0, 0, 0, -1020, -253, 0, 0, 0, 0, -1024, -712, 0, 0, 0, 0, 430, -1881, 0, 0, 0, 0, 1373, -1392)
+}
+point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a623i"]
+size = Vector2(1103, 490)
+
+[sub_resource type="Curve2D" id="Curve2D_pgjwd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -335, 55, 0, 0, 0, 0, -609, 736, 0, 0, 0, 0, -1184, 1697, 0, 0, 0, 0, -1179, 2084, 0, 0, 0, 0, -1113, 2516)
+}
+point_count = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mge5"]
+size = Vector2(1345, 577)
+
+[sub_resource type="Curve2D" id="Curve2D_obyj7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -7, -43, 0, 0, 0, 0, -413, 711, 0, 0, 0, 0, -1309, 677, 0, 0, 0, 0, -2042, 147, 0, 0, 0, 0, -2504, 6, 0, 0, 0, 0, -2828, -173, 0, 0, 0, 0, -2824, -512, 0, 0, 0, 0, -1817, -432, 0, 0, 0, 0, -1953, -868, 0, 0, 0, 0, -3523, -1107, 0, 0, 0, 0, -3455, 959, 0, 0, 0, 0, -2875, 162)
+}
+point_count = 12
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_170av"]
+size = Vector2(1070, 1708)
+
+[sub_resource type="Curve2D" id="Curve2D_uw1up"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -7, -43, 0, 0, 0, 0, -444, -76, 0, 0, 0, 0, -1226, -1293)
 }
 point_count = 3
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v26y4"]
-size = Vector2(924, 2579)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05pqk"]
+size = Vector2(1087, 1731)
 
-[sub_resource type="Curve2D" id="Curve2D_rdbsi"]
+[sub_resource type="Curve2D" id="Curve2D_5oefw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -90, -1221, 0, 0, 0, 0, -90, -1610)
+"points": PackedVector2Array(0, 0, 0, 0, -7, -43, 0, 0, 0, 0, -1580, -85, 0, 0, 0, 0, -2329, -1320, 0, 0, 0, 0, -1777, -1237)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rhlw"]
+size = Vector2(500, 1001)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yanil"]
+size = Vector2(945, 2574)
+
+[sub_resource type="Curve2D" id="Curve2D_1ftvr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -95, -1211, 0, 0, 0, 0, -93, -1615)
 }
 point_count = 2
 
@@ -807,135 +801,131 @@ script = ExtResource("4_4xmk4")
 [node name="Spawner" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(-5140, -131)
 
-[node name="CollisionShape2D" parent="SpawnerManager/Spawner" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/Spawner" index="0"]
 visible = false
-position = Vector2(3, 1)
-shape = SubResource("RectangleShape2D_6xmvn")
+position = Vector2(-56.5, 0.5)
+shape = SubResource("RectangleShape2D_42ga3")
 
-[node name="Path2D" parent="SpawnerManager/Spawner" index="1"]
-curve = SubResource("Curve2D_fwi2p")
+[node name="Path" parent="SpawnerManager/Spawner" index="1"]
+curve = SubResource("Curve2D_k0rvt")
 
-[node name="PathFollow2D" parent="SpawnerManager/Spawner/Path2D" index="0"]
-position = Vector2(-14, -211)
-rotation = -0.100478
+[node name="PathFollow" parent="SpawnerManager/Spawner/Path" index="0"]
+position = Vector2(-43, -202)
 
 [node name="Spawner6" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(-3960, -135)
 
-[node name="CollisionShape2D" parent="SpawnerManager/Spawner6" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/Spawner6" index="0"]
 visible = false
-position = Vector2(-3, -1)
-shape = SubResource("RectangleShape2D_007dk")
+position = Vector2(-85, 0)
+shape = SubResource("RectangleShape2D_g3j3q")
 
-[node name="Path2D" parent="SpawnerManager/Spawner6" index="1"]
-curve = SubResource("Curve2D_ldmu7")
+[node name="Path" parent="SpawnerManager/Spawner6" index="1"]
+curve = SubResource("Curve2D_lw0w7")
 
-[node name="PathFollow2D" parent="SpawnerManager/Spawner6/Path2D" index="0"]
-position = Vector2(-6, -16)
-rotation = -0.458044
+[node name="PathFollow" parent="SpawnerManager/Spawner6/Path" index="0"]
+position = Vector2(-7, -43)
 
 [node name="WaveSpawner2" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(-1845, 1434)
 
-[node name="CollisionShape2D" parent="SpawnerManager/WaveSpawner2" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/WaveSpawner2" index="0"]
 visible = false
-position = Vector2(1, -5.5)
-shape = SubResource("RectangleShape2D_dv6qc")
+position = Vector2(5, -17)
+shape = SubResource("RectangleShape2D_wox5j")
 
-[node name="Path2D" parent="SpawnerManager/WaveSpawner2" index="1"]
-curve = SubResource("Curve2D_raspm")
+[node name="Path" parent="SpawnerManager/WaveSpawner2" index="1"]
+curve = SubResource("Curve2D_rwqky")
 
-[node name="PathFollow2D" parent="SpawnerManager/WaveSpawner2/Path2D" index="0"]
-position = Vector2(15, -3)
+[node name="PathFollow" parent="SpawnerManager/WaveSpawner2/Path" index="0"]
+position = Vector2(-16, -23)
 
 [node name="WaveSpawner3" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(1090, -2601)
 
-[node name="CollisionShape2D" parent="SpawnerManager/WaveSpawner3" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/WaveSpawner3" index="0"]
 visible = false
-position = Vector2(217, 13)
-shape = SubResource("RectangleShape2D_2gqer")
+position = Vector2(190.5, -11)
+shape = SubResource("RectangleShape2D_a623i")
 
-[node name="Path2D" parent="SpawnerManager/WaveSpawner3" index="1"]
-curve = SubResource("Curve2D_nyhpy")
+[node name="Path" parent="SpawnerManager/WaveSpawner3" index="1"]
+curve = SubResource("Curve2D_pgjwd")
 
-[node name="PathFollow2D" parent="SpawnerManager/WaveSpawner3/Path2D" index="0"]
-position = Vector2(-315, 33)
+[node name="PathFollow" parent="SpawnerManager/WaveSpawner3/Path" index="0"]
+position = Vector2(-335, 55)
 
 [node name="WaveSpawner5" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(2522, 17)
 
-[node name="CollisionShape2D" parent="SpawnerManager/WaveSpawner5" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/WaveSpawner5" index="0"]
 visible = false
-shape = SubResource("RectangleShape2D_31pvs")
+position = Vector2(39.5, 31.5)
+shape = SubResource("RectangleShape2D_3mge5")
 
-[node name="Path2D" parent="SpawnerManager/WaveSpawner5" index="1"]
-curve = SubResource("Curve2D_m4uoi")
+[node name="Path" parent="SpawnerManager/WaveSpawner5" index="1"]
+curve = SubResource("Curve2D_obyj7")
 
-[node name="PathFollow2D" parent="SpawnerManager/WaveSpawner5/Path2D" index="0"]
-position = Vector2(-19, -3)
+[node name="PathFollow" parent="SpawnerManager/WaveSpawner5/Path" index="0"]
+position = Vector2(-7, -43)
 
 [node name="WaveSpawner7" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(1205, 1294)
 
-[node name="CollisionShape2D" parent="SpawnerManager/WaveSpawner7" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/WaveSpawner7" index="0"]
 visible = false
-position = Vector2(0, -7.5)
-shape = SubResource("RectangleShape2D_45q6e")
+position = Vector2(-19, 2)
+shape = SubResource("RectangleShape2D_170av")
 
-[node name="Path2D" parent="SpawnerManager/WaveSpawner7" index="1"]
-curve = SubResource("Curve2D_fssyv")
+[node name="Path" parent="SpawnerManager/WaveSpawner7" index="1"]
+curve = SubResource("Curve2D_uw1up")
 
-[node name="PathFollow2D" parent="SpawnerManager/WaveSpawner7/Path2D" index="0"]
-position = Vector2(-19, -3)
+[node name="PathFollow" parent="SpawnerManager/WaveSpawner7/Path" index="0"]
+position = Vector2(-7, -43)
 
 [node name="WaveSpawner8" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(2336, 1308)
 
-[node name="CollisionShape2D" parent="SpawnerManager/WaveSpawner8" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/WaveSpawner8" index="0"]
 visible = false
-position = Vector2(0, -10)
-shape = SubResource("RectangleShape2D_7qevh")
+position = Vector2(-19.5, -8.5)
+shape = SubResource("RectangleShape2D_05pqk")
 
-[node name="Path2D" parent="SpawnerManager/WaveSpawner8" index="1"]
-curve = SubResource("Curve2D_fvbq3")
+[node name="Path" parent="SpawnerManager/WaveSpawner8" index="1"]
+curve = SubResource("Curve2D_5oefw")
 
-[node name="PathFollow2D" parent="SpawnerManager/WaveSpawner8/Path2D" index="0"]
-position = Vector2(-19, -3)
+[node name="PathFollow" parent="SpawnerManager/WaveSpawner8/Path" index="0"]
+position = Vector2(-7, -43)
 
 [node name="WaveSpawner9" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(-564, -1906)
 
-[node name="CollisionShape2D" parent="SpawnerManager/WaveSpawner9" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/WaveSpawner9" index="0"]
 visible = false
-position = Vector2(-17.5, -16)
-shape = SubResource("RectangleShape2D_e8xpa")
+position = Vector2(-5, 4.5)
+shape = SubResource("RectangleShape2D_0rhlw")
 
-[node name="Path2D" parent="SpawnerManager/WaveSpawner9" index="1"]
-curve = SubResource("Curve2D_smp8u")
-
-[node name="PathFollow2D" parent="SpawnerManager/WaveSpawner9/Path2D" index="0"]
-position = Vector2(-19, -3)
+[node name="PathFollow" parent="SpawnerManager/WaveSpawner9/Path" index="0"]
+position = Vector2(-27, 526)
 
 [node name="Spawner4" parent="SpawnerManager" instance=ExtResource("4_i015u")]
 position = Vector2(92, 1613)
 
-[node name="CollisionShape2D" parent="SpawnerManager/Spawner4" index="0"]
+[node name="SpawnArea" parent="SpawnerManager/Spawner4" index="0"]
 visible = false
-position = Vector2(19, 113.5)
-shape = SubResource("RectangleShape2D_v26y4")
+position = Vector2(4.5, 121)
+shape = SubResource("RectangleShape2D_yanil")
 
-[node name="Path2D" parent="SpawnerManager/Spawner4" index="1"]
-curve = SubResource("Curve2D_rdbsi")
+[node name="Path" parent="SpawnerManager/Spawner4" index="1"]
+curve = SubResource("Curve2D_1ftvr")
 
-[node name="PathFollow2D" parent="SpawnerManager/Spawner4/Path2D" index="0"]
-position = Vector2(-90, -1221)
+[node name="PathFollow" parent="SpawnerManager/Spawner4/Path" index="0"]
+position = Vector2(-95, -1211)
 
-[node name="Spawner2" type="Timer" parent="SpawnerManager"]
+[node name="WaveTimer" type="Timer" parent="."]
 wait_time = 7.0
 autostart = true
 
-[connection signal="timeout" from="SpawnerManager/Spawner2" to="." method="_on_spawner_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_spawner_timeout"]
 
 [editable path="SpawnerManager/Spawner"]
 [editable path="SpawnerManager/Spawner6"]

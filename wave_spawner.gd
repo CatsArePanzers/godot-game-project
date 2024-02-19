@@ -2,7 +2,7 @@ extends Area2D
 
 class_name Spawner
 
-signal enemy_spawned
+signal enemy_spawned(new_enemy: Enemy)
 
 const enemy_basic 	= preload("res://entities/enemies/types/enemy_basic.tscn")
 const enemy_assault = preload("res://entities/enemies/types/enemy_assault.tscn")
@@ -25,6 +25,9 @@ func _ready():
 		queue_free()
 
 func spawn_enemy(enemy_type):
+	spawn_area
+	
+	
 	#var new_enemy: Enemy = 
 	
 	

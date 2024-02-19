@@ -7,3 +7,4 @@ const IDLE:    	   int = 1
 const MOVE_TO: 	   int = 2
 const ATTACK:  	   int = 3
 const FIND_ALLIES: int = 4
+const FOLLOW_PATH: int = 5

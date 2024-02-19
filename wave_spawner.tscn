@@ -14,13 +14,13 @@ point_count = 2
 [node name="WaveSpawner" type="Area2D"]
 script = ExtResource("1_aud8c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="SpawnArea" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6wfbl")
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="Path" type="Path2D" parent="."]
 curve = SubResource("Curve2D_j5rkv")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+[node name="PathFollow" type="PathFollow2D" parent="Path"]
 position = Vector2(-19, -3)
 rotates = false
 loop = false

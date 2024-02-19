@@ -13,32 +13,7 @@ var enemy_controllers := Dictionary()
 
 @onready var map: NavigationRegion2D = $NavigationRegion2D
 
-@onready var wave_manager: SpawnerManager = $SpawnerManager
-
-func spawn_enemy():
-	var new_enemy: Character = preload("res://entities/enemies/types/enemy_tank.tscn").instantiate()
-	
-	%PathFollow2D.progress_ratio = randf()
-	new_enemy.global_position = %PathFollow2D.global_position
-	
-	add_child(new_enemy)
-	
-	new_enemy.request_ready()
-	
-	var rand_rotation = randf() * PI * 2
-	new_enemy.weapon.rotation 		  = rand_rotation
-	new_enemy.detection_zone.rotation = rand_rotation + PI/2
-	
-	enemies.append(new_enemy)
-	
-	var new_enemy_controller: StateMachine = EnemyControllerScene.instantiate()
-	add_child(new_enemy_controller)
-	
-	new_enemy_controller.set_character(new_enemy)
-	enemy_controllers[new_enemy] = new_enemy_controller
-	
-	new_enemy.died.connect(remove_dead_enemy)
-
+@onready var spawner_manager: SpawnerManager = $SpawnerManager
 
 func spawn_ally(path_to_resource):
 	var new_ally: Character = load(path_to_resource).instantiate()
@@ -69,6 +44,8 @@ func _ready():
 	
 	allies[0].get_camera().make_current()
 	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)
+	
+	spawner_manager.enemy_spawned.connect(on_enemy_spawn)
 
 func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
@@ -128,3 +105,20 @@ func remove_dead_enemy(dead_enemy):
 	enemy_controllers[dead_enemy].queue_free()
 	enemy_controllers.erase(dead_enemy)
 	enemies.pop_at(enemies.find(dead_enemy))
+
+func on_enemy_spawn(new_enemy: Enemy):
+	add_child(new_enemy)
+	
+	var rand_rotation = randf() * PI * 2
+	new_enemy.weapon.rotation 		  = rand_rotation
+	new_enemy.detection_zone.rotation = rand_rotation + PI/2
+	
+	enemies.append(new_enemy)
+	
+	var new_enemy_controller: StateMachine = EnemyControllerScene.instantiate()
+	add_child(new_enemy_controller)
+	
+	new_enemy_controller.set_character(new_enemy)
+	enemy_controllers[new_enemy] = new_enemy_controller
+	
+	new_enemy.died.connect(remove_dead_enemy)

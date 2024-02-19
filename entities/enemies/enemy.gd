@@ -2,7 +2,7 @@ extends Character
 
 class_name Enemy
 
-var path: Path2D
+var path_to_follow: PathFollow2D
 
 func _ready():
 	super()
