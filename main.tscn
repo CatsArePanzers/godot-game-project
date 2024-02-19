@@ -706,9 +706,9 @@ size = Vector2(192, 280)
 
 [sub_resource type="Curve2D" id="Curve2D_rwqky"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -16, -23, 0, 0, 0, 0, -12, -253, 0, 0, 0, 0, -1020, -253, 0, 0, 0, 0, -1024, -712, 0, 0, 0, 0, 430, -1881, 0, 0, 0, 0, 1373, -1392)
+"points": PackedVector2Array(0, 0, 0, 0, -16, -23, 0, 0, 0, 0, -12, -253, 0, 0, 0, 0, -1020, -253, 0, 0, 0, 0, -1024, -712, 0, 0, 0, 0, -828, -716, 0, 0, 0, 0, -817, -1367, 0, 0, 0, 0, -361, -1357, 0, 0, 0, 0, -361, -1841, 0, 0, 0, 0, 459, -1820, 0, 0, 0, 0, 1373, -1392)
 }
-point_count = 6
+point_count = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a623i"]
 size = Vector2(1103, 490)
@@ -919,7 +919,7 @@ curve = SubResource("Curve2D_1ftvr")
 position = Vector2(-95, -1211)
 
 [node name="WaveTimer" type="Timer" parent="."]
-wait_time = 7.0
+wait_time = 80.0
 autostart = true
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_spawner_timeout"]

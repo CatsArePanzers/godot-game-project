@@ -47,8 +47,6 @@ func _ready():
 	spawn_ally("res://entities/allies/types/ally_assault.tscn")
 	spawn_ally("res://entities/allies/types/ally_sniper.tscn")
 	spawn_ally("res://entities/allies/types/ally_tank.tscn")
-	
-	spawner_manager.activate_spawners()
 
 func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
@@ -61,9 +59,7 @@ func _process(_delta):
 	pass
 
 func _on_spawner_timeout():
-	#spawn_enemy()
-	#spawn_ally()
-	pass
+	spawner_manager.activate_spawners()
 
 func switch_player():
 	if allies.size() <= 1:

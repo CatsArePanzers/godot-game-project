@@ -16,8 +16,8 @@ func _physics_process(delta):
 	super(delta)
 	
 	if allies_in_range < 1:
-		#print(allies_in_range)
-		find_allies.emit()
+		if state != CharacterState.ATTACK:
+			find_allies.emit()
 
 func get_camera():
 	return camera
