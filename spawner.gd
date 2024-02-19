@@ -4,13 +4,11 @@ class_name Spawner
 
 signal enemy_spawned(new_enemy: Enemy)
 
-const enemy_basic 	= preload("res://entities/enemies/types/enemy_basic.tscn")
-const enemy_assault = preload("res://entities/enemies/types/enemy_assault.tscn")
-const enemy_sniper 	= preload("res://entities/enemies/types/enemy_sniper.tscn")
-const enemy_tank	= preload("res://entities/enemies/types/enemy_tank.tscn")
-
 var spawn_area: CollisionShape2D
 var path	  : Path2D
+
+@export var spawn_number: int
+@export var enemy_types: Array[PackedScene] = []
 
 func _ready():
 	for child in get_children():
@@ -25,7 +23,9 @@ func _ready():
 		queue_free()
 
 func spawn_enemy():
-	var new_enemy: Enemy = enemy_basic.instantiate()
+	var enemy_type_idx = randi_range(1, enemy_types.size()) - 1
+	
+	var new_enemy: Enemy = enemy_types[enemy_type_idx].instantiate()
 	
 	new_enemy.global_position = create_random_position()
 	

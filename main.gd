@@ -5,10 +5,10 @@ const AllyControllerScene  = preload("res://entities/allies/ally_controller.tscn
 
 var player_idx: int = 0
 
-var allies := Array()
+var allies: Array[Ally] = []
 var ally_controllers := Dictionary()
 
-var enemies := Array()
+var enemies :Array[Enemy] = []
 var enemy_controllers := Dictionary()
 
 @onready var map: NavigationRegion2D = $NavigationRegion2D
@@ -56,6 +56,7 @@ func _unhandled_key_input(event):
 
 func _physics_process(_delta):
 	if enemies.is_empty():
+		print("vat")
 		_on_spawner_timeout()
 		$WaveTimer.start()
 

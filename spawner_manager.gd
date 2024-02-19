@@ -17,7 +17,8 @@ func _process(_delta):
 
 func activate_spawners():
 	for spawner: Spawner in spawners:
-		spawner.spawn_enemy()
+		for i in spawner.spawn_number:
+			spawner.spawn_enemy()
 
 func on_enemy_spawn(new_enemy: Enemy):
 	enemy_spawned.emit(new_enemy)
