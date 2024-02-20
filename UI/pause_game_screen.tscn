@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://bg3d3mgg2wtbg"]
 
-[ext_resource type="Script" path="res://UI/pause_game_screen.gd" id="1_a75a4"]
-[ext_resource type="FontFile" uid="uid://caosccxj4iyaa" path="res://assets/Fonts/Kenney Future.ttf" id="2_j22bv"]
+[ext_resource type="Script" path="res://ui/pause_game_screen.gd" id="1_seafe"]
+[ext_resource type="FontFile" uid="uid://caosccxj4iyaa" path="res://assets/Fonts/Kenney Future.ttf" id="2_j2s31"]
 
 [sub_resource type="Theme" id="Theme_1tdjp"]
-default_font = ExtResource("2_j22bv")
+default_font = ExtResource("2_j2s31")
 default_font_size = 120
 
 [node name="PauseGameScreen" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_a75a4")
+script = ExtResource("1_seafe")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -43,26 +43,26 @@ theme_override_constants/separation = 50
 
 [node name="Resume" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_j22bv")
+theme_override_fonts/font = ExtResource("2_j2s31")
 theme_override_font_sizes/font_size = 64
 text = "Resume
 "
 
 [node name="Save" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_j22bv")
+theme_override_fonts/font = ExtResource("2_j2s31")
 theme_override_font_sizes/font_size = 64
 text = "Save"
 
 [node name="Main Menu" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_j22bv")
+theme_override_fonts/font = ExtResource("2_j2s31")
 theme_override_font_sizes/font_size = 64
 text = "Main Menu"
 
 [node name="Quit" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_j22bv")
+theme_override_fonts/font = ExtResource("2_j2s31")
 theme_override_font_sizes/font_size = 64
 text = "Quit
 "

@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://4gnev660h02l"]
+[gd_scene load_steps=4 format=3 uid="uid://ctea8iv1evfcs"]
 
-[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_spma6"]
-[ext_resource type="FontFile" uid="uid://caosccxj4iyaa" path="res://assets/Fonts/Kenney Future.ttf" id="2_dmxl5"]
+[ext_resource type="Script" path="res://ui/game_over_screen.gd" id="1_e8xm1"]
+[ext_resource type="FontFile" uid="uid://caosccxj4iyaa" path="res://assets/Fonts/Kenney Future.ttf" id="2_0a8k2"]
 
 [sub_resource type="Theme" id="Theme_1tdjp"]
-default_font = ExtResource("2_dmxl5")
+default_font = ExtResource("2_0a8k2")
 default_font_size = 120
 
-[node name="Main Menu" type="CanvasLayer"]
+[node name="GameOverScreen" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_spma6")
+script = ExtResource("1_e8xm1")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -32,8 +32,7 @@ theme_override_constants/separation = 50
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/Rows"]
 layout_mode = 2
 theme = SubResource("Theme_1tdjp")
-text = "Godot Game 
-Project"
+text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -44,23 +43,25 @@ theme_override_constants/separation = 50
 
 [node name="NewGame" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_dmxl5")
+theme_override_fonts/font = ExtResource("2_0a8k2")
 theme_override_font_sizes/font_size = 64
 text = "New Game
 "
 
-[node name="Load" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
+[node name="Main Menu" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_dmxl5")
+theme_override_fonts/font = ExtResource("2_0a8k2")
 theme_override_font_sizes/font_size = 64
-text = "Load"
+text = "Main Menu"
 
 [node name="Quit" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_dmxl5")
+theme_override_fonts/font = ExtResource("2_0a8k2")
 theme_override_font_sizes/font_size = 64
 text = "Quit
 "
 
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

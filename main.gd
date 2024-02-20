@@ -2,7 +2,8 @@ extends Node2D
 
 const EnemyControllerScene = preload("res://entities/enemies/enemy_controller.tscn")
 const AllyControllerScene  = preload("res://entities/allies/ally_controller.tscn")
-const PauseMenuScene = preload("res://UI/pause_game_screen.tscn")
+
+const PauseMenuScene = preload("res://ui/pause_game_screen.tscn")
 
 var player_idx: int = 0
 
