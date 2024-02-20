@@ -267,11 +267,11 @@ one_shot = true
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 9.0
 target_desired_distance = 27.0
+avoidance_enabled = true
 radius = 50.0
 neighbor_distance = 200.0
 max_neighbors = 4
 max_speed = 1000.0
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="NavUpdate" type="Timer" parent="."]

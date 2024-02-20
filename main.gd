@@ -2,6 +2,7 @@ extends Node2D
 
 const EnemyControllerScene = preload("res://entities/enemies/enemy_controller.tscn")
 const AllyControllerScene  = preload("res://entities/allies/ally_controller.tscn")
+const PauseMenuScene = preload("res://UI/pause_game_screen.tscn")
 
 var player_idx: int = 0
 
@@ -53,6 +54,11 @@ func _ready():
 func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
 		switch_player()
+	
+	if event.is_action_pressed("pause") and get_tree().paused == false:
+		add_child(PauseMenuScene.instantiate())
+		get_tree().paused = true
+	
 
 func _physics_process(_delta):
 	if enemies.is_empty():
