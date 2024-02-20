@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfvl2terb63tc"]
+[gd_scene load_steps=13 format=3 uid="uid://bfvl2terb63tc"]
 
 [ext_resource type="Script" path="res://entities/character.gd" id="1_4davw"]
 [ext_resource type="Texture2D" uid="uid://dulns1vrtabso" path="res://assets/player.png" id="2_tgnx7"]
 [ext_resource type="Script" path="res://weapons/base/weapon_component.gd" id="3_pplpl"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_bkhtu"]
 [ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="4_s47ym"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_ownih"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 13.0
@@ -212,8 +213,7 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="Ally" type="CharacterBody2D"]
-position = Vector2(564, -3)
+[node name="Character" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 135
 motion_mode = 1
@@ -277,6 +277,8 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 [node name="NavUpdate" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_ownih")]
 
 [connection signal="change_weapon" from="WeaponComponent" to="." method="_on_weapon_component_change_weapon"]
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]

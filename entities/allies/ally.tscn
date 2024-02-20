@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6m0c4ypevo2w"]
+[gd_scene load_steps=17 format=3 uid="uid://b6m0c4ypevo2w"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_kf25d"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_emytg"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_6rg4l"]
 [ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="4_ft6o3"]
 [ext_resource type="PackedScene" uid="uid://e5o8u7v1i8wc" path="res://weapons/shotgun.tscn" id="4_hlhdo"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="9_r5ij7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -311,6 +312,12 @@ process_physics_priority = 66
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 rotation_smoothing_enabled = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_r5ij7")]
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 22.0
+offset_bottom = -9.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

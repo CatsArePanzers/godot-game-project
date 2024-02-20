@@ -20,6 +20,8 @@ func set_state(p_state):
 func get_state():
 	return state
 
+@onready var health_bar: HealthBarComponent = $HealthComponent
+
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 @onready var detection_zone = $DetectionZone
@@ -51,6 +53,9 @@ func _ready():
 	weapon_component.set_team(team.team)
 	weapon = weapon_component.get_current_weapon()
 	weapon_component.change_weapon.connect(change_weapon)
+	
+	health_bar.set_max_health(health)
+	health_bar.set_health(health)
 
 func get_team():
 	return team.team
@@ -185,6 +190,9 @@ func turn_to_angle(p_angle: float, p_rotation_speed = PI):
 
 func take_damage(damage):
 	health -= damage
+	
+	health_bar.set_health(health)
+	
 	if health <= 0:
 		died.emit(self)
 		queue_free()

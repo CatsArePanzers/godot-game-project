@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgm0uw8jm5b5a"]
+[gd_scene load_steps=15 format=3 uid="uid://bgm0uw8jm5b5a"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_05wh5"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_u4low"]
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_wmswy"]
 [ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="5_8h02g"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="7_hppxo"]
 [ext_resource type="PackedScene" uid="uid://dswwlc4kc7uco" path="res://weapons/assault.tscn" id="7_ty8dv"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="8_elvx3"]
 
@@ -300,6 +301,12 @@ process_physics_priority = 66
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 rotation_smoothing_enabled = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_hppxo")]
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 22.0
+offset_bottom = -9.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

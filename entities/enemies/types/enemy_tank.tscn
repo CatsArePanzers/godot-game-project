@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://e1odj2nuhxja"]
+[gd_scene load_steps=13 format=3 uid="uid://e1odj2nuhxja"]
 
 [ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_foqfg"]
 [ext_resource type="Texture2D" uid="uid://c161q5h67eld2" path="res://assets/tank_enemy.png" id="2_i8h20"]
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_rjhp4"]
 [ext_resource type="PackedScene" uid="uid://e5o8u7v1i8wc" path="res://weapons/shotgun.tscn" id="4_p8ncq"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_3xef1"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_4e5yt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 22.0
@@ -213,7 +214,6 @@ radius = 56.5574
 height = 231.897
 
 [node name="EnemyTank" type="CharacterBody2D"]
-position = Vector2(564, -3)
 collision_layer = 2
 collision_mask = 135
 motion_mode = 1
@@ -280,7 +280,23 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 wait_time = 0.3
 autostart = true
 
+[node name="HealthComponent" parent="." instance=ExtResource("6_4e5yt")]
+custom_minimum_size = Vector2(200, 0)
+offset_left = -101.0
+offset_top = -56.0
+offset_right = 99.0
+offset_bottom = -16.0
+
+[node name="ProgressBar" parent="HealthComponent" index="0"]
+custom_minimum_size = Vector2(60, 5)
+offset_left = -28.0
+offset_top = 0.0
+offset_right = 32.0
+offset_bottom = 5.0
+
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavUpdate" to="." method="_on_nav_update_timeout"]
+
+[editable path="HealthComponent"]

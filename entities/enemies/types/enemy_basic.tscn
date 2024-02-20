@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dm04elmgnq028"]
+[gd_scene load_steps=13 format=3 uid="uid://dm04elmgnq028"]
 
 [ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_oe1nc"]
 [ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_pkd3s"]
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_s0oks"]
 [ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="4_68m00"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_13rvw"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_mmkqo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -277,6 +278,12 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 [node name="NavUpdate" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_mmkqo")]
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 22.0
+offset_bottom = -9.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
