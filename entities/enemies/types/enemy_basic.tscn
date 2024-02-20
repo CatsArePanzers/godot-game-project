@@ -243,6 +243,7 @@ libraries = {
 
 [node name="Pistol" parent="WeaponComponent" instance=ExtResource("4_68m00")]
 position = Vector2(4, -4)
+damage = 20
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
@@ -266,7 +267,6 @@ one_shot = true
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 9.0
 target_desired_distance = 27.0
-avoidance_enabled = true
 radius = 50.0
 neighbor_distance = 200.0
 max_neighbors = 4

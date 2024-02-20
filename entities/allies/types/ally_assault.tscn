@@ -225,7 +225,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
 script = ExtResource("1_05wh5")
-health = 2500
+health = 3000
 speed = 400
 rotation_speed = 3.6
 
@@ -288,7 +288,6 @@ radius = 50.0
 neighbor_distance = 200.0
 max_neighbors = 4
 max_speed = 1000.0
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="NavUpdate" type="Timer" parent="."]

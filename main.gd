@@ -56,7 +56,6 @@ func _unhandled_key_input(event):
 
 func _physics_process(_delta):
 	if enemies.is_empty():
-		print("vat")
 		_on_spawner_timeout()
 		$WaveTimer.start()
 
