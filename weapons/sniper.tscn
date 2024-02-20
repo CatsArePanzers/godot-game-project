@@ -13,7 +13,7 @@ ammo_amounnt = 5
 shots_amount = 1
 shot_velocity = 4000
 damage = 400
-desired_range = 1000.0
+desired_range = 2000.0
 sprite_offset = 6
 
 [node name="GunSprite" type="Sprite2D" parent="."]

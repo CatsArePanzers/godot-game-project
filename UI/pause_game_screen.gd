@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-
+func _ready():
+	get_tree().paused = true
 
 func _on_save_pressed():
 	pass 
@@ -18,5 +19,6 @@ func _on_quit_pressed():
 
 func _on_resume_pressed():
 	queue_free()
-	get_tree().paused = false
 
+func _on_tree_exiting():
+	get_tree().paused = false

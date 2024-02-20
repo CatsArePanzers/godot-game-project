@@ -57,7 +57,6 @@ func _unhandled_key_input(event):
 	
 	if event.is_action_pressed("pause") and get_tree().paused == false:
 		add_child(PauseMenuScene.instantiate())
-		get_tree().paused = true
 	
 
 func _physics_process(_delta):
