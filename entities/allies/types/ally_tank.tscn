@@ -140,7 +140,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_uo48r"]
 resource_name = "run"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -268,7 +267,6 @@ shape = SubResource("CircleShape2D_rh4tl")
 [node name="Shotgun" parent="WeaponComponent" instance=ExtResource("4_jujhh")]
 shots_amount = 12
 damage = 25
-desired_range = 100.0
 min_spread = 1.0
 max_spread = 3.0
 
@@ -303,13 +301,6 @@ offset_left = -101.0
 offset_top = -56.0
 offset_right = 99.0
 offset_bottom = -16.0
-
-[node name="ProgressBar" parent="HealthComponent" index="0"]
-custom_minimum_size = Vector2(60, 5)
-offset_left = -28.0
-offset_top = 0.0
-offset_right = 32.0
-offset_bottom = 5.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

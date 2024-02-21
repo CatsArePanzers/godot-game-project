@@ -8,7 +8,7 @@ class_name Weapon
 @onready var sprite = $GunSprite
 
 @export var reload_time:   float
-@export var ammo_amounnt:  int = 0
+@export var ammo_amount:   int = 0
 @export var shots_amount:  int = 0
 @export var shot_velocity: int = 0
 @export var damage: 	   int = 0
@@ -32,14 +32,14 @@ func set_team(p_team):
 	team = p_team
 
 func _ready():
-	current_ammo = ammo_amounnt
+	current_ammo = ammo_amount
 	pass
 
 func shoot():
 	if current_ammo == 0 and !is_realoading:
 		is_realoading = true
 		await get_tree().create_timer(reload_time).timeout
-		current_ammo = ammo_amounnt
+		current_ammo = ammo_amount
 		is_realoading = false
 		return
 	elif is_realoading:

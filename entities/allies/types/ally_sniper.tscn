@@ -141,7 +141,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_uo48r"]
 resource_name = "run"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -268,6 +267,7 @@ shape = SubResource("CircleShape2D_4ogth")
 
 [node name="Sniper" parent="WeaponComponent" instance=ExtResource("4_6lxxk")]
 position = Vector2(1, -6)
+reload_time = 3.0
 shot_velocity = 2500
 desired_range = 1200.0
 

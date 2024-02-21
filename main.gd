@@ -4,6 +4,7 @@ const EnemyControllerScene = preload("res://entities/enemies/enemy_controller.ts
 const AllyControllerScene  = preload("res://entities/allies/ally_controller.tscn")
 
 const PauseMenuScene = preload("res://ui/pause_game_screen.tscn")
+const GameOverScene  = preload("res://ui/game_over_screen.tscn")
 
 var player_idx: int = 0
 
@@ -42,15 +43,15 @@ func spawn_ally(path_to_resource):
 
 func _ready():
 	spawner_manager.enemy_spawned.connect(on_enemy_spawn)
-	
-	spawn_ally("res://entities/allies/types/ally_basic.tscn")
-	
+	#spawn_ally("res://entities/allies/types/ally_basic.tscn")
+	#spawn_ally("res://entities/allies/types/ally_assault.tscn")
+	#spawn_ally("res://entities/allies/types/ally_sniper.tscn")
+	spawn_ally("res://entities/allies/types/ally_tank.tscn")
+
 	allies[0].get_camera().make_current()
 	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)
 	
-	spawn_ally("res://entities/allies/types/ally_assault.tscn")
-	spawn_ally("res://entities/allies/types/ally_sniper.tscn")
-	spawn_ally("res://entities/allies/types/ally_tank.tscn")
+	
 
 func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
@@ -64,6 +65,9 @@ func _physics_process(_delta):
 	if enemies.is_empty():
 		_on_spawner_timeout()
 		$WaveTimer.start()
+	
+	if allies.size() == 0:
+		end_game()
 
 func _process(_delta):
 	pass
@@ -140,3 +144,10 @@ func on_enemy_spawn(new_enemy: Enemy):
 	new_enemy.died.connect(remove_dead_enemy)
 	
 	new_enemy.follow_path.emit()
+
+func end_game():
+	if score_counter.curr_score == score_counter.hi_score:
+		score_counter.save_hi_score()
+	
+	add_child(GameOverScene.instantiate()) 
+	pass

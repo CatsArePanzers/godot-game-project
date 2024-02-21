@@ -23,10 +23,6 @@ func init_hi_score():
 func save_hi_score():
 	var config = ConfigFile.new()
 	
-	#var save = PackedScene.new().pack(self)
-	
-	#print(save)
-	
 	config.set_value("hi_score_section", "hi_score", hi_score)
 	
 	config.save_encrypted_pass(path, password)

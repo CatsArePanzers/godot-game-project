@@ -8,7 +8,7 @@
 script = ExtResource("1_m5o4b")
 bullet = ExtResource("2_rfooa")
 reload_time = 3.0
-ammo_amounnt = 30
+ammo_amount = 45
 shots_amount = 1
 shot_velocity = 1500
 damage = 30

@@ -141,7 +141,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_uo48r"]
 resource_name = "run"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -268,6 +267,7 @@ shape = SubResource("CircleShape2D_u7yhk")
 [node name="WeaponComponent" parent="." instance=ExtResource("3_wmswy")]
 
 [node name="Assault" parent="WeaponComponent" instance=ExtResource("7_ty8dv")]
+reload_time = 3.5
 max_spread = 3.0
 
 [node name="Pistol" parent="WeaponComponent" instance=ExtResource("5_8h02g")]

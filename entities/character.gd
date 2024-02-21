@@ -49,7 +49,7 @@ var target_distance = -1
 @export var speed: int = 300
 @export var rotation_speed = PI * 1.1
 
-func _ready():
+func _ready():	
 	weapon_component.set_team(team.team)
 	weapon = weapon_component.get_current_weapon()
 	weapon_component.change_weapon.connect(change_weapon)
@@ -76,6 +76,7 @@ func _physics_process(_delta):
 	track_target()
 	
 	nav_agent.set_velocity(velocity)
+	
 	animate()
 
 func animate():
@@ -160,16 +161,13 @@ func track_target():
 		return
 		
 	if (ray["collider"] != target):
+		nav_agent.target_position = target.global_position
+		targets_queue.pop_front()
+		potential_targets.push_front(target)
 		if targets_queue.size() <= 1:
-			targets_queue.pop_front()
-			potential_targets.push_front(target)
-			_on_nav_update_timeout()
 			target = null
 		else:
-			targets_queue.pop_front()
-			potential_targets.push_front(target)
 			target = targets_queue[0]
-			_on_nav_update_timeout()
 
 
 func turn_to(p_target, p_rotation_speed = PI):
@@ -204,8 +202,7 @@ func get_next_pos() -> Vector2:
 	return nav_agent.get_next_path_position()
 
 func _on_nav_update_timeout():
-	if target != null:
-		nav_agent.target_position = target.global_position
+	nav_agent.get_next_path_position()
 
 func set_nav_agent_target_pos(p_pos):
 	nav_agent.target_position = p_pos
@@ -214,7 +211,7 @@ func set_nav_agent_target_pos(p_pos):
 		nav_agent.target_position = nav_agent.get_final_position() 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
-	clamp(velocity, Vector2.ZERO, safe_velocity)
+	clamp(velocity, -safe_velocity, safe_velocity)
 	velocity = velocity as Vector2i
 
 func create_ray(from: Vector2, to: Vector2) -> Dictionary:

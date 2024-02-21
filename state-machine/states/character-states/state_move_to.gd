@@ -32,6 +32,10 @@ func update(delta):
 			character.move_and_slide()
 	elif character.nav_agent.is_target_reached():
 		var ray = character.create_ray(character.global_position, character.velocity * 2000)
+		
+		if ray.is_empty():
+			return
+		
 		if character.global_position.distance_to(ray["position"]) >= 60:
 			character.velocity = Vector2(character.velocity.x + randf_range(-20, 20), 
 										 character.velocity.y + randf_range(-20, 20))

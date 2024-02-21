@@ -19,6 +19,7 @@ func activate_spawners():
 	for spawner: Spawner in spawners:
 		for i in spawner.spawn_number:
 			spawner.spawn_enemy()
+			return
 
 func on_enemy_spawn(new_enemy: Enemy):
 	enemy_spawned.emit(new_enemy)
