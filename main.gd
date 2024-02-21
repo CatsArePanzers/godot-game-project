@@ -26,19 +26,26 @@ var enemy_controllers := Dictionary()
 
 func _load(config: ConfigFile, sections):
 	for controller in ally_controllers:
-		queue_free()
-		
+		controller.queue_free()
+	ally_controllers.clear()
+
 	for controller in enemy_controllers:
-		queue_free()
+		controller.queue_free()
+	enemy_controllers.clear()
 	
 	for ally in allies:
-		queue_free()
+		ally.queue_free()
+	allies.clear()
 	
 	for enemy in enemies:
-		queue_free()
+		enemy.queue_free()
+	enemies.clear()
 	
 	for element in get_tree().get_nodes_in_group("can_save"):
 		element.queue_free()
+	
+	print(allies)
+	print(ally_controllers)
 	
 	$WaveTimer.start(config.get_value("main_vars", "wave_time"))
 	score_counter.curr_score = config.get_value("main_vars", "curr_score")
@@ -55,15 +62,15 @@ func _load(config: ConfigFile, sections):
 		if entity.has_signal("ally_loaded"):
 			allies.append(entity)
 			entity.ally_loaded.connect(add_ally_state_machine)
-			if entity.state == CharacterState.PLAYER:
-				entity.get_camera().make_current()
 		elif entity.has_signal("enemy_loaded"):
 			enemies.append(entity)
 			entity.enemy_loaded.connect(add_enemy_state_machine)
-		
+			
 		entity._load(config, section)
 
 func _save(save_file: ConfigFile):
+	print(get_tree().get_nodes_in_group("can_save"))
+	
 	for element in get_tree().get_nodes_in_group("can_save"):
 		element._save(save_file)
 	
@@ -80,9 +87,9 @@ func _ready():
 	
 	spawner_manager.enemy_spawned.connect(on_enemy_spawn)
 
-	spawn_ally("res://entities/allies/types/ally_basic.tscn")
+	#spawn_ally("res://entities/allies/types/ally_basic.tscn")
 	#spawn_ally("res://entities/allies/types/ally_assault.tscn")
-	#spawn_ally("res://entities/allies/types/ally_sniper.tscn")
+	spawn_ally("res://entities/allies/types/ally_sniper.tscn")
 	#spawn_ally("res://entities/allies/types/ally_tank.tscn")
 
 	allies[0].get_camera().make_current()
@@ -103,14 +110,21 @@ func spawn_ally(path_to_resource):
 	
 	add_ally_state_machine(new_ally)
 
-func add_ally_state_machine(new_ally):
+func add_ally_state_machine(new_ally: Ally):
 	var new_ally_controller: StateMachine = AllyControllerScene.instantiate()
 	add_child(new_ally_controller)
+	
+	print(new_ally)
 	
 	new_ally_controller.set_character(new_ally)
 	ally_controllers[new_ally] = new_ally_controller
 	
 	new_ally.died.connect(remove_dead_ally)
+	
+	if new_ally.state == CharacterState.PLAYER:
+		new_ally.get_camera().make_current()
+		ally_controllers[new_ally].change_state(CharacterState.PLAYER)
+		print("mew")
 
 func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
@@ -194,7 +208,7 @@ func on_enemy_spawn(new_enemy: Enemy):
 	
 	enemies.append(new_enemy)
 	
-	add_ally_state_machine(new_enemy)
+	add_enemy_state_machine(new_enemy)
 
 func add_enemy_state_machine(new_enemy):
 	var new_enemy_controller: StateMachine = EnemyControllerScene.instantiate()

@@ -60,24 +60,27 @@ func _save(save_file: ConfigFile):
 	save_file.set_value(name, "velocity", velocity)
 	save_file.set_value(name, "curr_ammo", weapon_component.curr_weapon.current_ammo)
 	save_file.set_value(name, "health", health)
-	save_file.set_value(name, "target", inst_to_dict(target))
-	save_file.set_value(name, "target_pos", target_pos)
+	#save_file.set_value(name, "target", inst_to_dict(target))
+	if target:
+		save_file.set_value(name, "target_pos", target.global_position)
+	else:
+		save_file.set_value(name, "target_pos", target_pos)
 	save_file.set_value(name, "potential_target_idx", potential_target_idx)
 	save_file.set_value(name, "state", state)
 
 func _load(save_file: ConfigFile, p_section):
-	save_file.get_value(p_section, "global_position", global_position)
-	save_file.get_value(p_section, "weapon.rotation", weapon.rotation)
+	global_position = save_file.get_value(p_section, "global_position")
+	weapon.rotation = save_file.get_value(p_section, "weapon.rotation")
 
-	save_file.get_value(p_section, "detection_zone.rotation", detection_zone.rotation)
-	save_file.get_value(p_section, "velocity", velocity)
+	detection_zone.rotation = save_file.get_value(p_section, "detection_zone.rotation")
+	velocity = save_file.get_value(p_section, "velocity")
 	
 	weapon_component.switch_weapon(save_file.get_value(p_section, "weapon_idx"))
 	weapon_component.curr_weapon.current_ammo = save_file.get_value(p_section, "curr_ammo")
 	
 	health = save_file.get_value(p_section, "health")
-	if save_file.has_section_key(p_section, "target"):
-		target = dict_to_inst(save_file.get_value(p_section, "target"))
+	#if save_file.has_section_key(p_section, "target"):
+		#target = dict_to_inst(save_file.get_value(p_section, "target"))
 	target_pos = save_file.get_value(p_section, "target_pos")
 	potential_target_idx = save_file.get_value(p_section, "potential_target_idx")
 	state = save_file.get_value(p_section, "state")

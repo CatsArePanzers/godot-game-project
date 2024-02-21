@@ -12,6 +12,10 @@ func exit():
 	pass
 	
 func update(delta):
+	if character.path_to_follow == null:
+		change_state.emit(CharacterState.IDLE)
+		return
+	
 	if !has_reached_path_start():
 		return
 	

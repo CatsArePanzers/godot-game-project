@@ -13,7 +13,7 @@ var path_to_follow: PathFollow2D
 func _save(save_file: ConfigFile):
 	super(save_file)
 	
-	save_file.set_value(name, "path_to_follow", inst_to_dict(path_to_follow))
+	#save_file.set_value(name, "path_to_follow", inst_to_dict(path_to_follow))
 
 func _load(save_file: ConfigFile, p_section):
 	super(save_file, p_section)

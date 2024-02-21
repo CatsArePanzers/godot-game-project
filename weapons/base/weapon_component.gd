@@ -12,9 +12,11 @@ var weapon_idx = 0
 var weapons := Array()
 
 func switch_weapon(idx):
+	weapon_idx = idx
+	
 	curr_weapon.visible = false
 	
-	curr_weapon = weapons[idx]
+	curr_weapon = weapons[weapon_idx]
 	
 	curr_weapon.visible = true
 	

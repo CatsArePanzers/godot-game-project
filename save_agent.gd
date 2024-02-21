@@ -14,7 +14,7 @@ func _save():
 	
 	await main_scene._save(config)
 	
-	config.save(path)#_encrypted_pass(path, password)
+	config.save(path)
 
 func _load():
 	var config = ConfigFile.new()
@@ -23,6 +23,7 @@ func _load():
 		return
 	
 	main_scene_file_path = config.get_value("main_scene_file_path", "main_scene_file_path")
+	
 	main_scene = SceneSwitcher.goto_scene(main_scene_file_path)
 	
 	var sections = config.get_sections()

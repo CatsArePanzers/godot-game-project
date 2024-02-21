@@ -16,6 +16,9 @@ func exit():
 	character.sprite.texture = ally_texture
 
 func update(_delta):
+	if !character:
+		return
+	
 	character.velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("shoot"):

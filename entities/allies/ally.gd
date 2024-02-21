@@ -19,9 +19,6 @@ func _save(save_file: ConfigFile):
 func _load(save_file: ConfigFile, p_section):
 	super(save_file, p_section)
 	
-	if save_file.has_section_key(p_section, "last_seen_ally"):
-		last_seen_ally = dict_to_inst(save_file.get_value(p_section, "last_seen_ally"))
-	
 	allies_in_range = save_file.get_value(p_section, "allies_in_range")
 	
 	ally_loaded.emit(self)
