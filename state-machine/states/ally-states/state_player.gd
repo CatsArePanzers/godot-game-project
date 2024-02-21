@@ -31,9 +31,9 @@ func update(_delta):
 		character.velocity.x = 1
 	
 	if Input.is_action_just_pressed("switch_next_weapon"):
-		character.weapon_component.switch_weapon(1)
+		character.weapon_component.change_weapon(1)
 	elif Input.is_action_just_pressed("switch_prev_weapon"):
-		character.weapon_component.switch_weapon(-1)
+		character.weapon_component.change_weapon(-1)
 	
 	character.velocity = character.velocity.normalized() * character.speed
 	character.move_and_slide()

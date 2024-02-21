@@ -1,9 +1,12 @@
 extends CanvasLayer
 
-const MainScene = preload("res://main.tscn")
+@export var main_scene_path = "res://main.tscn"
 
 func _on_new_game_pressed():
-	get_tree().change_scene_to_packed(MainScene)
+	SceneSwitcher.goto_scene(main_scene_path)
+
+func _on_load_pressed():
+	SaveAgent._load()
 
 func _on_quit_pressed():
 	get_tree().quit()

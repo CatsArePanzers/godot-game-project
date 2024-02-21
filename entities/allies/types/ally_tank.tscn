@@ -215,7 +215,7 @@ height = 300.172
 [sub_resource type="CircleShape2D" id="CircleShape2D_rh4tl"]
 radius = 266.017
 
-[node name="AllyTank" type="CharacterBody2D"]
+[node name="AllyTank" type="CharacterBody2D" groups=["can_save"]]
 position = Vector2(564, -3)
 collision_layer = 4
 collision_mask = 135

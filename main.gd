@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Main
+
 const EnemyControllerScene = preload("res://entities/enemies/enemy_controller.tscn")
 const AllyControllerScene  = preload("res://entities/allies/ally_controller.tscn")
 
@@ -7,6 +9,8 @@ const PauseMenuScene = preload("res://ui/pause_game_screen.tscn")
 const GameOverScene  = preload("res://ui/game_over_screen.tscn")
 
 var player_idx: int = 0
+
+var wave_wait_timer: int = 30
 
 var allies: Array[Ally] = []
 var ally_controllers := Dictionary()
@@ -19,6 +23,70 @@ var enemy_controllers := Dictionary()
 @onready var spawner_manager: SpawnerManager = $SpawnerManager
 
 @onready var score_counter:	ScoreCounter = $ScoreCounter
+
+func _load(config: ConfigFile, sections):
+	for controller in ally_controllers:
+		queue_free()
+		
+	for controller in enemy_controllers:
+		queue_free()
+	
+	for ally in allies:
+		queue_free()
+	
+	for enemy in enemies:
+		queue_free()
+	
+	for element in get_tree().get_nodes_in_group("can_save"):
+		element.queue_free()
+	
+	$WaveTimer.start(config.get_value("main_vars", "wave_time"))
+	score_counter.curr_score = config.get_value("main_vars", "curr_score")
+	
+	sections.remove_at(sections.find("main_vars"))
+	
+	print(sections)
+	
+	for section in sections:
+		var entity = load(config.get_value(section, "scene_path")).instantiate()
+		
+		get_node(config.get_value(section, "parent_node_path")).add_child(entity)
+		
+		if entity.has_signal("ally_loaded"):
+			allies.append(entity)
+			entity.ally_loaded.connect(add_ally_state_machine)
+			if entity.state == CharacterState.PLAYER:
+				entity.get_camera().make_current()
+		elif entity.has_signal("enemy_loaded"):
+			enemies.append(entity)
+			entity.enemy_loaded.connect(add_enemy_state_machine)
+		
+		entity._load(config, section)
+
+func _save(save_file: ConfigFile):
+	for element in get_tree().get_nodes_in_group("can_save"):
+		element._save(save_file)
+	
+	save_file.set_value("main_vars", "wave_time", $WaveTimer.time_left)
+	save_file.set_value("main_vars", "curr_score", score_counter.curr_score)
+
+func _init():
+	pass
+
+func _ready():
+	SaveAgent.main_scene_file_path = scene_file_path
+	SaveAgent.main_scene_path = get_path()
+	SaveAgent.main_scene = self
+	
+	spawner_manager.enemy_spawned.connect(on_enemy_spawn)
+
+	spawn_ally("res://entities/allies/types/ally_basic.tscn")
+	#spawn_ally("res://entities/allies/types/ally_assault.tscn")
+	#spawn_ally("res://entities/allies/types/ally_sniper.tscn")
+	#spawn_ally("res://entities/allies/types/ally_tank.tscn")
+
+	allies[0].get_camera().make_current()
+	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)
 
 func spawn_ally(path_to_resource):
 	var new_ally: Character = load(path_to_resource).instantiate()
@@ -33,6 +101,9 @@ func spawn_ally(path_to_resource):
 	
 	allies.append(new_ally)
 	
+	add_ally_state_machine(new_ally)
+
+func add_ally_state_machine(new_ally):
 	var new_ally_controller: StateMachine = AllyControllerScene.instantiate()
 	add_child(new_ally_controller)
 	
@@ -41,25 +112,12 @@ func spawn_ally(path_to_resource):
 	
 	new_ally.died.connect(remove_dead_ally)
 
-func _ready():
-	spawner_manager.enemy_spawned.connect(on_enemy_spawn)
-	#spawn_ally("res://entities/allies/types/ally_basic.tscn")
-	#spawn_ally("res://entities/allies/types/ally_assault.tscn")
-	#spawn_ally("res://entities/allies/types/ally_sniper.tscn")
-	spawn_ally("res://entities/allies/types/ally_tank.tscn")
-
-	allies[0].get_camera().make_current()
-	ally_controllers[allies[0]].change_state(CharacterState.PLAYER)
-	
-	
-
 func _unhandled_key_input(event):
 	if event.is_action_released("switch_player"):
 		switch_player()
 	
 	if event.is_action_pressed("pause") and get_tree().paused == false:
 		add_child(PauseMenuScene.instantiate())
-	
 
 func _physics_process(_delta):
 	if enemies.is_empty():
@@ -74,6 +132,7 @@ func _process(_delta):
 
 func _on_spawner_timeout():
 	spawner_manager.activate_spawners()
+	$WaveTimer.set_wait_time(wave_wait_timer)
 
 func switch_player():
 	if allies.size() <= 1:
@@ -135,6 +194,9 @@ func on_enemy_spawn(new_enemy: Enemy):
 	
 	enemies.append(new_enemy)
 	
+	add_ally_state_machine(new_enemy)
+
+func add_enemy_state_machine(new_enemy):
 	var new_enemy_controller: StateMachine = EnemyControllerScene.instantiate()
 	add_child(new_enemy_controller)
 	
@@ -149,5 +211,4 @@ func end_game():
 	if score_counter.curr_score == score_counter.hi_score:
 		score_counter.save_hi_score()
 	
-	add_child(GameOverScene.instantiate()) 
-	pass
+	SceneSwitcher.goto_scene("res://ui/game_over_screen.tscn")

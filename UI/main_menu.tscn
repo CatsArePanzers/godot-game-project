@@ -63,4 +63,5 @@ text = "Quit
 "
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

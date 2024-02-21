@@ -2,8 +2,8 @@ extends Node2D
 
 class_name ScoreCounter
 
-@export var path: 	  String = "user://hi-score.cfg"
-@export var password: String = "kotkamql"
+var path: 	  String = "user://hi-score.cfg"
+var password: String = "kotkamql"
 
 var curr_score = 0
 var hi_score = 90000

@@ -30,12 +30,28 @@ func _on_body_entered(body):
 		body.take_damage(damage)
 	
 	if body.has_method("get_state"):
-		#print(body.global_position.direction_to(global_position - velocity * 2000).angle())
-		#print((body.global_position.distance_to(body.end_of_fov.global_position) * (body.global_position - direction * 2000000).normalized()).angle())
-		#print((body.global_position - direction * 2000000000).angle())
 		body.get_hit_from(body.global_position - direction * 2000000000)
 	
 	piercing -= 1
 	
 	if piercing <= 0:
 		queue_free()
+
+func _save(save_file: ConfigFile):
+	save_file.set_value(name, "scene_path",  scene_file_path)
+	save_file.set_value(name, "parent_node_path", get_parent().get_path())
+	
+	save_file.set_value(name, "global_position", global_position)
+	save_file.set_value(name, "direction", direction)
+	save_file.set_value(name, "speed", speed)
+	save_file.set_value(name, "damage", damage)
+	save_file.set_value(name, "team", team)
+	save_file.set_value(name, "piercing", piercing)
+
+func _load(save_file: ConfigFile, p_section):
+	global_position = save_file.get_value(p_section, "global_position")
+	direction = save_file.get_value(p_section, "direction")
+	speed = save_file.get_value(p_section, "speed")
+	damage = save_file.get_value(p_section, "damage")
+	team = save_file.get_value(p_section, "team")
+	piercing = save_file.get_value(p_section, "piercing")
