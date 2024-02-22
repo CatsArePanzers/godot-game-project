@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr2tvbx3nmjmu"]
+
+[ext_resource type="Script" path="res://weapons/base/gun.gd" id="1_5t55i"]
+[ext_resource type="PackedScene" uid="uid://xnajdijjnp6t" path="res://weapons/bullets/bullet.tscn" id="2_spmrh"]
+[ext_resource type="Texture2D" uid="uid://dap412noah47w" path="res://assets/weapons.png" id="3_ydutp"]
+
+[node name="Pistol" type="Node2D"]
+script = ExtResource("1_5t55i")
+bullet = ExtResource("2_spmrh")
+reload_time = 1.5
+ammo_amount = 18
+shots_amount = 1
+shot_velocity = 1500
+damage = 50
+desired_range = 500.0
+spread = 0.05
+max_rand_spread = 0.2
+max_spread = 2.0
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+position = Vector2(13, 2)
+texture = ExtResource("3_ydutp")
+region_enabled = true
+region_rect = Rect2(0, 73, 21, 13)
+
+[node name="GunBarrel" type="Marker2D" parent="."]
+position = Vector2(24, 0)
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="SpreadTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SpreadTimer" to="." method="_on_spread_timer_timeout"]

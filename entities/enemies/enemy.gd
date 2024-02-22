@@ -1,57 +1,30 @@
-extends CharacterBody2D
+extends Character
 
-@onready var ai  = $AI
+class_name Enemy
 
-@onready var gun   		= $Gun
-@onready var barrel     = $Gun/GunBarrel
-@onready var gun_sprite = $Gun/GunSprite
+signal follow_path
+signal enemy_loaded
 
-@onready var animations = $AnimationPlayer
-@onready var sprite 	= $EnemySprite
+var path: Path2D
+@export var score_worth: int
 
-@export var speed: int = 3
+var path_to_follow: PathFollow2D
 
-var direction = Vector2.ZERO
-var target = null
+func _save(save_file: ConfigFile):
+	super(save_file)
+	
+	#save_file.set_value(name, "path_to_follow", inst_to_dict(path_to_follow))
 
-@export var health: int = 100
+func _load(save_file: ConfigFile, p_section):
+	super(save_file, p_section)
+	
+	if save_file.has_section_key(p_section, "path_to_follow"):
+		path_to_follow = dict_to_inst(save_file.get_value(p_section, "path_to_follow"))
+	
+	enemy_loaded.emit(self)
 
 func _ready():
-	ai.set_weapon(gun)
-	ai.connect("emit_target", self.set_target)
+	super()
 
-func set_target(new_target):
-	target = new_target
-
-func _physics_process(_delta):
-	if target:
-		direction = global_position.direction_to(target.global_position)
-	else: 
-		direction = Vector2.ZERO
-	
-	move_and_collide(direction * speed)
-	
-	animate()
-
-func animate():
-	if direction == Vector2.ZERO:
-		animations.play("idle")
-	else: 
-		animations.play("run")
-	
-	if target == null:
-		return
-	
-	if target.global_position.x - self.global_position.x < 0:
-		gun_sprite.flip_v = true
-		gun_sprite.offset = Vector2(0, -2)
-		sprite.flip_h = true
-	else:
-		gun_sprite.flip_v = false
-		gun_sprite.offset = Vector2(0, 2)
-		sprite.flip_h = false
-
-func take_damage(damage):
-	health -= damage
-	if health <= 0:
-		queue_free()
+func _physics_process(delta):
+	super(delta)

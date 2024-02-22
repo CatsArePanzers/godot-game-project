@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://mn0jsk2cixli"]
+
+[ext_resource type="Script" path="res://state-machine/state_machine.gd" id="1_ds7wk"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_idle.gd" id="2_4wt47"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_attack.gd" id="3_sklgt"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_move_to.gd" id="4_d5yqu"]
+[ext_resource type="Script" path="res://state-machine/states/enemy-states/state_follow_path.gd" id="5_viq2q"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_wander.gd" id="6_mo0q7"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_ds7wk")
+
+[node name="StateIdle" type="Node" parent="."]
+script = ExtResource("2_4wt47")
+
+[node name="StateAttack" type="Node" parent="."]
+script = ExtResource("3_sklgt")
+
+[node name="StateHit" type="Node" parent="."]
+script = ExtResource("4_d5yqu")
+
+[node name="StateFollowPath" type="Node" parent="."]
+script = ExtResource("5_viq2q")
+
+[node name="StateWander" type="Node" parent="."]
+script = ExtResource("6_mo0q7")

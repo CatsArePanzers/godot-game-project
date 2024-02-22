@@ -1,0 +1,34 @@
+[gd_scene load_steps=10 format=3 uid="uid://dsygyr4xt4ri5"]
+
+[ext_resource type="Script" path="res://state-machine/state_machine.gd" id="1_q2q6w"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_idle.gd" id="2_tlp8b"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_attack.gd" id="3_e0sb7"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_move_to.gd" id="4_rkthu"]
+[ext_resource type="Script" path="res://state-machine/states/ally-states/state_player.gd" id="5_246pj"]
+[ext_resource type="Texture2D" uid="uid://dulns1vrtabso" path="res://assets/player.png" id="6_nlvns"]
+[ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="7_lqu7d"]
+[ext_resource type="Script" path="res://state-machine/states/ally-states/state_find_allies.gd" id="8_v5p5m"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_wander.gd" id="9_1cqmt"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_q2q6w")
+
+[node name="StateIdle" type="Node" parent="."]
+script = ExtResource("2_tlp8b")
+
+[node name="StateAttack" type="Node" parent="."]
+script = ExtResource("3_e0sb7")
+
+[node name="StateHit" type="Node" parent="."]
+script = ExtResource("4_rkthu")
+
+[node name="StatePlayer" type="Node" parent="."]
+script = ExtResource("5_246pj")
+player_texture = ExtResource("6_nlvns")
+ally_texture = ExtResource("7_lqu7d")
+
+[node name="StateFindAllies" type="Node" parent="."]
+script = ExtResource("8_v5p5m")
+
+[node name="StateWander" type="Node" parent="."]
+script = ExtResource("9_1cqmt")
