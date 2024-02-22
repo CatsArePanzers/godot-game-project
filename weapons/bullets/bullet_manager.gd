@@ -13,7 +13,7 @@ func handle_bullet(bullet: Bullet, pos, direction, team, damage, speed):
 	add_child(bullet)
 	await get_tree().create_timer(0.000001).timeout
 	if bullet != null:
-		bullet.set_direction(direction)]
- 
+		bullet.set_direction(direction)
+
 func _process(_delta):
 	pass
