@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0jxhbup3fig5"]
+[gd_scene load_steps=13 format=3 uid="uid://cgnsir2v7t46j"]
 
-[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_nwa4n"]
-[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_k646f"]
-[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_cpsqu"]
-[ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="3_hugab"]
-[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="4_jw2b7"]
-[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_wyhuy"]
+[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_12mjv"]
+[ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_53qal"]
+[ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_3xctl"]
+[ext_resource type="PackedScene" uid="uid://dswwlc4kc7uco" path="res://weapons/assault.tscn" id="4_e3v13"]
+[ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_qfbrc"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_saw62"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -213,7 +213,7 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="EnemyAssault" type="CharacterBody2D" groups=["can_save"]]
 position = Vector2(564, -3)
 collision_layer = 2
 collision_mask = 135
@@ -221,11 +221,14 @@ motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 3.0
-script = ExtResource("1_nwa4n")
-rotation_speed = 3.025
+script = ExtResource("1_12mjv")
+score_worth = 500
+health = 200
+speed = 350
+rotation_speed = 2.7
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_k646f")
+texture = ExtResource("2_53qal")
 region_enabled = true
 region_rect = Rect2(33, 35, 26, 44)
 
@@ -238,28 +241,28 @@ libraries = {
 "": SubResource("AnimationLibrary_1m63o")
 }
 
-[node name="WeaponComponent" parent="." instance=ExtResource("3_cpsqu")]
+[node name="WeaponComponent" parent="." instance=ExtResource("3_3xctl")]
 
-[node name="Pistol" parent="WeaponComponent" instance=ExtResource("3_hugab")]
-position = Vector2(4, -4)
+[node name="Assault" parent="WeaponComponent" instance=ExtResource("4_e3v13")]
+damage = 10
 
-[node name="DetectionZone" type="Area2D" parent="."]
+[node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
 collision_layer = 7
 collision_mask = 7
 
 [node name="FOV" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2(1.22951, -115.086)
+position = Vector2(0, -115.086)
 shape = SubResource("CapsuleShape2D_1og35")
 
 [node name="EndOfFOV" type="Marker2D" parent="DetectionZone"]
-position = Vector2(-1.63934, -230.172)
+position = Vector2(0, -230.172)
 
-[node name="Team" parent="." instance=ExtResource("4_jw2b7")]
+[node name="Team" parent="." instance=ExtResource("5_qfbrc")]
 team = 1
 
 [node name="Cooldown" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -267,8 +270,8 @@ path_desired_distance = 9.0
 target_desired_distance = 27.0
 avoidance_enabled = true
 radius = 50.0
-neighbor_distance = 200.0
-max_neighbors = 4
+max_neighbors = 5
+time_horizon_obstacles = 1.0
 max_speed = 1000.0
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
@@ -277,7 +280,7 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 wait_time = 0.3
 autostart = true
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_wyhuy")]
+[node name="HealthComponent" parent="." instance=ExtResource("6_saw62")]
 offset_left = -18.0
 offset_top = -49.0
 offset_right = 22.0
