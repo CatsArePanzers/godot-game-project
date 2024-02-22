@@ -12,6 +12,9 @@ func exit():
 	pass
 	
 func update(delta):
+	if character == null:
+		return
+	
 	if character.target == null or character.weapon == null:
 		if character.target != null:
 			return
@@ -59,9 +62,10 @@ func move_character(_delta):
 	var ray = character.create_ray(character.global_position + character.velocity * get_process_delta_time(), 
 								   character.target.global_position)
 	
-	if ray["collider"] != character.target:
-		character.velocity = Vector2.ZERO
-		return
+	if !ray.is_empty():
+		if ray["collider"] != character.target:
+			character.velocity = Vector2.ZERO
+			return
 	
 	if distance_to_target > character.weapon.desired_range * 5/6:
 		move_distance = direction * 100

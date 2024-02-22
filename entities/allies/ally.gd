@@ -14,7 +14,7 @@ func _save(save_file: ConfigFile):
 	super(save_file)
 	
 	save_file.set_value(name, "allies_in_range", allies_in_range)
-	save_file.set_value(name, "last_seen_ally", inst_to_dict(last_seen_ally))
+	#save_file.set_value(name, "last_seen_ally", inst_to_dict(last_seen_ally))
 
 func _load(save_file: ConfigFile, p_section):
 	super(save_file, p_section)

@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b41ifw2mx8pbb"]
+[gd_scene load_steps=4 format=3 uid="uid://b41ifw2mx8pbb"]
 
 [ext_resource type="Script" path="res://spawner.gd" id="1_aud8c"]
-[ext_resource type="Script" path="res://path_follow.gd" id="2_bk731"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wfbl"]
 size = Vector2(1161.5, 1143)
@@ -25,4 +24,3 @@ curve = SubResource("Curve2D_j5rkv")
 position = Vector2(-27, 526)
 rotates = false
 loop = false
-script = ExtResource("2_bk731")

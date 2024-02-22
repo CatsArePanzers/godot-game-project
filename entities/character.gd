@@ -6,6 +6,7 @@ signal died
 signal commenced_attack
 signal got_hit
 signal loaded
+signal changed_weapon
 
 @onready var state := CharacterState.IDLE:
 	set(new_state):
@@ -111,9 +112,9 @@ func _physics_process(_delta):
 		track_potential_target(potential_targets[potential_target_idx])
 		potential_target_idx += 1
 	
-	track_target()
+	nav_agent.velocity = velocity
 	
-	nav_agent.set_velocity(velocity)
+	track_target()
 	
 	animate()
 
@@ -246,10 +247,6 @@ func set_nav_agent_target_pos(p_pos):
 	if !nav_agent.is_target_reachable():
 		nav_agent.target_position = nav_agent.get_final_position()
 
-func _on_navigation_agent_2d_velocity_computed(safe_velocity):
-	clamp(velocity, -safe_velocity, safe_velocity)
-	velocity = velocity as Vector2i
-
 func create_ray(from: Vector2, to: Vector2) -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(from, to, collision_mask ^ collision_layer, [self])
@@ -275,3 +272,4 @@ func set_move_target(p_tp: Vector2):
 
 func change_weapon(new_weapon):
 	weapon = new_weapon
+	changed_weapon.emit(weapon)

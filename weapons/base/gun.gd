@@ -2,6 +2,10 @@ extends Node2D
 
 class_name Weapon
 
+signal fired
+signal reloading
+signal reloaded
+
 @export var bullet: PackedScene
 
 @onready var barrel = $GunBarrel
@@ -24,7 +28,7 @@ class_name Weapon
 
 @onready var team
 var current_ammo
-var is_realoading := false
+var is_reloading := false
 
 signal bullet_fired(bullet, pos, direction)
 
@@ -35,14 +39,24 @@ func _ready():
 	current_ammo = ammo_amount
 	pass
 
-func shoot():
-	if current_ammo == 0 and !is_realoading:
-		is_realoading = true
+func reload():
+	if !is_reloading:
+		reloading.emit()
+		is_reloading = true
 		await get_tree().create_timer(reload_time).timeout
 		current_ammo = ammo_amount
-		is_realoading = false
+		is_reloading = false
+		reloaded.emit()
 		return
-	elif is_realoading:
+	elif is_reloading:
+		return
+
+func shoot():
+	if is_reloading:
+		return
+	
+	if current_ammo == 0:
+		reload()
 		return
 	
 	if $Cooldown.is_stopped() == false:
@@ -58,7 +72,8 @@ func shoot():
 	$SpreadTimer.start()
 	
 	$Cooldown.start()
-	
+	fired.emit()
+
 func generate_bullet_spread() -> Vector2:
 	var bullet_spread := Vector2.ZERO
 	

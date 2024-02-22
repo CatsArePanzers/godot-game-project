@@ -12,8 +12,12 @@ func exit():
 	pass
 	
 func update(_delta):
+	if character == null:
+		return
+	
 	if character.last_seen_ally == null:
-		change_state.emit(CharacterState.IDLE)
+		change_state.emit(CharacterState.WANDER)
+		#print("vat")
 		return
 	
 	var direction_to_ally = character.global_position.direction_to(character.last_seen_ally.global_position)
@@ -28,7 +32,7 @@ func update(_delta):
 			character.nav_agent.is_target_reached()
 			or character.allies_in_range >= 2
 		):
-		change_state.emit(CharacterState.IDLE)
+		change_state.emit(CharacterState.WANDER)
 	
 	character.move_and_slide()
 

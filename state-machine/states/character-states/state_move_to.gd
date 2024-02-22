@@ -14,6 +14,9 @@ func exit():
 	pass
 	
 func update(delta):
+	if character == null:
+		return
+	
 	if character.target != null:
 		change_state.emit(CharacterState.ATTACK)
 		return

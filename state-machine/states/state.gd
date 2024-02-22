@@ -23,6 +23,9 @@ func set_character(p_character: Character):
 	
 
 func enter():
+	if character == null:
+		return
+	
 	character.state = state_name
 
 func exit():

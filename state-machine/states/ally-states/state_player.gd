@@ -16,7 +16,7 @@ func exit():
 	character.sprite.texture = ally_texture
 
 func update(_delta):
-	if !character:
+	if character == null:
 		return
 	
 	character.velocity = Vector2.ZERO
@@ -44,7 +44,14 @@ func update(_delta):
 	character.turn_to(character.get_global_mouse_position())
 
 func _unhandled_input(event):
+	if character == null:
+		return
+	
 	if event.is_action_released("shoot") and character.state == CharacterState.PLAYER:
 		character.weapon.shoot()
+		get_viewport().set_input_as_handled()
+		
+	if event.is_action_released("reload") and character.state == CharacterState.PLAYER:
+		character.weapon.reload()
 		get_viewport().set_input_as_handled()
 

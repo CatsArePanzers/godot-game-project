@@ -14,12 +14,12 @@ func _save():
 	
 	await main_scene._save(config)
 	
-	config.save(path)
+	config.save_encrypted_pass(path, password)
 
 func _load():
 	var config = ConfigFile.new()
 	
-	if config.load(path) != OK:#_encrypted_pass(path, password) != OK:
+	if config.load_encrypted_pass(path, password) != OK:
 		return
 	
 	main_scene_file_path = config.get_value("main_scene_file_path", "main_scene_file_path")

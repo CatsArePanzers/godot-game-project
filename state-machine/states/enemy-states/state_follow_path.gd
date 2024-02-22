@@ -12,8 +12,11 @@ func exit():
 	pass
 	
 func update(delta):
+	if character == null:
+		return
+	
 	if character.path_to_follow == null:
-		change_state.emit(CharacterState.IDLE)
+		change_state.emit(CharacterState.WANDER)
 		return
 	
 	if !has_reached_path_start():
@@ -25,7 +28,7 @@ func update(delta):
 	if (
 			character.path_to_follow.progress_ratio >= 1
 		):
-		change_state.emit(CharacterState.IDLE)
+		change_state.emit(CharacterState.WANDER)
 
 func has_reached_path_start() -> bool:
 	if character.nav_agent.is_target_reached():
