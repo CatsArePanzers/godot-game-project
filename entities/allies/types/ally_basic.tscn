@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://de3elh8cnhgq7"]
+[gd_scene load_steps=14 format=3 uid="uid://de3elh8cnhgq7"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_nxdjq"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_vw58r"]
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_b523n"]
 [ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="5_s1yie"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_tbxgc"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="8_c2y2v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
@@ -139,7 +140,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_uo48r"]
 resource_name = "run"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -215,8 +215,7 @@ height = 500.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqdy0"]
 radius = 201.04
 
-[node name="AllyBasic" type="CharacterBody2D"]
-position = Vector2(564, -3)
+[node name="AllyBasic" type="CharacterBody2D" groups=["can_save"]]
 collision_layer = 4
 collision_mask = 135
 motion_mode = 1
@@ -224,7 +223,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
 script = ExtResource("1_nxdjq")
-health = 2500
+health = 4000
 speed = 400
 rotation_speed = 3.6
 
@@ -278,11 +277,9 @@ one_shot = true
 path_desired_distance = 9.0
 target_desired_distance = 27.0
 avoidance_enabled = true
-radius = 50.0
 neighbor_distance = 200.0
 max_neighbors = 4
 max_speed = 1000.0
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="NavUpdate" type="Timer" parent="."]
@@ -295,6 +292,12 @@ process_physics_priority = 66
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 rotation_smoothing_enabled = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_tbxgc")]
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 22.0
+offset_bottom = -9.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

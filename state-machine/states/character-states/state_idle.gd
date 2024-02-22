@@ -11,7 +11,10 @@ func enter():
 func exit():
 	pass
 	
-func update(_delta):	
+func update(_delta):
+	if character == null:
+		return
+	
 	character.velocity = Vector2.ZERO
 	
 	if character.target != null:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgnsir2v7t46j"]
+[gd_scene load_steps=13 format=3 uid="uid://cgnsir2v7t46j"]
 
 [ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_12mjv"]
 [ext_resource type="Texture2D" uid="uid://b86hmvu2a8v8u" path="res://assets/enemy.png" id="2_53qal"]
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_3xctl"]
 [ext_resource type="PackedScene" uid="uid://dswwlc4kc7uco" path="res://weapons/assault.tscn" id="4_e3v13"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_qfbrc"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_saw62"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -212,7 +213,7 @@ _data = {
 radius = 56.5574
 height = 231.897
 
-[node name="EnemyAssault" type="CharacterBody2D"]
+[node name="EnemyAssault" type="CharacterBody2D" groups=["can_save"]]
 position = Vector2(564, -3)
 collision_layer = 2
 collision_mask = 135
@@ -221,6 +222,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 3.0
 script = ExtResource("1_12mjv")
+score_worth = 500
 health = 200
 speed = 350
 rotation_speed = 2.7
@@ -242,6 +244,7 @@ libraries = {
 [node name="WeaponComponent" parent="." instance=ExtResource("3_3xctl")]
 
 [node name="Assault" parent="WeaponComponent" instance=ExtResource("4_e3v13")]
+damage = 10
 
 [node name="DetectionZone" type="Area2D" parent="." groups=["Enemy"]]
 scale = Vector2(2.44, 2.32)
@@ -267,8 +270,8 @@ path_desired_distance = 9.0
 target_desired_distance = 27.0
 avoidance_enabled = true
 radius = 50.0
-neighbor_distance = 200.0
-max_neighbors = 4
+max_neighbors = 5
+time_horizon_obstacles = 1.0
 max_speed = 1000.0
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
@@ -276,6 +279,12 @@ debug_path_custom_color = Color(1, 0, 1, 1)
 [node name="NavUpdate" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_saw62")]
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 22.0
+offset_bottom = -9.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

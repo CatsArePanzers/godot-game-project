@@ -5,6 +5,8 @@ class_name Character
 signal died
 signal commenced_attack
 signal got_hit
+signal loaded
+signal changed_weapon
 
 @onready var state := CharacterState.IDLE:
 	set(new_state):
@@ -19,6 +21,8 @@ func set_state(p_state):
 	
 func get_state():
 	return state
+
+@onready var health_bar: HealthBarComponent = $HealthComponent
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -41,16 +45,56 @@ var potential_target_idx: int = 0
 
 var target = null
 var target_pos: Vector2
-var target_distance = -1
 
 @export var health: int = 100
 @export var speed: int = 300
 @export var rotation_speed = PI * 1.1
 
+func _save(save_file: ConfigFile):
+	save_file.set_value(name, "scene_path",  scene_file_path)
+	save_file.set_value(name, "parent_node_path", get_parent().get_path())
+	
+	save_file.set_value(name, "global_position", global_position)
+	save_file.set_value(name, "weapon.rotation", weapon.rotation)
+	save_file.set_value(name, "weapon_idx", weapon_component.weapon_idx)
+	save_file.set_value(name, "detection_zone.rotation", detection_zone.rotation)
+	save_file.set_value(name, "velocity", velocity)
+	save_file.set_value(name, "curr_ammo", weapon_component.curr_weapon.current_ammo)
+	save_file.set_value(name, "health", health)
+	#save_file.set_value(name, "target", inst_to_dict(target))
+	if target:
+		save_file.set_value(name, "target_pos", target.global_position)
+	else:
+		save_file.set_value(name, "target_pos", target_pos)
+	save_file.set_value(name, "potential_target_idx", potential_target_idx)
+	save_file.set_value(name, "state", state)
+
+func _load(save_file: ConfigFile, p_section):
+	global_position = save_file.get_value(p_section, "global_position")
+	weapon.rotation = save_file.get_value(p_section, "weapon.rotation")
+
+	detection_zone.rotation = save_file.get_value(p_section, "detection_zone.rotation")
+	velocity = save_file.get_value(p_section, "velocity")
+	
+	weapon_component.switch_weapon(save_file.get_value(p_section, "weapon_idx"))
+	weapon_component.curr_weapon.current_ammo = save_file.get_value(p_section, "curr_ammo")
+	
+	health = save_file.get_value(p_section, "health")
+	#if save_file.has_section_key(p_section, "target"):
+		#target = dict_to_inst(save_file.get_value(p_section, "target"))
+	target_pos = save_file.get_value(p_section, "target_pos")
+	potential_target_idx = save_file.get_value(p_section, "potential_target_idx")
+	state = save_file.get_value(p_section, "state")
+	
+	loaded.emit()
+
 func _ready():
 	weapon_component.set_team(team.team)
 	weapon = weapon_component.get_current_weapon()
-	weapon_component.change_weapon.connect(change_weapon)
+	weapon_component.changed_weapon.connect(change_weapon)
+	
+	health_bar.set_max_health(health)
+	health_bar.set_health(health)
 
 func get_team():
 	return team.team
@@ -68,9 +112,10 @@ func _physics_process(_delta):
 		track_potential_target(potential_targets[potential_target_idx])
 		potential_target_idx += 1
 	
+	nav_agent.velocity = velocity
+	
 	track_target()
 	
-	nav_agent.set_velocity(velocity)
 	animate()
 
 func animate():
@@ -129,7 +174,10 @@ func track_potential_target(body):
 	
 	var ray = create_ray(global_position, body.global_position)
 	
-	if (ray["collider"] != body and !ray.is_empty()):
+	if ray.is_empty():
+		return
+	
+	if (ray["collider"] != body):
 		return
 	
 	potential_targets.pop_at(potential_targets.find(body))
@@ -138,7 +186,6 @@ func track_potential_target(body):
 	if target == null:
 		target = targets_queue[0]
 		target = target
-		_on_nav_update_timeout()
 	
 	commenced_attack.emit()
 
@@ -148,18 +195,17 @@ func track_target():
 		
 	var ray = create_ray(global_position, target.global_position)
 	
+	if (ray.is_empty()):
+		return
+		
 	if (ray["collider"] != target):
+		nav_agent.target_position = target.global_position
+		targets_queue.pop_front()
+		potential_targets.push_front(target)
 		if targets_queue.size() <= 1:
-			targets_queue.pop_front()
-			potential_targets.push_front(target)
-			_on_nav_update_timeout()
 			target = null
 		else:
-			targets_queue.pop_front()
-			potential_targets.push_front(target)
 			target = targets_queue[0]
-			_on_nav_update_timeout()
-
 
 func turn_to(p_target, p_rotation_speed = PI):
 	match typeof(p_target):
@@ -179,6 +225,9 @@ func turn_to_angle(p_angle: float, p_rotation_speed = PI):
 
 func take_damage(damage):
 	health -= damage
+	
+	health_bar.set_health(health)
+	
 	if health <= 0:
 		died.emit(self)
 		queue_free()
@@ -190,18 +239,13 @@ func get_next_pos() -> Vector2:
 	return nav_agent.get_next_path_position()
 
 func _on_nav_update_timeout():
-	if target != null:
-		nav_agent.target_position = target.global_position
+	nav_agent.get_next_path_position()
 
 func set_nav_agent_target_pos(p_pos):
 	nav_agent.target_position = p_pos
 	
 	if !nav_agent.is_target_reachable():
-		nav_agent.target_position = nav_agent.get_final_position() 
-
-func _on_navigation_agent_2d_velocity_computed(safe_velocity):
-	clamp(velocity, Vector2.ZERO, safe_velocity)
-	velocity = velocity as Vector2i
+		nav_agent.target_position = nav_agent.get_final_position()
 
 func create_ray(from: Vector2, to: Vector2) -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
@@ -228,3 +272,4 @@ func set_move_target(p_tp: Vector2):
 
 func change_weapon(new_weapon):
 	weapon = new_weapon
+	changed_weapon.emit(weapon)

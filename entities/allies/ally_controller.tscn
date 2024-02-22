@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsygyr4xt4ri5"]
+[gd_scene load_steps=10 format=3 uid="uid://dsygyr4xt4ri5"]
 
 [ext_resource type="Script" path="res://state-machine/state_machine.gd" id="1_q2q6w"]
 [ext_resource type="Script" path="res://state-machine/states/character-states/state_idle.gd" id="2_tlp8b"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dulns1vrtabso" path="res://assets/player.png" id="6_nlvns"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="7_lqu7d"]
 [ext_resource type="Script" path="res://state-machine/states/ally-states/state_find_allies.gd" id="8_v5p5m"]
+[ext_resource type="Script" path="res://state-machine/states/character-states/state_wander.gd" id="9_1cqmt"]
 
 [node name="StateMachine" type="Node"]
 script = ExtResource("1_q2q6w")
@@ -28,3 +29,6 @@ ally_texture = ExtResource("7_lqu7d")
 
 [node name="StateFindAllies" type="Node" parent="."]
 script = ExtResource("8_v5p5m")
+
+[node name="StateWander" type="Node" parent="."]
+script = ExtResource("9_1cqmt")

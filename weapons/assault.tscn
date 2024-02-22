@@ -7,10 +7,12 @@
 [node name="Assault" type="Node2D"]
 script = ExtResource("1_m5o4b")
 bullet = ExtResource("2_rfooa")
+reload_time = 3.0
+ammo_amount = 45
 shots_amount = 1
 shot_velocity = 1500
-damage = 15
-desired_range = 150.0
+damage = 30
+desired_range = 500.0
 min_spread = 1.0
 spread = 0.05
 max_rand_spread = 0.75

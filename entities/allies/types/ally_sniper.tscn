@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cr0m43ux0o2x6"]
+[gd_scene load_steps=15 format=3 uid="uid://cr0m43ux0o2x6"]
 
 [ext_resource type="Script" path="res://entities/allies/ally.gd" id="1_fg2wk"]
 [ext_resource type="Texture2D" uid="uid://cwh322jfp1xk4" path="res://assets/ally.png" id="2_dbqgw"]
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_1bdme"]
 [ext_resource type="PackedScene" uid="uid://dnf4ifbbuyirc" path="res://weapons/sniper.tscn" id="4_6lxxk"]
 [ext_resource type="PackedScene" uid="uid://cr2tvbx3nmjmu" path="res://weapons/pistol.tscn" id="5_4abpq"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="7_p4jv6"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="8_h7wd8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
@@ -140,7 +141,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_uo48r"]
 resource_name = "run"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -216,7 +216,7 @@ height = 1300.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ogth"]
 radius = 329.006
 
-[node name="AllySniper" type="CharacterBody2D"]
+[node name="AllySniper" type="CharacterBody2D" groups=["can_save"]]
 position = Vector2(564, -3)
 collision_layer = 4
 collision_mask = 135
@@ -225,7 +225,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 safe_margin = 2.0
 script = ExtResource("1_fg2wk")
-health = 1000
+health = 1500
 speed = 500
 rotation_speed = 4.0
 
@@ -267,6 +267,7 @@ shape = SubResource("CircleShape2D_4ogth")
 
 [node name="Sniper" parent="WeaponComponent" instance=ExtResource("4_6lxxk")]
 position = Vector2(1, -6)
+reload_time = 3.0
 shot_velocity = 2500
 desired_range = 1200.0
 
@@ -289,7 +290,6 @@ radius = 50.0
 neighbor_distance = 200.0
 max_neighbors = 4
 max_speed = 1000.0
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="NavUpdate" type="Timer" parent="."]
@@ -302,6 +302,12 @@ process_physics_priority = 66
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 rotation_smoothing_enabled = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_p4jv6")]
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 22.0
+offset_bottom = -9.0
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

@@ -14,6 +14,9 @@ func exit():
 	pass
 	
 func update(delta):
+	if character == null:
+		return
+	
 	if character.target != null:
 		change_state.emit(CharacterState.ATTACK)
 		return
@@ -25,18 +28,17 @@ func update(delta):
 	if (
 				!character.nav_agent.is_target_reached()
 				and character.nav_agent.is_target_reachable()
-				#asand fmod(abs(character.weapon.global_rotation - angle), TAU - 0.1) < PI/18
+				and fmod(abs(character.weapon.global_rotation - angle), TAU - 0.1) < PI/18
 		):
 			
 			character.velocity = character.get_move_direction() * character.speed
 			character.move_and_slide()
-			
-			print(character.nav_agent.distance_to_target())
-			print(character.nav_agent.is_target_reachable())
-			print(character.global_position.distance_to(character.nav_agent.get_final_position()))
-			
 	elif character.nav_agent.is_target_reached():
 		var ray = character.create_ray(character.global_position, character.velocity * 2000)
+		
+		if ray.is_empty():
+			return
+		
 		if character.global_position.distance_to(ray["position"]) >= 60:
 			character.velocity = Vector2(character.velocity.x + randf_range(-20, 20), 
 										 character.velocity.y + randf_range(-20, 20))
@@ -45,8 +47,3 @@ func update(delta):
 		else:
 			character.velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * character.speed
 			character.set_move_target(character.velocity * 2000)
-	else:
-		print("cat")
-		print(character.nav_agent.distance_to_target())
-		print(character.nav_agent.is_target_reachable())
-		print(character.global_position.distance_to(character.nav_agent.get_final_position()))

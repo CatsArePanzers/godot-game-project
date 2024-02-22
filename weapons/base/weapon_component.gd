@@ -2,16 +2,29 @@ extends Node2D
 
 class_name WeaponComponent
 
-signal change_weapon(weapon)
+signal changed_weapon(weapon)
 
 var team
 
 var curr_weapon: Weapon
+var weapon_idx = 0
 
 var weapons := Array()
 
-func switch_weapon(weapon_change = 1):
-	var weapon_idx = weapons.find(curr_weapon)
+func switch_weapon(idx):
+	weapon_idx = idx
+	
+	curr_weapon.visible = false
+	
+	curr_weapon = weapons[weapon_idx]
+	
+	curr_weapon.visible = true
+	
+	changed_weapon.emit(curr_weapon)
+	
+	return curr_weapon
+
+func change_weapon(weapon_change = 1):
 	weapon_idx += weapon_change
 	weapon_idx %= weapons.size()
 	
@@ -21,7 +34,7 @@ func switch_weapon(weapon_change = 1):
 	
 	curr_weapon.visible = true
 	
-	change_weapon.emit(curr_weapon)
+	changed_weapon.emit(curr_weapon)
 	
 	return curr_weapon
 

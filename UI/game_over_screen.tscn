@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctea8iv1evfcs"]
+
+[ext_resource type="Script" path="res://ui/game_over_screen.gd" id="1_e8xm1"]
+[ext_resource type="FontFile" uid="uid://caosccxj4iyaa" path="res://assets/Fonts/Kenney Future.ttf" id="2_0a8k2"]
+
+[sub_resource type="Theme" id="Theme_1tdjp"]
+default_font = ExtResource("2_0a8k2")
+default_font_size = 120
+
+[node name="GameOverScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_e8xm1")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+theme = SubResource("Theme_1tdjp")
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 50
+
+[node name="NewGame" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0a8k2")
+theme_override_font_sizes/font_size = 64
+text = "New Game
+"
+
+[node name="Main Menu" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0a8k2")
+theme_override_font_sizes/font_size = 64
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/Rows/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0a8k2")
+theme_override_font_sizes/font_size = 64
+text = "Quit
+"
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

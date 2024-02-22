@@ -7,10 +7,12 @@
 [node name="Pistol" type="Node2D"]
 script = ExtResource("1_5t55i")
 bullet = ExtResource("2_spmrh")
+reload_time = 1.5
+ammo_amount = 18
 shots_amount = 1
 shot_velocity = 1500
-damage = 40
-desired_range = 300.0
+damage = 50
+desired_range = 500.0
 spread = 0.05
 max_rand_spread = 0.2
 max_spread = 2.0

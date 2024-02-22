@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://co0favsh51q1f"]
+
+[ext_resource type="Script" path="res://save_agent.gd" id="1_n753k"]
+
+[node name="SaveAgent" type="Node"]
+process_mode = 3
+script = ExtResource("1_n753k")
