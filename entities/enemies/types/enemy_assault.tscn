@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dcb8sgcjyra2s" path="res://weapons/base/weapon_component.tscn" id="3_3xctl"]
 [ext_resource type="PackedScene" uid="uid://dswwlc4kc7uco" path="res://weapons/assault.tscn" id="4_e3v13"]
 [ext_resource type="PackedScene" uid="uid://cjtek7s4wju4r" path="res://team.tscn" id="5_qfbrc"]
-[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_saw62"]
+[ext_resource type="PackedScene" uid="uid://cxbjrqp2iad2r" path="res://ui/health_bar_component.tscn" id="6_80xiv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f15xe"]
 radius = 11.0
@@ -277,10 +277,9 @@ debug_enabled = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="NavUpdate" type="Timer" parent="."]
-wait_time = 0.3
 autostart = true
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_saw62")]
+[node name="HealthComponent" parent="." instance=ExtResource("6_80xiv")]
 offset_left = -18.0
 offset_top = -49.0
 offset_right = 22.0

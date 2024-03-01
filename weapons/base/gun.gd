@@ -40,16 +40,16 @@ func _ready():
 	pass
 
 func reload():
-	if !is_reloading:
-		reloading.emit()
-		is_reloading = true
-		await get_tree().create_timer(reload_time).timeout
-		current_ammo = ammo_amount
-		is_reloading = false
-		reloaded.emit()
+	if is_reloading:
 		return
-	elif is_reloading:
-		return
+	
+	reloading.emit()
+	is_reloading = true
+	await get_tree().create_timer(reload_time).timeout
+	current_ammo = ammo_amount
+	is_reloading = false
+	reloaded.emit()
+	return 
 
 func shoot():
 	if is_reloading:

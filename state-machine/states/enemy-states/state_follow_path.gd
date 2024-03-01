@@ -19,7 +19,7 @@ func update(delta):
 		change_state.emit(CharacterState.WANDER)
 		return
 	
-	if !has_reached_path_start():
+	if !has_reached_path_pos():
 		return
 	
 	character.path_to_follow.progress += character.speed * delta + character.nav_agent.target_desired_distance
@@ -30,7 +30,7 @@ func update(delta):
 		):
 		change_state.emit(CharacterState.WANDER)
 
-func has_reached_path_start() -> bool:
+func has_reached_path_pos() -> bool:
 	if character.nav_agent.is_target_reached():
 		return true
 	

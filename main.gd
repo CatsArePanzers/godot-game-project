@@ -240,7 +240,7 @@ func end_game():
 	if score_counter.curr_score == score_counter.hi_score:
 		var hi_score_screen = HiScoreScene.instantiate()
 		hi_score_screen.set_score_counter(score_counter)
-		await add_child(hi_score_screen)
+		add_child(hi_score_screen)
 	
 	add_child(GameOverScene.instantiate())
 

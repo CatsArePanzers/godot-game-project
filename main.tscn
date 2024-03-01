@@ -944,6 +944,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(-521, 167)
 mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -1021,7 +1022,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("11_ffkpk")
 theme_override_font_sizes/font_size = 30
-text = "by CAT"
+text = "by  "
 
 [node name="AmmoRow" type="HBoxContainer" parent="MainScreenGUI/MarginContainer/Rows"]
 layout_mode = 2

@@ -26,13 +26,13 @@ func update(delta):
 	var angle = character.global_position.direction_to(character.target_pos).angle()
 	
 	if (
-				!character.nav_agent.is_target_reached()
-				and character.nav_agent.is_target_reachable()
-				and fmod(abs(character.weapon.global_rotation - angle), TAU - 0.1) < PI/18
+			!character.nav_agent.is_target_reached()
+			and character.nav_agent.is_target_reachable()
+			and fmod(abs(character.weapon.global_rotation - angle), TAU - 0.1) < PI/18
 		):
 			
-			character.velocity = character.get_move_direction() * character.speed
-			character.move_and_slide()
+		character.velocity = character.get_move_direction() * character.speed
+		character.move_and_slide()
 	elif character.nav_agent.is_target_reached():
 		var ray = character.create_ray(character.global_position, character.velocity * 2000)
 		

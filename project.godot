@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="diplomna_test"
+config/name="SejDefender"
 run/main_scene="res://ui/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"

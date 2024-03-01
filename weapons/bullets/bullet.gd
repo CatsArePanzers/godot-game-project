@@ -2,6 +2,8 @@ extends Area2D
 
 class_name Bullet
 
+const VECTOR_LENGTH = 2000000000
+
 var direction := Vector2.ZERO
 var velocity  := Vector2.ZERO
 var speed: 		 int = 1000
@@ -30,7 +32,7 @@ func _on_body_entered(body):
 		body.take_damage(damage)
 	
 	if body.has_method("get_state"):
-		body.get_hit_from(body.global_position - direction * 2000000000)
+		body.get_hit_from(body.global_position - direction * VECTOR_LENGTH)
 	
 	piercing -= 1
 	
